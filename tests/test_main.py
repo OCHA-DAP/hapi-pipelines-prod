@@ -152,7 +152,7 @@ class TestHAPIPipelines:
                     count = session.scalar(
                         select(func.count(DBWFPMarket.code))
                     )
-                    check.equal(count, 3837)
+                    check.equal(count, 4100)
                     count = session.scalar(
                         select(func.count(DBPopulation.resource_hdx_id))
                     )
