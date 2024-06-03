@@ -47,7 +47,7 @@ class ConflictEvent(BaseUploader):
                 values = admin_results["values"]
 
                 for admin_code in admin_codes:
-                    admin_rows = []
+                    admin_rows = set()
                     admin2_code = admins.get_admin2_code_based_on_level(
                         admin_code=admin_code, admin_level=admin_level
                     )
@@ -84,10 +84,13 @@ class ConflictEvent(BaseUploader):
                                 reference_period_start=time_period_range[0],
                                 reference_period_end=time_period_range[1],
                             )
-                            if conflict_event_row in admin_rows:
+                            conflict_event_tuple = tuple(
+                                conflict_event_row.values()
+                            )
+                            if conflict_event_tuple in admin_rows:
                                 number_duplicates += 1
                                 continue
-                            admin_rows.append(conflict_event_row)
+                            admin_rows.add(conflict_event_tuple)
                             conflict_event_rows.append(conflict_event_row)
 
             if number_duplicates > 0:
