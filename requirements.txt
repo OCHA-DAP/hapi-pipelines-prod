@@ -10,7 +10,7 @@ attrs==23.2.0
     #   referencing
 cachetools==5.3.3
     # via google-auth
-certifi==2024.2.2
+certifi==2024.6.2
     # via requests
 cffi==1.16.0
     # via cryptography
@@ -166,9 +166,9 @@ pyasn1-modules==0.4.0
     # via google-auth
 pycparser==2.22
     # via cffi
-pydantic==2.7.2
+pydantic==2.7.3
     # via frictionless
-pydantic-core==2.18.3
+pydantic-core==2.18.4
     # via pydantic
 pygments==2.18.0
     # via rich
@@ -278,7 +278,7 @@ typeguard==4.3.0
     # via inflect
 typer==0.12.3
     # via frictionless
-typing-extensions==4.12.0
+typing-extensions==4.12.1
     # via
     #   frictionless
     #   inflect

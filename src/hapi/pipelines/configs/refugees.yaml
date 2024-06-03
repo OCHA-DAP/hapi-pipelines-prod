@@ -5,11 +5,6 @@ refugees_national:
     format: "csv"
     headers: 1
     use_hxl: True
-    filter_cols:
-      - "#indicator+population_type"
-      - "#country+code+origin"
-      - "#country+code+asylum"
-    prefilter: "#indicator+population_type in ['REF', 'OOC']"
     admin:
       - "#country+code+origin"
     admin_exact: True
