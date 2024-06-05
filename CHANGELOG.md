@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.15] - 2024-06-05
+
+### Changed
+
+- Switch HNO to use prod HDX data
+
+## [0.9.14] - 2024-06-03
+
+### Added
+
+- Non-standard age categories to population data
+- Admin mappings for food prices data
+
+### Changed
+
+- Removed filter on refugee data
+
+### Fixed
+
+- Added missing population data for SLV
+
 ## [0.9.13] - 2024-05-30
 
 ### Added
