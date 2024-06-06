@@ -6,7 +6,7 @@ on:
     tags:
       - "*"
   schedule:
-    - cron: "0 0,12 * * *"
+    - cron: "2 22,11 * * *"
 
 jobs:
   build:
