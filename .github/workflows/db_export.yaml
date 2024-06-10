@@ -2,9 +2,8 @@ name: Database Export
 
 on:
   workflow_dispatch: # Add a run button on GitHub
-  push:
-    tags:
-      - "*"
+  release:
+    types: [published]
   schedule:
     - cron: "2 22,11 * * *"
 
