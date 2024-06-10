@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.16] - 2024-06-10
+
+### Changed
+
+- Update to latest schema version
+
 ## [0.9.15] - 2024-06-05
 
 ### Changed
