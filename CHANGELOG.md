@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.17] - 2024-06-10
+
+### Changed
+
+- Replace "POP" with "all" for humanitarian needs population status
+
 ## [0.9.16] - 2024-06-10
 
 ### Changed
