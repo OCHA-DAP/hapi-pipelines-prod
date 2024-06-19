@@ -136,7 +136,7 @@ class HumanitarianNeeds(BaseUploader):
                     )
                     self._session.add(humanitarian_needs_row)
 
-                create_row("Population", "POP")
+                create_row("Population", "all")
                 create_row("Affected", "AFF")
                 create_row("In Need", "INN")
                 create_row("Targeted", "TGT")
