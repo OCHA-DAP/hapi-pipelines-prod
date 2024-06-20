@@ -321,6 +321,7 @@ operational_presence_admintwo:
     dataset: "somalia-operational-presence"
     resource: "3Ws_All_Clusters_1st_Qtr_2024.xlsx"
     format: "xlsx"
+    sheet: "1st Qtr 3Ws"
     headers: 1
     use_hxl: True
     source_date:
