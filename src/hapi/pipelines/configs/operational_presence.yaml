@@ -86,6 +86,7 @@ operational_presence_admintwo:
     dataset: "republique-centrafricaine-presence-operationnelle"
     resource: "3W_CAR_Dec2023"
     format: "xlsx"
+    sheet: "Compil_3W_VF"
     headers: 1
     source_date:
       start: "01/10/2023"
@@ -129,29 +130,29 @@ operational_presence_admintwo:
       - "implementing_org_type"
       - "clusters"
 
-  # TODO: For some reason the full width of the table is not being read in
-  # operational_presence_cod:
-  #   dataset: "drc_presence_operationnelle"
-  #   resource: "rdc-3w_avril-2024.xlsx"
-  #   format: "xlsx"
-  #   headers: 1
-  #   source_date:
-  #     start: "01/04/2024"
-  #     end: "30/04/2024"
-  #   admin:
-  #     - ~
-  #     - "Pcode ZS"
-  #   admin_exact: True
-  #   input:
-  #     - "NOM ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
-  #     - "ACCRONYME (Choisir dans la liste déroulante)"
-  #     - "TYPE ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
-  #     - "SECTEUR/DOMAINE (Choisir dans la liste déroulante)"
-  #   list:
-  #     - "NOM ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
-  #     - "ACCRONYME (Choisir dans la liste déroulante)"
-  #     - "TYPE ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
-  #     - "SECTEUR/DOMAINE (Choisir dans la liste déroulante)"
+  operational_presence_cod:
+    dataset: "drc_presence_operationnelle"
+    resource: "rdc-3w_avril-2024.xlsx"
+    format: "xlsx"
+    sheet: "Compilation_VF"
+    headers: 1
+    source_date:
+      start: "01/04/2024"
+      end: "30/04/2024"
+    admin:
+      - ~
+      - "Pcode ZS"
+    admin_exact: True
+    input:
+      - "NOM ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
+      - "ACCRONYME (Choisir dans la liste déroulante)"
+      - "TYPE ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
+      - "SECTEUR/DOMAINE (Choisir dans la liste déroulante)"
+    list:
+      - "NOM ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
+      - "ACCRONYME (Choisir dans la liste déroulante)"
+      - "TYPE ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
+      - "SECTEUR/DOMAINE (Choisir dans la liste déroulante)"
 
   operational_presence_col:
     dataset: "colombia-4ws"
@@ -521,6 +522,7 @@ operational_presence_national:
     dataset: "south-sudan-operational-presence"
     resource: "ss_20240511_3w_oerational presence_Jan to Apr_2024.xlsx"
     format: "xlsx"
+    sheet: "data"
     headers: 1
     source_date:
       start: "01/01/2024"
