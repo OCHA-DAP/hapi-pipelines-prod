@@ -47,7 +47,7 @@ class OperationalPresence(BaseUploader):
         self._results = results
         self._config = config
 
-    def populate(self, debug=False):
+    def populate(self, debug=True):
         logger.info("Populating operational presence table")
         operational_presence_rows = []
         if debug:
