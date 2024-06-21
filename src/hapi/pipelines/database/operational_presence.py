@@ -62,16 +62,19 @@ class OperationalPresence(BaseUploader):
                 resource_id = admin_results["hapi_resource_metadata"]["hdx_id"]
                 hxl_tags = admin_results["headers"][1]
                 values = admin_results["values"]
-
+                # Config must contain an org name
                 org_name_index = hxl_tags.index("#org+name")
+                # If config is missing org acronym, use the org name
                 try:
                     org_acronym_index = hxl_tags.index("#org+acronym")
                 except ValueError:
                     org_acronym_index = hxl_tags.index("#org+name")
+                # If config is missing org type, set to None
                 try:
                     org_type_name_index = hxl_tags.index("#org+type+name")
                 except ValueError:
                     org_type_name_index = None
+                # If config is missing sector, add to error messages
                 try:
                     sector_index = hxl_tags.index("#sector")
                 except ValueError:
@@ -89,6 +92,8 @@ class OperationalPresence(BaseUploader):
                         if not org_name_orig:
                             org_name_orig = org_acronym_orig
                         sector_orig = values[sector_index][admin_code][i]
+                        # Skip rows that are missing a sector
+                        # TODO: isn't this caught by the sector check above?
                         if not sector_orig:
                             continue
                         org_type_orig = None

@@ -181,7 +181,11 @@ if __name__ == "__main__":
             if len(theme_strs) == 1:
                 themes_to_run[theme_strs[0]] = None
             else:
-                themes_to_run[theme_strs[0]] = theme_strs[1]
+                # Split values by pipe for multiple countries
+                values = theme_strs[1].split("|")
+                themes_to_run[theme_strs[0]] = (
+                    values if len(values) > 1 else values[0]
+                )
     else:
         themes_to_run = None
     if args.scrapers:

@@ -55,56 +55,60 @@ operational_presence_admintwo:
       - "#org +type +name"
       - "#sector +cluster +name"
 
+  # TODO: missing org acronym / name distinction
+  # TODO: but more importantly missing sector
+  # TODO: it actually throws a bug though, check what it is
   operational_presence_bfa:
-     dataset: "burkina-faso-presence-operationnelle"
-     resource: "3W Burkina Faso January-February 2024"
-     format: "xlsx"
-     sheet: "MATRICE"
-     headers: 2
-     source_date:
-       start: "01/01/2024"
-       end: "29/02/2024"
-     use_hxl: True
-     admin:
-       - ~
-       - "#adm2+name"
-     admin_exact: False
-     input:
-       - "#org+name"
-       - "#sector"
-     list:
-       - "#org+name"
-       - "#sector"
-     output:
-       - "org_name"
-       - "sector"
-     output_hxl:
-       - "#org+name"
-       - "#sector"
+    dataset: "burkina-faso-presence-operationnelle"
+    resource: "3W Burkina Faso January-February 2024"
+    format: "xlsx"
+    sheet: "MATRICE"
+    headers: 2
+    source_date:
+      start: "01/01/2024"
+      end: "29/02/2024"
+    use_hxl: True
+    admin:
+      - ~
+      - "#adm2+name"
+    admin_exact: False
+    input:
+      - "#org+name"
+      - "#sector"
+    list:
+      - "#org+name"
+      - "#sector"
+    output:
+      - "org_name"
+      - "sector"
+    output_hxl:
+      - "#org+name"
+      - "#sector"
 
   operational_presence_caf:
     dataset: "republique-centrafricaine-presence-operationnelle"
     resource: "3W_CAR_Dec2023"
     format: "xlsx"
-    sheet: "Compil_3W_VF"
+    sheet: "COMPILALL"
     headers: 1
     source_date:
       start: "01/10/2023"
       end: "31/12/2023"
+    use_hxl: True
     admin:
       - ~
-      - "PCODE2"
+      - "#adm2+code"
     admin_exact: True
     input:
-      - "Description_Acteur"
-      - "ACTEUR"
-      - "TYPE_ORG"
-      - "SECTEUR"
+      - "#org+description"
+      - "#org+acronym"
+      - "#org+type"
+      - "#sector"
     list:
-      - "Description_Acteur"
-      - "ACTEUR"
-      - "TYPE_ORG"
-      - "SECTEUR"
+      - "#org+description"
+      - "#org+acronym"
+      - "#org+type"
+      - "#sector"
 
   operational_presence_cmr:
     dataset: "cameroon-5w-operational-presence"
