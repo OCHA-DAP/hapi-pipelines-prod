@@ -349,6 +349,7 @@ sector_map:
   protection lutte anti mines: "PRO-MIN"
   protection protection de l'enfant: "PRO-CPN"
   protection violences basees sur le genre: "PRO-GBV"
+  protection vgb: "PRO-GBV"
   proteccion: "PRO"
   provbg: "PRO-GBV"
   psea: "PRO-GBV"

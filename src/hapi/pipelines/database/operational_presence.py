@@ -92,7 +92,6 @@ class OperationalPresence(BaseUploader):
                         "missing sector in config, dataset skipped",
                     )
                     continue
-
                 for admin_code, org_names in values[org_name_index].items():
                     for i, org_name_orig in enumerate(org_names):
                         admin2_code = admins.get_admin2_code_based_on_level(
