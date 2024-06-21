@@ -145,7 +145,7 @@ operational_presence_admintwo:
       end: "30/04/2024"
     admin:
       - ~
-      - "Pcode ZS"
+      - "Code Terrtoire"
     admin_exact: True
     input:
       - "NOM ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"

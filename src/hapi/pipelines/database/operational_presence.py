@@ -62,6 +62,14 @@ class OperationalPresence(BaseUploader):
                 resource_id = admin_results["hapi_resource_metadata"]["hdx_id"]
                 hxl_tags = admin_results["headers"][1]
                 values = admin_results["values"]
+                # Add this check to see if there is no data, otherwise get a confusing
+                # sqlalchemy error
+                if not values[0]:
+                    raise RuntimeError(
+                        f"Admin level {admin_level} in dataset"
+                        f" {dataset_name} has no data, "
+                        f"please check configuration"
+                    )
                 # Config must contain an org name
                 org_name_index = hxl_tags.index("#org+name")
                 # If config is missing org acronym, use the org name
@@ -78,7 +86,11 @@ class OperationalPresence(BaseUploader):
                 try:
                     sector_index = hxl_tags.index("#sector")
                 except ValueError:
-                    add_message(errors, dataset_name, "missing sector")
+                    add_message(
+                        errors,
+                        dataset_name,
+                        "missing sector in config, dataset skipped",
+                    )
                     continue
 
                 for admin_code, org_names in values[org_name_index].items():
@@ -93,8 +105,14 @@ class OperationalPresence(BaseUploader):
                             org_name_orig = org_acronym_orig
                         sector_orig = values[sector_index][admin_code][i]
                         # Skip rows that are missing a sector
-                        # TODO: isn't this caught by the sector check above?
+                        # TODO: This step is done before org matching, so there is no chance
+                        #  to try and get the sector that way. Is that something we want ot change?
                         if not sector_orig:
+                            add_message(
+                                errors,
+                                dataset_name,
+                                f"org {org_name_orig} missing sector",
+                            )
                             continue
                         org_type_orig = None
                         if org_type_name_index:
