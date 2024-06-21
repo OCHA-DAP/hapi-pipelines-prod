@@ -105,8 +105,6 @@ class OperationalPresence(BaseUploader):
                             org_name_orig = org_acronym_orig
                         sector_orig = values[sector_index][admin_code][i]
                         # Skip rows that are missing a sector
-                        # TODO: This step is done before org matching, so there is no chance
-                        #  to try and get the sector that way. Is that something we want ot change?
                         if not sector_orig:
                             add_message(
                                 errors,
@@ -223,7 +221,9 @@ class OperationalPresence(BaseUploader):
             )
             return
 
+        logger.info("Writing to org table")
         self._org.populate_multiple()
+        logger.info("Writing to operational presence table")
         batch_populate(
             operational_presence_rows, self._session, DBOperationalPresence
         )
