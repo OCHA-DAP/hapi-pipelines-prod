@@ -148,15 +148,25 @@ operational_presence_admintwo:
       - "Code Terrtoire"
     admin_exact: True
     input:
-      - "NOM ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
-      - "ACCRONYME (Choisir dans la liste déroulante)"
-      - "TYPE ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
-      - "SECTEUR/DOMAINE (Choisir dans la liste déroulante)"
+      - "NOM ORGANISATION
+        (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
+      - "ACCRONYME
+        (Choisir dans la liste déroulante)"
+      - "TYPE ORGANISATION
+        (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
+      - "CLUSTER
+        (Choisir dans la liste déroulante)
+        Pour les projets humanitaires uniquement"
     list:
-      - "NOM ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
-      - "ACCRONYME (Choisir dans la liste déroulante)"
-      - "TYPE ORGANISATION (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
-      - "SECTEUR/DOMAINE (Choisir dans la liste déroulante)"
+      - "NOM ORGANISATION
+        (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
+      - "ACCRONYME
+        (Choisir dans la liste déroulante)"
+      - "TYPE ORGANISATION
+        (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
+      - "CLUSTER
+        (Choisir dans la liste déroulante)
+         Pour les projets humanitaires uniquement"
 
   operational_presence_col:
     dataset: "colombia-4ws"
@@ -457,7 +467,9 @@ operational_presence_national:
     resource: "NER_Sep_2023"
     format: "xlsx"
     sheet: "3W_Data_T2"
-    headers: 4
+    headers:
+      - 4
+      - 5
     source_date:
       start: "01/07/2023"
       end: "30/09/2023"
@@ -466,20 +478,24 @@ operational_presence_national:
       - "NOM ORGANISATION
         (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
       - "ACCRONYME
-        (Choisir dans la liste déroulante)"
+        (Choisir dans la liste déroulante)
+        #org+acronym"
       - "TYPE ORGANISATION
         (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
-      - "SECTEUR/DOMAINE
-        (Choisir dans la liste déroulante)"
+      - "CLUSTER
+        (Choisir dans la liste déroulante)
+        #sector"
     list:
       - "NOM ORGANISATION
         (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
       - "ACCRONYME
-        (Choisir dans la liste déroulante)"
+        (Choisir dans la liste déroulante)
+        #org+acronym"
       - "TYPE ORGANISATION
         (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
-      - "SECTEUR/DOMAINE
-        (Choisir dans la liste déroulante)"
+      - "CLUSTER
+        (Choisir dans la liste déroulante)
+        #sector"
 
   operational_presence_pse:
     dataset: "state-of-palestine-who-does-what-and-where-3ws"

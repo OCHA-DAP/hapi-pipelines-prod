@@ -52,12 +52,12 @@ class OperationalPresence(BaseUploader):
         operational_presence_rows = []
         if debug:
             debug_rows = []
-        number_duplicates = 0
         errors = set()
         for dataset in self._results.values():
             dataset_name = dataset["hdx_stub"]
             time_period_start = dataset["time_period"]["start"]
             time_period_end = dataset["time_period"]["end"]
+            number_duplicates = 0
             for admin_level, admin_results in dataset["results"].items():
                 resource_id = admin_results["hapi_resource_metadata"]["hdx_id"]
                 hxl_tags = admin_results["headers"][1]
@@ -210,6 +210,12 @@ class OperationalPresence(BaseUploader):
                         operational_presence_rows.append(
                             operational_presence_row
                         )
+            if number_duplicates:
+                add_message(
+                    errors,
+                    dataset_name,
+                    f"{number_duplicates} duplicate rows found",
+                )
         if debug:
             write_list_to_csv(
                 join("saved_data", "debug_operational_presence.csv"),
@@ -222,9 +228,6 @@ class OperationalPresence(BaseUploader):
             operational_presence_rows, self._session, DBOperationalPresence
         )
 
-        logger.warning(
-            f"There were {number_duplicates} duplicate operational presence rows!"
-        )
         for dataset, msg in self._config.get(
             "conflict_event_error_messages", dict()
         ).items():

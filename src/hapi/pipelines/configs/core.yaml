@@ -363,7 +363,6 @@ sector_map:
   salud: "HEA"
   samv: "FSC"
   sante: "HEA"
-  sectoriel: "Multi"
   securite alimentaire: "FSC"
   seguridad alimentaria: "FSC"
   seguridad alimentaria y nutricion: "FSC"
