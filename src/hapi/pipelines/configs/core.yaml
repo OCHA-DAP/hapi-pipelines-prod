@@ -232,6 +232,7 @@ org_type_map:
   international institution: "438"
   local ngo: "504"
   mouv cr: "445"
+  mouvement croix rouge: "445"
   mouvement de la croix rouge: "445"
   movimiento de la cruz roja media luna roja: "445"
   nations unies: "447"
@@ -262,6 +263,7 @@ org_type_map:
 
 sector_map:
   abna: "SHL"
+  abri bna: "SHL"
   abris: "SHL"
   abris ame: "SHL"
   abris/bna: "SHL"
@@ -368,6 +370,7 @@ sector_map:
   shelter and non food items: "SHL"
   site management: "CCM"
   snfi: "SHL"
+  telecommunications: "TEL"
   telecomunicaciones de emergencia: "TEL"
   telecommunications d'urgence: "TEL"
   vbg: "PRO-GBV"
