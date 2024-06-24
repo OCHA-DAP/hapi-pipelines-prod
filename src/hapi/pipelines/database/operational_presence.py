@@ -52,32 +52,46 @@ class OperationalPresence(BaseUploader):
         operational_presence_rows = []
         if debug:
             debug_rows = []
-        number_duplicates = 0
         errors = set()
         for dataset in self._results.values():
             dataset_name = dataset["hdx_stub"]
             time_period_start = dataset["time_period"]["start"]
             time_period_end = dataset["time_period"]["end"]
+            number_duplicates = 0
             for admin_level, admin_results in dataset["results"].items():
                 resource_id = admin_results["hapi_resource_metadata"]["hdx_id"]
                 hxl_tags = admin_results["headers"][1]
                 values = admin_results["values"]
-
+                # Add this check to see if there is no data, otherwise get a confusing
+                # sqlalchemy error
+                if not values[0]:
+                    raise RuntimeError(
+                        f"Admin level {admin_level} in dataset"
+                        f" {dataset_name} has no data, "
+                        f"please check configuration"
+                    )
+                # Config must contain an org name
                 org_name_index = hxl_tags.index("#org+name")
+                # If config is missing org acronym, use the org name
                 try:
                     org_acronym_index = hxl_tags.index("#org+acronym")
                 except ValueError:
                     org_acronym_index = hxl_tags.index("#org+name")
+                # If config is missing org type, set to None
                 try:
                     org_type_name_index = hxl_tags.index("#org+type+name")
                 except ValueError:
                     org_type_name_index = None
+                # If config is missing sector, add to error messages
                 try:
                     sector_index = hxl_tags.index("#sector")
                 except ValueError:
-                    add_message(errors, dataset_name, "missing sector")
+                    add_message(
+                        errors,
+                        dataset_name,
+                        "missing sector in config, dataset skipped",
+                    )
                     continue
-
                 for admin_code, org_names in values[org_name_index].items():
                     for i, org_name_orig in enumerate(org_names):
                         admin2_code = admins.get_admin2_code_based_on_level(
@@ -89,7 +103,13 @@ class OperationalPresence(BaseUploader):
                         if not org_name_orig:
                             org_name_orig = org_acronym_orig
                         sector_orig = values[sector_index][admin_code][i]
+                        # Skip rows that are missing a sector
                         if not sector_orig:
+                            add_message(
+                                errors,
+                                dataset_name,
+                                f"org {org_name_orig} missing sector",
+                            )
                             continue
                         org_type_orig = None
                         if org_type_name_index:
@@ -187,6 +207,12 @@ class OperationalPresence(BaseUploader):
                         operational_presence_rows.append(
                             operational_presence_row
                         )
+            if number_duplicates:
+                add_message(
+                    errors,
+                    dataset_name,
+                    f"{number_duplicates} duplicate rows found",
+                )
         if debug:
             write_list_to_csv(
                 join("saved_data", "debug_operational_presence.csv"),
@@ -194,14 +220,13 @@ class OperationalPresence(BaseUploader):
             )
             return
 
+        logger.info("Writing to org table")
         self._org.populate_multiple()
+        logger.info("Writing to operational presence table")
         batch_populate(
             operational_presence_rows, self._session, DBOperationalPresence
         )
 
-        logger.warning(
-            f"There were {number_duplicates} duplicate operational presence rows!"
-        )
         for dataset, msg in self._config.get(
             "conflict_event_error_messages", dict()
         ).items():

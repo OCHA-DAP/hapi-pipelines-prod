@@ -62,9 +62,10 @@ class Org(BaseUploader):
         )
         if key in self.data:
             org_type_old = self.data[key][2]
-            if org_type_old:
-                # TODO: should we flag these units?
-                return
+            if org_type and not org_type_old:
+                self.data[key][2] = org_type
+            # TODO: should we flag orgs if we find more than one org type?
+            return
         self.data[
             (
                 clean_name(acronym).upper(),
