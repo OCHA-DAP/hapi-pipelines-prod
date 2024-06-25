@@ -517,13 +517,13 @@ operational_presence_national:
 
   operational_presence_sdn:
     dataset: "sudan-operational-presence"
-    resource: "2024-consolidated-3w-data-jan-to-31-May.xlsx"
+    resource: "2024-consolidated-3w-data-jan-to-31-march.xlsx"
     format: "xlsx"
     sheet: "3W_master_data"
     headers: 1
     source_date:
       start: "01/01/2024"
-      end: "31/05/2024"
+      end: "31/03/2024"
     admin_single: "SDN"
     input:
       - "Organization"
