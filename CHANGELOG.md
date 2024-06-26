@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.19] - 2024-06-25
+
+### Fixed
+
+- Updated Sudan 3W filename
+
+## [0.9.18] - 2024-06-24
+
+### Added
+
+- Specify countries per theme when running via the command line
+
+### Fixed
+
+- Thanks to bugfix in `openpyxl`, added 3W data for: BFA, CAF, COD, NER
+- Updated 3W data for: MLI, SOM, ETH, SDN, SSD
+- Avoid overwriting orgs with multiple org types
+
 ## [0.9.17] - 2024-06-10
 
 ### Changed

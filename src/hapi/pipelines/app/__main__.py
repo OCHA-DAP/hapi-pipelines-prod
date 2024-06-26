@@ -54,7 +54,13 @@ def parse_args():
         default=None,
         help="Database connection parameters. Overrides --db-uri.",
     )
-    parser.add_argument("-th", "--themes", default=None, help="Themes to run")
+    th_help = (
+        "Themes to run. Can pass a single theme or multiple themes "
+        "separated by commas. You can also append a colon to the "
+        "theme name and pass ISO3s separated by a pipe. For example: "
+        "population:AFG|COD,poverty_rate:BFA,funding"
+    )
+    parser.add_argument("-th", "--themes", default=None, help=th_help)
     parser.add_argument(
         "-sc", "--scrapers", default=None, help="Scrapers to run"
     )
@@ -181,7 +187,11 @@ if __name__ == "__main__":
             if len(theme_strs) == 1:
                 themes_to_run[theme_strs[0]] = None
             else:
-                themes_to_run[theme_strs[0]] = theme_strs[1]
+                # Split values by pipe for multiple countries
+                values = theme_strs[1].split("|")
+                themes_to_run[theme_strs[0]] = (
+                    values if len(values) > 1 else values[0]
+                )
     else:
         themes_to_run = None
     if args.scrapers:
