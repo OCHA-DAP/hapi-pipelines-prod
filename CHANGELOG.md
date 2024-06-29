@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+### [0.9.20] - 2024-06-29
+
+### Fixed
+
+- Add check for funding requirements value due to missing data for UKR
+
 ## [0.9.19] - 2024-06-25
 
 ### Fixed
