@@ -7,6 +7,7 @@ from hapi_schema.db_funding import DBFunding
 from hdx.utilities.dateparse import parse_date
 from sqlalchemy.orm import Session
 
+from ..utilities.logging_helpers import add_message, add_missing_value_message
 from . import locations
 from .base_uploader import BaseUploader
 from .metadata import Metadata
@@ -29,7 +30,9 @@ class Funding(BaseUploader):
 
     def populate(self):
         logger.info("Populating funding table")
+        errors = set()
         for dataset in self._results.values():
+            dataset_name = dataset["hdx_stub"]
             for admin_level, admin_results in dataset["results"].items():
                 resource_id = admin_results["hapi_resource_metadata"]["hdx_id"]
                 hxl_tags = admin_results["headers"][1]
@@ -55,8 +58,21 @@ class Funding(BaseUploader):
                             values[reference_period_end_i][admin_code][irow]
                         )
                         if reference_period_start > reference_period_end:
-                            logger.error(
-                                f"Date misalignment in funding data for {appeal_code} in {admin_code}"
+                            add_message(
+                                errors,
+                                dataset_name,
+                                f"Date misalignment in funding data for {appeal_code} in {admin_code}",
+                            )
+                            continue
+                        # This check for a missing funding line has been added due to
+                        # an error in the UKR funding requirements data
+                        funding_usd = values[funding_usd_i][admin_code][irow]
+                        if funding_usd is None:
+                            add_missing_value_message(
+                                errors,
+                                dataset_name,
+                                "funding_usd",
+                                appeal_code,
                             )
                             continue
                         funding_row = DBFunding(
@@ -72,9 +88,7 @@ class Funding(BaseUploader):
                             requirements_usd=values[requirements_usd_i][
                                 admin_code
                             ][irow],
-                            funding_usd=values[funding_usd_i][admin_code][
-                                irow
-                            ],
+                            funding_usd=funding_usd,
                             funding_pct=values[funding_pct_i][admin_code][
                                 irow
                             ],
@@ -84,3 +98,5 @@ class Funding(BaseUploader):
 
                         self._session.add(funding_row)
         self._session.commit()
+        for error in sorted(errors):
+            logger.error(error)

@@ -134,7 +134,7 @@ num2words==0.5.13
     # via quantulum3
 oauthlib==3.2.2
     # via requests-oauthlib
-openpyxl==3.1.4
+openpyxl==3.1.5
     # via hdx-python-utilities
 packaging==24.1
     # via pytest
