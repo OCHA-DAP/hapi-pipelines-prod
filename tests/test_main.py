@@ -182,7 +182,7 @@ class TestHAPIPipelines:
                     count = session.scalar(
                         select(func.count(DBFunding.resource_hdx_id))
                     )
-                    check.equal(count, 57)
+                    check.equal(count, 56)
                     count = session.scalar(
                         select(func.count(DBConflictEvent.resource_hdx_id))
                     )
