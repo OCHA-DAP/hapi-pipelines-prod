@@ -4,12 +4,12 @@ import logging
 from typing import Dict
 
 from hapi_schema.db_org import DBOrg
-from hdx.location.names import clean_name
 from hdx.scraper.utilities.reader import Read
 from hdx.utilities.dictandlist import dict_of_sets_add
 from sqlalchemy.orm import Session
 
 from ..utilities.batch_populate import batch_populate
+from ..utilities.mappings import clean_text
 from .base_uploader import BaseUploader
 
 logger = logging.getLogger(__name__)
@@ -57,8 +57,8 @@ class Org(BaseUploader):
         org_type,
     ):
         key = (
-            clean_name(acronym).upper(),
-            clean_name(org_name).upper(),
+            clean_text(acronym),
+            clean_text(org_name),
         )
         if key in self.data:
             org_type_old = self.data[key][2]
@@ -68,10 +68,10 @@ class Org(BaseUploader):
             return
         self.data[
             (
-                clean_name(acronym).upper(),
-                clean_name(org_name).upper(),
+                clean_text(acronym),
+                clean_text(org_name),
             )
-        ] = (acronym, org_name, org_type)
+        ] = [acronym, org_name, org_type]
 
     def populate_multiple(self):
         org_rows = [
@@ -93,9 +93,9 @@ class Org(BaseUploader):
         org_map_info = org_name_map.get(org_name)
         if not org_map_info:
             org_name_map_clean = {
-                clean_name(on): org_name_map[on] for on in org_name_map
+                clean_text(on): org_name_map[on] for on in org_name_map
             }
-            org_name_clean = clean_name(org_name)
+            org_name_clean = clean_text(org_name)
             org_map_info = org_name_map_clean.get(org_name_clean)
         if not org_map_info:
             return {"#org+name": org_name}
