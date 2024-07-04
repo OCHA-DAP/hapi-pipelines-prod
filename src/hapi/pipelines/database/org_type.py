@@ -52,10 +52,10 @@ class OrgType(BaseUploader):
             "503": "Development Programme",
             "504": "Local NGO",
         }
-        for code in extra_entries:
+        for code, description in extra_entries.items():
             parse_org_type_values(
                 code=code,
-                description=extra_entries[code],
+                description=description,
             )
 
         self._session.commit()

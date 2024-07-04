@@ -68,7 +68,7 @@ def test_get_code_from_name():
     }
     assert get_code_from_name(
         "NATIONAL_NGO", org_type_lookup, org_type_map
-    ) == ("441", "national ngo", True)
+    ) == ("441", "national ngo", False)
     assert get_code_from_name(
         "COOPÉRATION_INTERNATIONALE", org_type_lookup, org_type_map
     ) == (None, "cooperation internationale", False)
@@ -80,7 +80,9 @@ def test_get_code_from_name():
     assert get_code_from_name(
         "International", org_type_lookup, org_type_map
     ) == (None, "international", False)
-    assert get_code_from_name("LOGISTIQUE", sector_lookup, sector_map) == (
+    assert get_code_from_name(
+        "LOGISTIQUE", sector_lookup, sector_map, fuzzy_match=True
+    ) == (
         "LOG",
         "logistique",
         True,
