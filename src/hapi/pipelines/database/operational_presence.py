@@ -6,8 +6,8 @@ from typing import Dict
 
 from hapi_schema.db_operational_presence import DBOperationalPresence
 from hdx.location.adminlevel import AdminLevel
-from hdx.location.names import clean_name
 from hdx.utilities.dictandlist import write_list_to_csv
+from hdx.utilities.text import normalise
 from sqlalchemy.orm import Session
 
 from ..utilities.batch_populate import batch_populate
@@ -160,8 +160,8 @@ class OperationalPresence(BaseUploader):
                         )
                         org_acronym, org_name, org_type = self._org.data[
                             (
-                                clean_name(org_acronym).upper(),
-                                clean_name(org_name).upper(),
+                                normalise(org_acronym),
+                                normalise(org_name),
                             )
                         ]
                         sector_code = self._sector.get_sector_code(sector_orig)
@@ -228,7 +228,7 @@ class OperationalPresence(BaseUploader):
         )
 
         for dataset, msg in self._config.get(
-            "conflict_event_error_messages", dict()
+            "operational_presence_error_messages", dict()
         ).items():
             add_message(errors, dataset, msg)
         for error in sorted(errors):
