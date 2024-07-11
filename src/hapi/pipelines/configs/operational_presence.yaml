@@ -12,7 +12,6 @@ operational_presence_default:
     - "operational_presence_hnd"
     - "operational_presence_hti"
     - "operational_presence_mli"
-    - "operational_presence_moz"
     - "operational_presence_ner"
     - "operational_presence_nga"
     - "operational_presence_sdn"
@@ -250,28 +249,29 @@ operational_presence_admintwo:
 
   operational_presence_moz:
     dataset: "mozambique-3ws-2023-jan-nov"
-    resource: "mozambique-hrp-2023_ocha_consolidated_5w_jan-_-nov-2023_hxl"
+    resource: "MOZ-Humanitarian Operational Presence May 2024.xlsx"
     format: "xlsx"
-    sheet: "3W"
-    headers: 4
+    sheet: "Operationa Presence May 2024"
+    headers: 1
     source_date:
-      start: "01/01/2023"
-      end: "30/11/2023"
-    use_hxl: True
+      start: "01/05/2024"
+      end: "31/05/2024"
     admin:
       - ~
-      - "#adm2+code"
+      - "District (Admin 2)-pcode (distrito/ cidade)"
     admin_exact: True
     input:
-      - "#org+impl"
-      - "#org+impl"
-      - "#org+type"
-      - "#sector"
+      - "Implementing Partner (parceiro de implementação)"
+      - "Organization Type ((tipo de organização)2"
     list:
-      - "#org+impl"
-      - "#org+impl"
-      - "#org+type"
-      - "#sector"
+      - "Implementing Partner (parceiro de implementação)"
+      - "Organization Type ((tipo de organização)2"
+    output:
+      - "org_name"
+      - "org_type_name"
+    output_hxl:
+      - "#org+name"
+      - "#org+type+name"
 
   operational_presence_nga:
     dataset: "nigeria-3w"
