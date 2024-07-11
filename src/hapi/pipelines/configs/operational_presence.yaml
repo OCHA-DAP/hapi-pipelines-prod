@@ -249,23 +249,24 @@ operational_presence_admintwo:
 
   operational_presence_moz:
     dataset: "mozambique-3ws-2023-jan-nov"
-    resource: "MOZ-Humanitarian Operational Presence May 2024.xlsx"
+    resource: "MOZ-Humanitarian Operational Presence May 2024"
     format: "xlsx"
     sheet: "Operationa Presence May 2024"
     headers: 1
     source_date:
       start: "01/05/2024"
       end: "31/05/2024"
+    use_hxl: True
     admin:
       - ~
-      - "District (Admin 2)-pcode (distrito/ cidade)"
+      - "#adm2+code"
     admin_exact: True
     input:
-      - "Implementing Partner (parceiro de implementação)"
-      - "Organization Type ((tipo de organização)2"
+      - "#org+name+impl"
+      - "#org+type+impl"
     list:
-      - "Implementing Partner (parceiro de implementação)"
-      - "Organization Type ((tipo de organização)2"
+      - "#org+name+impl"
+      - "#org+type+impl"
     output:
       - "org_name"
       - "org_type_name"
