@@ -24,7 +24,7 @@ ckanapi==4.8
     # via hdx-python-api
 click==8.1.7
     # via typer
-coverage==7.5.4
+coverage==7.6.0
     # via pytest-cov
 cryptography==42.0.8
     # via pyopenssl
@@ -58,8 +58,7 @@ greenlet==3.0.3
     # via sqlalchemy
 gspread==6.1.2
     # via hdx-python-scraper
-hapi-schema==0.8.13
-    # via hapi-pipelines (pyproject.toml)
+hapi-schema @ git+https://git@github.com/OCHA-DAP/hapi-sqlalchemy-schema@941aa371588cefff5410a402838a586cb1efc755
 hdx-python-api==6.3.1
     # via
     #   hapi-pipelines (pyproject.toml)
