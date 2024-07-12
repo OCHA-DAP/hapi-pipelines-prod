@@ -248,7 +248,7 @@ operational_presence_admintwo:
       - "Cluster"
 
   operational_presence_moz:
-    dataset: "mozambique-3ws-2023-jan-nov"
+    dataset: "mozambique-operational-presence"
     resource: "MOZ-Humanitarian Operational Presence May 2024"
     format: "xlsx"
     sheet: "Operationa Presence May 2024"
