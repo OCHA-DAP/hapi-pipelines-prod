@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.30] - 2024-07-13
+
+### Fixed
+
+- Update filenames for ETH conflict data
+
 ## [0.9.29] - 2024-07-12
 
 ### Fixed
