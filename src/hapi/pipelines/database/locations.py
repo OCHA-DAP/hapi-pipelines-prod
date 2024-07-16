@@ -28,21 +28,7 @@ class Locations(BaseUploader):
         self._datasetinfo = configuration["locations_hrp_gho"]
 
     def populate(self):
-        reader = Read.get_reader()
-        headers, iterator = reader.get_tabular_rows(
-            self._datasetinfo["url"],
-            headers=2,
-            dict_form=True,
-            format="csv",
-            file_prefix="locations",
-        )
-        has_hrp = {}
-        in_gho = {}
-        for row in iterator:
-            if row["#indicator+hrp+bool"] == "Y":
-                has_hrp[row["#country+code"]] = True
-            if row["#indicator+gho+bool"] == "Y":
-                in_gho[row["#country+code"]] = True
+        has_hrp, in_gho = self.read_hrp_gho_data()
         for country in Country.countriesdata()["countries"].values():
             code = country["#country+code+v_iso3"]
             location_row = DBLocation(
@@ -55,3 +41,21 @@ class Locations(BaseUploader):
             self._session.add(location_row)
             self._session.commit()
             self.data[code] = location_row.id
+
+    def read_hrp_gho_data(self):
+        has_hrp = {}
+        in_gho = {}
+        reader = Read.get_reader()
+        headers, iterator = reader.get_tabular_rows(
+            self._datasetinfo["url"],
+            headers=2,
+            dict_form=True,
+            format="csv",
+            file_prefix="locations",
+        )
+        for row in iterator:
+            if row["#indicator+hrp+bool"] == "Y":
+                has_hrp[row["#country+code"]] = True
+            if row["#indicator+gho+bool"] == "Y":
+                in_gho[row["#country+code"]] = True
+        return has_hrp, in_gho
