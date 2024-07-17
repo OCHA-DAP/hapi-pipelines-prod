@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.33] - 2024-07-17
+
+### Added
+
+- Add 'has_hrp' and 'in_gho' fields to location table
+
 ## [0.9.32] - 2024-07-17
 
 ### Fixed
