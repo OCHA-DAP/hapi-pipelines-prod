@@ -54,8 +54,8 @@ class Locations(BaseUploader):
             file_prefix="locations",
         )
         for row in iterator:
-            if row["#indicator+hrp+bool"] == "Y":
+            if row["#indicator+hrp+bool"].upper() == "Y":
                 has_hrp[row["#country+code"]] = True
-            if row["#indicator+gho+bool"] == "Y":
+            if row["#indicator+gho+bool"].upper() == "Y":
                 in_gho[row["#country+code"]] = True
         return has_hrp, in_gho
