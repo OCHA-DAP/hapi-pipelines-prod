@@ -5,6 +5,7 @@ from typing import Dict
 
 from hapi_schema.db_org_type import DBOrgType
 from hdx.scraper.utilities.reader import Read
+from hdx.utilities.text import normalise
 from sqlalchemy.orm import Session
 
 from ..utilities.mappings import get_code_from_name
@@ -22,14 +23,13 @@ class OrgType(BaseUploader):
     ):
         super().__init__(session)
         self._datasetinfo = datasetinfo
-        self.data = {}
-        self._org_type_map = org_type_map
+        self.data = org_type_map
 
     def populate(self):
         logger.info("Populating org type table")
 
         def parse_org_type_values(code: str, description: str) -> None:
-            self.data[description] = code
+            self.data[normalise(description)] = code
             org_type_row = DBOrgType(
                 code=code,
                 description=description,
@@ -61,11 +61,7 @@ class OrgType(BaseUploader):
         self._session.commit()
 
     def get_org_type_code(self, org_type: str) -> str:
-        org_type_code, name_clean, add = get_code_from_name(
+        return get_code_from_name(
             name=org_type,
             code_lookup=self.data,
-            code_mapping=self._org_type_map,
         )
-        if add:
-            self._org_type_map[name_clean] = org_type_code
-        return org_type_code
