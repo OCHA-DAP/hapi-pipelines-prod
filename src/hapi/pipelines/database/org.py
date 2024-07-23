@@ -1,11 +1,13 @@
 """Populate the org table."""
 
 import logging
-from typing import Dict
+from dataclasses import dataclass
+from os.path import join
+from typing import Dict, NamedTuple
 
 from hapi_schema.db_org import DBOrg
 from hdx.scraper.utilities.reader import Read
-from hdx.utilities.dictandlist import dict_of_sets_add
+from hdx.utilities.dictandlist import write_list_to_csv
 from hdx.utilities.text import normalise
 from sqlalchemy.orm import Session
 
@@ -15,6 +17,23 @@ from .base_uploader import BaseUploader
 logger = logging.getLogger(__name__)
 
 _BATCH_SIZE = 1000
+
+
+@dataclass
+class OrgInfo:
+    canonical_name: str
+    normalised_name: str
+    acronym: str | None
+    normalised_acronym: str | None
+    type_code: str | None
+    used: bool = False
+    complete: bool = False
+
+
+class OrgData(NamedTuple):
+    acronym: str
+    name: str
+    type_code: str
 
 
 class Org(BaseUploader):
@@ -27,7 +46,6 @@ class Org(BaseUploader):
         self._datasetinfo = datasetinfo
         self.data = {}
         self._org_map = {}
-        self._org_lookup = {}
 
     def populate(self):
         logger.info("Populating org mapping")
@@ -39,74 +57,128 @@ class Org(BaseUploader):
             format="csv",
             file_prefix="org",
         )
-        for row in iterator:
-            org_name = row.get("#x_pattern")
-            canonical_org_name = row.get("#org+name")
-            if not canonical_org_name:
-                continue
-            self._org_map[org_name] = row
-            self._org_map[canonical_org_name] = row
-            org_acronym = row.get("#org+acronym")
-            if org_acronym:
-                self._org_map[org_acronym] = row
 
-    def add_or_match_org(
-        self,
-        acronym,
-        org_name,
-        org_type,
-    ):
-        key = (
-            normalise(acronym),
-            normalise(org_name),
-        )
-        if key in self.data:
-            org_type_old = self.data[key][2]
-            if org_type and not org_type_old:
-                self.data[key][2] = org_type
-            # TODO: should we flag orgs if we find more than one org type?
-            return
-        self.data[
-            (
-                normalise(acronym),
-                normalise(org_name),
+        for i, row in enumerate(iterator):
+            canonical_name = row["#org+name"]
+            if not canonical_name:
+                logger.error(f"Canonical name is empty in row {i}!")
+                continue
+            normalised_name = normalise(canonical_name)
+            country_code = row["#country+code"]
+            acronym = row["#org+acronym"]
+            if acronym:
+                normalised_acronym = normalise(acronym)
+            else:
+                normalised_acronym = None
+            org_name = row["#x_pattern"]
+            type_code = row["#org+type+code"]
+            org_info = OrgInfo(
+                canonical_name,
+                normalised_name,
+                acronym,
+                normalised_acronym,
+                type_code,
             )
-        ] = [acronym, org_name, org_type]
+            self._org_map[(country_code, canonical_name)] = org_info
+            self._org_map[(country_code, normalised_name)] = org_info
+            self._org_map[(country_code, acronym)] = org_info
+            self._org_map[(country_code, normalised_acronym)] = org_info
+            self._org_map[(country_code, org_name)] = org_info
+            self._org_map[(country_code, normalise(org_name))] = org_info
+
+    def get_org_info(self, org_str: str, location: str) -> OrgInfo:
+        key = (location, org_str)
+        org_info = self._org_map.get(key)
+        if org_info:
+            return org_info
+        normalised_str = normalise(org_str)
+        org_info = self._org_map.get((location, normalised_str))
+        if org_info:
+            self._org_map[key] = org_info
+            return org_info
+        org_info = self._org_map.get((None, org_str))
+        if org_info:
+            self._org_map[key] = org_info
+            return org_info
+        org_info = self._org_map.get((None, normalised_str))
+        if org_info:
+            self._org_map[key] = org_info
+            return org_info
+        org_info = OrgInfo(
+            canonical_name=org_str,
+            normalised_name=normalised_str,
+            acronym=None,
+            normalised_acronym=None,
+            type_code=None,
+        )
+        self._org_map[key] = org_info
+        return org_info
+
+    def add_or_match_org(self, org_info: OrgInfo) -> OrgData:
+        key = (org_info.normalised_acronym, org_info.normalised_name)
+        org_data = self.data.get(key)
+        if org_data:
+            if not org_data.type_code and org_info.type_code:
+                org_data = OrgData(
+                    org_data.acronym, org_data.name, org_info.type_code
+                )
+                self.data[key] = org_data
+                # TODO: should we flag orgs if we find more than one org type?
+            else:
+                org_info.type_code = org_data.type_code
+            # Since we're looking up by normalised acronym and normalised name,
+            # these don't need copying here
+            org_info.acronym = org_data.acronym
+            org_info.canonical_name = org_data.name
+
+        else:
+            org_data = OrgData(
+                org_info.acronym, org_info.canonical_name, org_info.type_code
+            )
+            self.data[key] = org_data
+        if org_info.acronym and org_info.type_code:
+            org_info.complete = True
+        org_info.used = True
+        return org_data
 
     def populate_multiple(self):
         org_rows = [
             dict(
-                acronym=values[0],
-                name=values[1],
-                org_type_code=values[2],
+                acronym=org_data.acronym,
+                name=org_data.name,
+                org_type_code=org_data.type_code,
             )
-            for values in self.data.values()
+            for org_data in self.data.values()
         ]
         batch_populate(org_rows, self._session, DBOrg)
 
-    def get_org_info(self, org_name: str, location: str) -> Dict[str, str]:
-        org_name_map = {
-            on: self._org_map[on]
-            for on in self._org_map
-            if self._org_map[on]["#country+code"] in [location, None]
-        }
-        org_map_info = org_name_map.get(org_name)
-        if not org_map_info:
-            org_name_map_clean = {
-                normalise(on): org_name_map[on] for on in org_name_map
-            }
-            org_name_clean = normalise(org_name)
-            org_map_info = org_name_map_clean.get(org_name_clean)
-        if not org_map_info:
-            return {"#org+name": org_name}
-        org_info = {"#org+name": org_map_info["#org+name"]}
-        if not org_info["#org+name"]:
-            org_info["#org+name"] = org_map_info["#x_pattern"]
-        if org_map_info["#org+acronym"]:
-            org_info["#org+acronym"] = org_map_info["#org+acronym"]
-        if org_map_info["#org+type+code"]:
-            org_info["#org+type+code"] = org_map_info["#org+type+code"]
-        return org_info
-
-    def add_org_to_lookup(self, org_name_orig, org_name_official):
-        dict_of_sets_add(self._org_lookup, org_name_official, org_name_orig)
+    def output_org_map(self, folder: str) -> None:
+        rows = [
+            (
+                "Country Code",
+                "Lookup",
+                "Canonical Name",
+                "Normalised Name",
+                "Acronym",
+                "Normalised Acronym",
+                "Type Code",
+                "Used",
+                "Complete",
+            )
+        ]
+        for key, org_info in self._org_map.items():
+            country_code, lookup = key
+            rows.append(
+                (
+                    country_code,
+                    lookup,
+                    org_info.canonical_name,
+                    org_info.normalised_name,
+                    org_info.acronym,
+                    org_info.normalised_acronym,
+                    org_info.type_code,
+                    "Y" if org_info.used else "N",
+                    "Y" if org_info.complete else "N",
+                )
+            )
+        write_list_to_csv(join(folder, "org_map.csv"), rows)
