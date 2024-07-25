@@ -178,8 +178,8 @@ operational_presence_admintwo:
       - "SECTOR / CLUSTER"
 
   operational_presence_hnd:
-    dataset: "345w_honduras_october_2023"
-    resource: "345w_honduras_october_2023-hn.csv"
+    dataset: "honduras-operational-presence-2023"
+    resource: "HND_OperationalPresence_345w_2023.csv"
     format: "csv"
     headers: 1
     use_hxl: True

@@ -29,9 +29,10 @@ class Sector(BaseUploader):
         logger.info("Populating sector table")
 
         def parse_sector_values(code: str, name: str):
-            if code != "intersectoral":
-                self.data[normalise(name)] = code
-                self.data[normalise(code)] = code
+            self.data[name] = code
+            self.data[code] = code
+            self.data[normalise(name)] = code
+            self.data[normalise(code)] = code
             sector_row = DBSector(
                 code=code,
                 name=name,
@@ -59,7 +60,7 @@ class Sector(BaseUploader):
 
         self._session.commit()
 
-    def get_sector_code(self, sector: str) -> str:
+    def get_sector_code(self, sector: str) -> str | None:
         return get_code_from_name(
             name=sector,
             code_lookup=self.data,
