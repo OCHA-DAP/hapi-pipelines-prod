@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.38] - 2024-07-26
+
+### Fixed
+
+- Honduras operational presence file update
+
 ## [0.9.37] - 2024-07-24
 
 ### Fixed
