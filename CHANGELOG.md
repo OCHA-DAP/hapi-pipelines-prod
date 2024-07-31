@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.41] - 2024-07-31
+
+### Changed
+
+- Convert xlsx to csv for conflict events
+
+## [0.9.40] - 2024-07-30
+
+### Changed
+
+- Split pipelines test into multiple tests
+
+## [0.9.39] - 2024-07-29
+
+### Fixed
+
+- COD and TCD operational presence update
+
 ## [0.9.38] - 2024-07-26
 
 ### Fixed
