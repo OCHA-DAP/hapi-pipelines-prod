@@ -38,6 +38,8 @@ def test_get_code_from_name_org_type():
         get_code_from_name(
             "NATIONAL_NGO",
             actual_org_type_lookup,
+            [],
+            fuzzy_match=False,
         )
         == "441"
     )
@@ -45,14 +47,42 @@ def test_get_code_from_name_org_type():
         get_code_from_name(
             "COOPÉRATION_INTERNATIONALE",
             actual_org_type_lookup,
+            [],
+            fuzzy_match=False,
         )
         is None
     )
-    assert get_code_from_name("NGO", actual_org_type_lookup) is None
+    unmatched = []
+    assert (
+        get_code_from_name(
+            "COOPÉRATION_INTERNATIONALE",
+            actual_org_type_lookup,
+            unmatched,
+            fuzzy_match=True,
+        )
+        is None
+    )
+    assert (
+        get_code_from_name(
+            "COOPÉRATION_INTERNATIONALE",
+            actual_org_type_lookup,
+            unmatched,
+            fuzzy_match=True,
+        )
+        is None
+    )
+    assert (
+        get_code_from_name(
+            "NGO", actual_org_type_lookup, [], fuzzy_match=False
+        )
+        is None
+    )
     assert (
         get_code_from_name(
             "International",
             actual_org_type_lookup,
+            [],
+            fuzzy_match=False,
         )
         is None
     )
@@ -100,16 +130,29 @@ def test_get_code_from_name_sector():
     actual_sector_lookup = {normalise(k): v for k, v in sector_lookup.items()}
     actual_sector_lookup.update(sector_map)
     assert (
-        get_code_from_name("education", actual_sector_lookup, fuzzy_match=True)
+        get_code_from_name(
+            "education", actual_sector_lookup, [], fuzzy_match=True
+        )
         == "EDU"
     )
     assert (
         get_code_from_name(
-            "LOGISTIQUE", actual_sector_lookup, fuzzy_match=True
+            "LOGISTIQUE", actual_sector_lookup, [], fuzzy_match=True
         )
         == "LOG"
     )
-    assert get_code_from_name("CCCM", actual_sector_lookup) == "CCM"
-    assert get_code_from_name("Santé", actual_sector_lookup) == "HEA"
+    assert (
+        get_code_from_name("CCCM", actual_sector_lookup, [], fuzzy_match=False)
+        == "CCM"
+    )
+    assert (
+        get_code_from_name(
+            "Santé", actual_sector_lookup, [], fuzzy_match=False
+        )
+        == "HEA"
+    )
     actual_sector_lookup["cccm"] = "CCM"
-    assert get_code_from_name("CCS", actual_sector_lookup) is None
+    assert (
+        get_code_from_name("CCS", actual_sector_lookup, [], fuzzy_match=False)
+        is None
+    )
