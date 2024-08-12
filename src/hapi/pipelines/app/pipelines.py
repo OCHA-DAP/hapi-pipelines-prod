@@ -43,6 +43,7 @@ class Pipelines:
         scrapers_to_run: Optional[ListTuple[str]] = None,
         errors_on_exit: Optional[ErrorsOnExit] = None,
         use_live: bool = True,
+        countries_to_run: Optional[ListTuple[str]] = None,
     ):
         self.configuration = configuration
         self.session = session
@@ -51,8 +52,9 @@ class Pipelines:
             configuration=configuration,
             session=session,
             use_live=use_live,
+            countries=countries_to_run,
         )
-        countries = configuration["HAPI_countries"]
+        countries = self.locations.hapi_countries
         libhxl_dataset = AdminLevel.get_libhxl_dataset().cache()
         self.admins = Admins(
             configuration, session, self.locations, libhxl_dataset

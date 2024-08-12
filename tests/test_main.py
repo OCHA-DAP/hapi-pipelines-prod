@@ -104,6 +104,7 @@ class TestHAPIPipelines:
                         themes_to_run=themes_to_run,
                         errors_on_exit=errors_on_exit,
                         use_live=False,
+                        countries_to_run=configuration["HAPI_countries"],
                     )
                     logger.info("Running pipelines")
                     pipelines.run()
