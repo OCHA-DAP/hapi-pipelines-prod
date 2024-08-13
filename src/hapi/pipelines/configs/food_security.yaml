@@ -53,23 +53,21 @@ food_security_adminone:
   food_security_ch:
     dataset: "cadre-harmonise"
     format: "xlsx"
+    xlsx2csv: True
     admin:
       - "adm0_pcod3"
       - "adm1_pcod2"
     admin_exact: False
-    prefilter: "adm0_pcod3 in ['AFG', 'BFA', 'CAF', 'CMR', 'COD', 'COL', 'ETH', 'GTM', 'HND', 'HTI', 'MLI', 'MMR', 'MOZ', 'NER', 'NGA', 'PSE', 'SDN', 'SLV', 'SOM', 'SSD', 'SYR', 'TCD', 'UKR', 'VEN', 'YEM'] and adm2_pcod2 is None"
+    prefilter: "adm2_pcod2 is None"
     filter_cols:
-      - "adm0_pcod3"
       - "adm2_pcod2"
 
 food_security_admintwo:
   food_security_ch:
     dataset: "cadre-harmonise"
     format: "xlsx"
+    xlsx2csv: True
     admin:
       - "adm0_pcod3"
       - "adm2_pcod2"
     admin_exact: False
-    prefilter: "adm0_pcod3 in ['AFG', 'BFA', 'CAF', 'CMR', 'COD', 'COL', 'ETH', 'GTM', 'HND', 'HTI', 'MLI', 'MMR', 'MOZ', 'NER', 'NGA', 'PSE', 'SDN', 'SLV', 'SOM', 'SSD', 'SYR', 'TCD', 'UKR', 'VEN', 'YEM']"
-    filter_cols:
-      - "adm0_pcod3"

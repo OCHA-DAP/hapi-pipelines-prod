@@ -10,6 +10,7 @@ from hdx.utilities.dateparse import parse_date_range
 from hdx.utilities.dictandlist import dict_of_lists_add
 from sqlalchemy.orm import Session
 
+from ..utilities.logging_helpers import add_message
 from . import admins
 from .base_uploader import BaseUploader
 from .metadata import Metadata
@@ -32,7 +33,9 @@ class FoodSecurity(BaseUploader):
 
     def populate(self):
         logger.info("Populating food security table")
+        errors = set()
         for dataset in self._results.values():
+            dataset_name = dataset["hdx_stub"]
             for admin_level, admin_results in dataset["results"].items():
                 resource_id = admin_results["hapi_resource_metadata"]["hdx_id"]
                 # Get all the column positions
@@ -81,11 +84,17 @@ class FoodSecurity(BaseUploader):
                             ][irow],
                         )
                         # Total population required to calculate fraction in phase
-                        population_total = int(
-                            values[population_in_phase_columns["all"]][
-                                admin_code
-                            ][irow]
-                        )
+                        population_total = values[
+                            population_in_phase_columns["all"]
+                        ][admin_code][irow]
+                        if population_total is None:
+                            add_message(
+                                errors,
+                                dataset_name,
+                                f"{admin_code} missing total population",
+                            )
+                            continue
+                        population_total = int(float(population_total))
                         # Sum the population in each row by type and date to aggregate admin 1.5 to admin 1
                         dict_of_lists_add(
                             population_totals,
@@ -102,7 +111,9 @@ class FoodSecurity(BaseUploader):
                             ][admin_code][irow]
                             if population_in_phase is None:
                                 population_in_phase = 0
-                            population_in_phase = int(population_in_phase)
+                            population_in_phase = int(
+                                float(population_in_phase)
+                            )
                             # Sum the phase population in each row to aggregate admin 1.5 to admin 1
                             dict_of_lists_add(
                                 population_in_phases,
@@ -135,6 +146,8 @@ class FoodSecurity(BaseUploader):
                         )
                         self._session.add(food_security_row)
         self._session.commit()
+        for error in sorted(errors):
+            logger.error(error)
 
 
 def _get_ipc_type_code_from_data(ipc_type_from_data: str) -> str:
