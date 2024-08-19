@@ -62,7 +62,7 @@ class HumanitarianNeeds(BaseUploader):
         logger.info("Populating humanitarian needs table")
         reader = Read.get_reader("hdx")
         datasets = reader.search_datasets(
-            filename="hno_dataset",
+            filename="Global HPC HNO*",
             fq="name:global-hpc-hno-*",
             configuration=self._configuration,
         )
