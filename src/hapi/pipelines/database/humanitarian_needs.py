@@ -6,6 +6,7 @@ from logging import getLogger
 from hapi_schema.db_humanitarian_needs import DBHumanitarianNeeds
 from hdx.api.configuration import Configuration
 from hdx.scraper.utilities.reader import Read
+from hdx.utilities.dictandlist import dict_of_lists_add
 from hdx.utilities.text import get_numeric_if_possible
 from sqlalchemy.orm import Session
 
@@ -70,8 +71,8 @@ class HumanitarianNeeds(BaseUploader):
         dataset_name = dataset["name"]
         resource = dataset.get_resource()  # assumes first resource is latest!
         self._metadata.add_resource(dataset_id, resource)
-        negative_values = []
-        rounded_values = []
+        negative_values_by_iso3 = {}
+        rounded_values_by_iso3 = {}
         resource_id = resource["id"]
         resource_name = resource["name"]
         year = int(resource_name[-4:])
@@ -84,6 +85,7 @@ class HumanitarianNeeds(BaseUploader):
             admin2_ref = self.get_admin2_ref(row, dataset_name, errors)
             if not admin2_ref:
                 continue
+            countryiso3 = row["Country ISO3"]
             population_group = row["Population Group"]
             if population_group == "ALL":
                 population_group = "all"
@@ -110,10 +112,14 @@ class HumanitarianNeeds(BaseUploader):
                     return
                 value = get_numeric_if_possible(value)
                 if value < 0:
-                    negative_values.append(str(value))
+                    dict_of_lists_add(
+                        negative_values_by_iso3, countryiso3, str(value)
+                    )
                     return
                 if isinstance(value, float):
-                    rounded_values.append(str(value))
+                    dict_of_lists_add(
+                        rounded_values_by_iso3, countryiso3, str(value)
+                    )
                     value = round(value)
                 humanitarian_needs_row = DBHumanitarianNeeds(
                     resource_hdx_id=resource_id,
@@ -138,18 +144,20 @@ class HumanitarianNeeds(BaseUploader):
             create_row("Targeted", "TGT")
             create_row("Reached", "REA")
 
-            self._session.commit()
+        self._session.commit()
+        for countryiso3, values in negative_values_by_iso3.items():
             add_multi_valued_message(
                 errors,
-                dataset_name,
+                f"{dataset_name} - {countryiso3}",
                 "negative values removed",
-                negative_values,
+                values,
             )
+        for countryiso3, values in rounded_values_by_iso3.items():
             add_multi_valued_message(
                 warnings,
-                dataset_name,
+                f"{dataset_name} - {countryiso3}",
                 "float values rounded",
-                rounded_values,
+                values,
             )
 
         for warning in sorted(warnings):
