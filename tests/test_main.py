@@ -153,8 +153,12 @@ class TestHAPIPipelines:
         count = session.scalar(
             select(func.count(DBOperationalPresence.resource_hdx_id))
         )
-        check.equal(count, 12954)
-        check_org_mappings(pipelines)
+        check.equal(count, 12920)
+        # Comparison must be performed in this test method,
+        # otherwise error details are not logged
+        comparisons = check_org_mappings(pipelines)
+        for lhs, rhs in comparisons:
+            check.equal(lhs, rhs)
 
     @pytest.mark.parametrize("themes_to_run", [{"food_security": None}])
     def test_food_security(self, configuration, folder, pipelines):

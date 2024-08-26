@@ -1559,7 +1559,7 @@ Central Highland,Daykundi,AF24,Khadir,AF2404,SHUHADA,Shuhada Organization,Nation
 Central Highland,Daykundi,AF24,Khadir,AF2404,UNHCR,United Nations High Commissioner for Refugees,United Nations,PROTECTION_OP,Operational Presence: Protection,OP
 Central Highland,Daykundi,AF24,Khadir,AF2404,WSTA,Watan Social and Technical Services Association,National NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Central Highland,Daykundi,AF24,Khadir,AF2404,AAH,Action Against Hunger | ACF-USA,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
-Central Highland,Daykundi,AF24,Khadir,AF2404,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
+Central Highland,Daykundi,AF24,Khadir,AF2404,MEDAIR,,,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
 Central Highland,Daykundi,AF24,Khadir,AF2404,UNICEF,United Nations Children's Fund,United Nations,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,ADA,Afghan Development Association,National NGO,EiE_OP,Operational Presence: Education in Emergencies,OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,ADA,Afghan Development Association,National NGO,EDUCATION_OP,Operational Presence: Education in Emergencies,OP
@@ -1570,15 +1570,11 @@ Central Highland,Daykundi,AF24,Kiti,AF2405,LSO,Labour Spring Organization,Intern
 Central Highland,Daykundi,AF24,Kiti,AF2405,WSTA,Watan Social and Technical Services Association,National NGO,ESNFI_OP,Operational Presence: Emergency Shelter & Non-Food Items,OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,ADA,Afghan Development Association,National NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,AFGHANAID,Afghan Aid,International NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
-Central Highland,Daykundi,AF24,Kiti,AF2405,MEDAIR,MEDAIR,International NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,OCHR,Organization for Coordination of Humanitarian Relief ,National NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
-Central Highland,Daykundi,AF24,Kiti,AF2405,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,MOVE,MOVE Welfare Organization,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Central Highland,Daykundi,AF24,Kiti,AF2405,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,UNHCR,United Nations High Commissioner for Refugees,United Nations,PROTECTION_OP,Operational Presence: Protection,OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,WSTA,Watan Social and Technical Services Association,National NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,AAH,Action Against Hunger | ACF-USA,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
-Central Highland,Daykundi,AF24,Kiti,AF2405,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
 Central Highland,Daykundi,AF24,Kiti,AF2405,UNICEF,United Nations Children's Fund,United Nations,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
 Central Highland,Daykundi,AF24,Miramor,AF2406,ADA,Afghan Development Association,National NGO,EiE_OP,Operational Presence: Education in Emergencies,OP
 Central Highland,Daykundi,AF24,Miramor,AF2406,ADA,Afghan Development Association,National NGO,EDUCATION_OP,Operational Presence: Education in Emergencies,OP
@@ -1621,10 +1617,7 @@ Central Highland,Daykundi,AF24,Kajran,AF2408,IOM,International Organization for 
 Central Highland,Daykundi,AF24,Kajran,AF2408,WSTA,Watan Social and Technical Services Association,National NGO,ESNFI_OP,Operational Presence: Emergency Shelter & Non-Food Items,OP
 Central Highland,Daykundi,AF24,Kajran,AF2408,ADA,Afghan Development Association,National NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Central Highland,Daykundi,AF24,Kajran,AF2408,AFGHANAID,Afghan Aid,International NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
-Central Highland,Daykundi,AF24,Kajran,AF2408,MEDAIR,MEDAIR,International NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
-Central Highland,Daykundi,AF24,Kajran,AF2408,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Central Highland,Daykundi,AF24,Kajran,AF2408,MOVE,MOVE Welfare Organization,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Central Highland,Daykundi,AF24,Kajran,AF2408,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Central Highland,Daykundi,AF24,Kajran,AF2408,MOVE,MOVE Welfare Organization,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Central Highland,Daykundi,AF24,Kajran,AF2408,UNHCR,United Nations High Commissioner for Refugees,United Nations,PROTECTION_OP,Operational Presence: Protection,OP
 Central Highland,Daykundi,AF24,Kajran,AF2408,WSTA,Watan Social and Technical Services Association,National NGO,PROTECTION_OP,Operational Presence: Protection,OP
@@ -1719,7 +1712,6 @@ Central Highland,Bamyan,AF10,Sayghan,AF1003,WASSA,Women Activities & Social Serv
 Central Highland,Daykundi,AF24,Nili,AF2401,WHO,World Health Organization,United Nations,HEALTH_OP,Operational Presence: Health,OP
 Central Highland,Daykundi,AF24,Nili,AF2401,FAO,Food and Agriculture Organization,United Nations,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Central Highland,Daykundi,AF24,Shahrestan,AF2402,FAO,Food and Agriculture Organization,United Nations,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
-Central Highland,Daykundi,AF24,Kajran,AF2408,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
 Central Highland,Bamyan,AF10,Sayghan,AF1003,SI,Solidarites International,International NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Central Highland,Bamyan,AF10,Waras,AF1007,SI,Solidarites International,International NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Central Highland,Bamyan,AF10,Yakawlang,AF1005,ACHRO,Association of Chief Human Resource Officers,National NGO,PROTECTION_OP,Operational Presence: Protection,OP
@@ -8090,7 +8082,6 @@ Southern,Uruzgan,AF25,Tirinkot,AF2501,UNHCR,United Nations High Commissioner for
 Southern,Uruzgan,AF25,Tirinkot,AF2501,NRC,Norwegian Refugee Council,International NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Southern,Uruzgan,AF25,Tirinkot,AF2501,OHW,Organization of Human Welfare,National NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Southern,Uruzgan,AF25,Tirinkot,AF2501,AHDS,Afghan Health & Development Services,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Uruzgan,AF25,Tirinkot,AF2501,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Tirinkot,AF2501,ORCD,Organization for Research and Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Tirinkot,AF2501,NRC,Norwegian Refugee Council,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Southern,Uruzgan,AF25,Tirinkot,AF2501,WADAN,Welfare Association for Development of Afghanistan,National NGO,PROTECTION_OP,Operational Presence: Protection,OP
@@ -8104,11 +8095,9 @@ Southern,Uruzgan,AF25,Dehrawud,AF2502,UNICEF,United Nations Children's Fund,Unit
 Southern,Uruzgan,AF25,Dehrawud,AF2502,IOM,International Organization for Migration,United Nations,ESNFI_OP,Operational Presence: Emergency Shelter & Non-Food Items,OP
 Southern,Uruzgan,AF25,Dehrawud,AF2502,OHW,Organization of Human Welfare,National NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Southern,Uruzgan,AF25,Dehrawud,AF2502,AHDS,Afghan Health & Development Services,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Uruzgan,AF25,Dehrawud,AF2502,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Dehrawud,AF2502,OPHCD,Organization for Promotion of Health & Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Dehrawud,AF2502,ORCD,Organization for Research and Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Dehrawud,AF2502,WAW,Women for Afghan Women,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
-Southern,Uruzgan,AF25,Dehrawud,AF2502,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
 Southern,Uruzgan,AF25,Chora,AF2503,LKRO,Loy Kandahar Reconstuction Organization ,National NGO,EiE_OP,Operational Presence: Education in Emergencies,OP
 Southern,Uruzgan,AF25,Chora,AF2503,LKRO,Loy Kandahar Reconstuction Organization ,National NGO,EDUCATION_OP,Operational Presence: Education in Emergencies,OP
 Southern,Uruzgan,AF25,Chora,AF2503,UNICEF,United Nations Children's Fund,United Nations,EiE_OP,Operational Presence: Education in Emergencies,OP
@@ -8118,12 +8107,10 @@ Southern,Uruzgan,AF25,Chora,AF2503,NRC,Norwegian Refugee Council,International N
 Southern,Uruzgan,AF25,Chora,AF2503,UNHCR,United Nations High Commissioner for Refugees,United Nations,ESNFI_OP,Operational Presence: Emergency Shelter & Non-Food Items,OP
 Southern,Uruzgan,AF25,Chora,AF2503,OHW,Organization of Human Welfare,National NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Southern,Uruzgan,AF25,Chora,AF2503,AHDS,Afghan Health & Development Services,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Uruzgan,AF25,Chora,AF2503,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Chora,AF2503,OPHCD,Organization for Promotion of Health & Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Chora,AF2503,ORCD,Organization for Research and Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Chora,AF2503,NRC,Norwegian Refugee Council,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Southern,Uruzgan,AF25,Chora,AF2503,WAW,Women for Afghan Women,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
-Southern,Uruzgan,AF25,Chora,AF2503,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
 Southern,Uruzgan,AF25,Shahid-e-Hassas,AF2504,COAR,Coordination of Afghan Relief,National NGO,EiE_OP,Operational Presence: Education in Emergencies,OP
 Southern,Uruzgan,AF25,Shahid-e-Hassas,AF2504,COAR,Coordination of Afghan Relief,National NGO,EDUCATION_OP,Operational Presence: Education in Emergencies,OP
 Southern,Uruzgan,AF25,Shahid-e-Hassas,AF2504,LKRO,Loy Kandahar Reconstuction Organization ,National NGO,EiE_OP,Operational Presence: Education in Emergencies,OP
@@ -8144,7 +8131,6 @@ Southern,Uruzgan,AF25,Khas Uruzgan,AF2505,OHW,Organization of Human Welfare,Nati
 Southern,Uruzgan,AF25,Khas Uruzgan,AF2505,AHDS,Afghan Health & Development Services,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Khas Uruzgan,AF2505,OPHCD,Organization for Promotion of Health & Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Khas Uruzgan,AF2505,WAW,Women for Afghan Women,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
-Southern,Uruzgan,AF25,Khas Uruzgan,AF2505,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
 Southern,Uruzgan,AF25,Chinarto,AF2506,LKRO,Loy Kandahar Reconstuction Organization ,National NGO,EiE_OP,Operational Presence: Education in Emergencies,OP
 Southern,Uruzgan,AF25,Chinarto,AF2506,LKRO,Loy Kandahar Reconstuction Organization ,National NGO,EDUCATION_OP,Operational Presence: Education in Emergencies,OP
 Southern,Uruzgan,AF25,Chinarto,AF2506,UNICEF,United Nations Children's Fund,United Nations,EiE_OP,Operational Presence: Education in Emergencies,OP
@@ -8152,7 +8138,6 @@ Southern,Uruzgan,AF25,Chinarto,AF2506,UNICEF,United Nations Children's Fund,Unit
 Southern,Uruzgan,AF25,Chinarto,AF2506,IOM,International Organization for Migration,United Nations,ESNFI_OP,Operational Presence: Emergency Shelter & Non-Food Items,OP
 Southern,Uruzgan,AF25,Chinarto,AF2506,OHW,Organization of Human Welfare,National NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Southern,Uruzgan,AF25,Chinarto,AF2506,AHDS,Afghan Health & Development Services,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Uruzgan,AF25,Chinarto,AF2506,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Chinarto,AF2506,OPHCD,Organization for Promotion of Health & Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Uruzgan,AF25,Chinarto,AF2506,WAW,Women for Afghan Women,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Southern,Uruzgan,AF25,Gizab,AF2507,LKRO,Loy Kandahar Reconstuction Organization ,National NGO,EiE_OP,Operational Presence: Education in Emergencies,OP
@@ -8387,12 +8372,10 @@ Southern,Kandahar,AF27,Daman,AF2703,OHW,Organization of Human Welfare,National N
 Southern,Kandahar,AF27,Daman,AF2703,INTERSOS,Intersos - Humanitarian Organization for Emergency,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Daman,AF2703,IOM,International Organization for Migration,United Nations,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Daman,AF2703,JACK,Just for Afghan Capacity and Knowledge,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Kandahar,AF27,Daman,AF2703,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Daman,AF2703,ORCD,Organization for Research and Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Daman,AF2703,UNFPA,United Nations Population Fund,United Nations,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Daman,AF2703,BARAN,Bu Ali Rehabilitation and Aid Network,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Southern,Kandahar,AF27,Daman,AF2703,JACK,Just for Afghan Capacity and Knowledge,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
-Southern,Kandahar,AF27,Daman,AF2703,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Southern,Kandahar,AF27,Daman,AF2703,SCI,Save the Children Federation International,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Southern,Kandahar,AF27,Daman,AF2703,SCI,Save the Children Federation International,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Southern,Kandahar,AF27,Daman,AF2703,WAW,Women for Afghan Women,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
@@ -8405,7 +8388,6 @@ Southern,Kandahar,AF27,Panjwayi,AF2704,KRO,Kandahar Refugee Organisation,Nationa
 Southern,Kandahar,AF27,Panjwayi,AF2704,OHW,Organization of Human Welfare,National NGO,FSAC_OP,Operational Presence: Food Security & Agriculture,OP
 Southern,Kandahar,AF27,Panjwayi,AF2704,INTERSOS,Intersos - Humanitarian Organization for Emergency,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Panjwayi,AF2704,JACK,Just for Afghan Capacity and Knowledge,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Kandahar,AF27,Panjwayi,AF2704,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Panjwayi,AF2704,SCI,Save the Children Federation International,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Panjwayi,AF2704,UNFPA,United Nations Population Fund,United Nations,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Panjwayi,AF2704,BARAN,Bu Ali Rehabilitation and Aid Network,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
@@ -8522,7 +8504,6 @@ Southern,Kandahar,AF27,Maywand,AF2710,OHW,Organization of Human Welfare,National
 Southern,Kandahar,AF27,Maywand,AF2710,AYSO,Afghan  Youth Service Organization,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Maywand,AF2710,HADAAF,Humanitarian Assistance and Development Association for Afghanistan ,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Maywand,AF2710,JACK,Just for Afghan Capacity and Knowledge,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Kandahar,AF27,Maywand,AF2710,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Maywand,AF2710,UNFPA,United Nations Population Fund,United Nations,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Maywand,AF2710,BARAN,Bu Ali Rehabilitation and Aid Network,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Southern,Kandahar,AF27,Maywand,AF2710,HADAAF,Humanitarian Assistance and Development Association for Afghanistan ,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
@@ -8546,7 +8527,6 @@ Southern,Kandahar,AF27,Spin Boldak,AF2711,HMLO,Human Management & Leadership Org
 Southern,Kandahar,AF27,Spin Boldak,AF2711,INTERSOS,Intersos - Humanitarian Organization for Emergency,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Spin Boldak,AF2711,IOM,International Organization for Migration,United Nations,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Spin Boldak,AF2711,JACK,Just for Afghan Capacity and Knowledge,National NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Kandahar,AF27,Spin Boldak,AF2711,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Spin Boldak,AF2711,UNFPA,United Nations Population Fund,United Nations,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Spin Boldak,AF2711,BARAN,Bu Ali Rehabilitation and Aid Network,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Southern,Kandahar,AF27,Spin Boldak,AF2711,HADAAF,Humanitarian Assistance and Development Association for Afghanistan ,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
@@ -8959,18 +8939,6 @@ Southern,Kandahar,AF27,Maywand,AF2710,INTERSOS,Intersos - Humanitarian Organizat
 Southern,Kandahar,AF27,Zheray,AF2705,INTERSOS,Intersos - Humanitarian Organization for Emergency,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Southern,Zabul,AF26,Shah Joi,AF2606,INTERSOS,Intersos - Humanitarian Organization for Emergency,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Southern,Zabul,AF26,Shinkay,AF2603,INTERSOS,Intersos - Humanitarian Organization for Emergency,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
-Southern,Kandahar,AF27,Zheray,AF2705,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Uruzgan,AF25,Chinarto,AF2506,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
-Southern,Uruzgan,AF25,Chora,AF2503,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
-Southern,Uruzgan,AF25,Dehrawud,AF2502,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
-Southern,Kandahar,AF27,Panjwayi,AF2704,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
-Southern,Kandahar,AF27,Zheray,AF2705,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
-Southern,Uruzgan,AF25,Tirinkot,AF2501,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
-Southern,Kandahar,AF27,Panjwayi,AF2704,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
-Southern,Uruzgan,AF25,Chinarto,AF2506,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
-Southern,Kandahar,AF27,Daman,AF2703,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
-Southern,Kandahar,AF27,Zheray,AF2705,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
-Southern,Uruzgan,AF25,Tirinkot,AF2501,MEDAIR,MEDAIR,International NGO,WASH_OP,"Operatioanl Presence: Water, Sanitation & Hygiene",OP
 Southern,Kandahar,AF27,Kandahar,AF2701,NRC,Norwegian Refugee Council,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Southern,Hilmand,AF30,Lashkargah,AF3001,OPHCD,Organization for Promotion of Health & Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Hilmand,AF30,Garmser,AF3006,OPHCD,Organization for Promotion of Health & Community Development,National NGO,HEALTH_OP,Operational Presence: Health,OP
@@ -9083,8 +9051,6 @@ Southern,Zabul,AF26,Tarnak Wa Jaldak,AF2602,UNICEF,United Nations Children's Fun
 Southern,Zabul,AF26,Qalat,AF2601,WC-UK,War Child UK,International NGO,PROTECTION_OP,Operational Presence: Protection,OP
 Southern,Hilmand,AF30,Lashkargah,AF3001,HAS,Humanitarian Assistance Society,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Southern,Hilmand,AF30,Lashkargah,AF3001,OPHCD,Organization for Promotion of Health & Community Development,National NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
-Southern,Uruzgan,AF25,Khas Uruzgan,AF2505,MEDAIR,MEDAIR,International NGO,HEALTH_OP,Operational Presence: Health,OP
-Southern,Uruzgan,AF25,Khas Uruzgan,AF2505,MEDAIR,MEDAIR,International NGO,NUTRITION_OP,Operational Presence: Nutrition,OP
 Southern,Kandahar,AF27,Ghorak,AF2709,SCI,Save the Children Federation International,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Kandahar,AF27,Shah Wali Kot,AF2706,SCI,Save the Children Federation International,International NGO,HEALTH_OP,Operational Presence: Health,OP
 Southern,Zabul,AF26,Qalat,AF2601,UNFPA,United Nations Population Fund,United Nations,PROTECTION_OP,Operational Presence: Protection,OP
