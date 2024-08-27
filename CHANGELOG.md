@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.49] - 2024-08-27
+
+### Fixed
+
+- Updated Colombia population resource names
+
 ## [0.9.48] - 2024-08-21
 
 ### Fixed
