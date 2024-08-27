@@ -298,7 +298,7 @@ population_national:
 
   population_col:
     dataset: "cod-ps-col"
-    resource: "col_admpop_adm0_2023.csv"
+    resource: "col_admpop_adm0_2024.csv"
     format: "csv"
     use_hxl: False
     admin_single: "COL"
@@ -1253,7 +1253,7 @@ population_adminone:
 
   population_col:
     dataset: "cod-ps-col"
-    resource: "col_admpop_adm1_2023.csv"
+    resource: "col_admpop_adm1_2024.csv"
     format: "csv"
     use_hxl: False
     admin:
@@ -2203,7 +2203,7 @@ population_admintwo:
 
   population_col:
     dataset: "cod-ps-col"
-    resource: "col_admpop_adm2_2023.csv"
+    resource: "col_admpop_adm2_2024.csv"
     format: "csv"
     use_hxl: False
     admin:
