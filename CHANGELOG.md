@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.9.49] - 2024-08-27
 
+### Changed
+
+- 3W updates for Afghanistan, Cameroon, CAR, Ethiopia, Mali , Nigeria,
+  South Sudan, Sudan, and Yemen
+
 ### Fixed
 
 - Updated Colombia population resource names
