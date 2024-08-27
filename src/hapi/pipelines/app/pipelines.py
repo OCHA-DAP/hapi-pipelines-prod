@@ -191,7 +191,6 @@ class Pipelines:
             "food_security", "admintwo", adminlevel=self.admintwo
         )
         _create_configurable_scrapers("national_risk", "national")
-        _create_configurable_scrapers("funding", "national")
         _create_configurable_scrapers("refugees", "national")
         _create_configurable_scrapers("poverty_rate", "national")
         _create_configurable_scrapers("conflict_event", "national")
@@ -294,14 +293,11 @@ class Pipelines:
             refugees.populate()
 
         if not self.themes_to_run or "funding" in self.themes_to_run:
-            results = self.runner.get_hapi_results(
-                self.configurable_scrapers["funding"]
-            )
             funding = Funding(
                 session=self.session,
                 metadata=self.metadata,
                 locations=self.locations,
-                results=results,
+                configuration=self.configuration,
             )
             funding.populate()
 

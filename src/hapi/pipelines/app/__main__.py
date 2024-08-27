@@ -220,7 +220,6 @@ if __name__ == "__main__":
         "conflict_event.yaml",
         "core.yaml",
         "food_security.yaml",
-        "funding.yaml",
         "national_risk.yaml",
         "operational_presence.yaml",
         "population.yaml",

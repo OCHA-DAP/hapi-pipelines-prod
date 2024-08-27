@@ -5,6 +5,7 @@ from typing import Dict
 from hapi_schema.db_dataset import DBDataset
 from hapi_schema.db_resource import DBResource
 from hdx.data.dataset import Dataset
+from hdx.data.resource import Resource
 from hdx.scraper.runner import Runner
 from hdx.scraper.utilities.reader import Read
 from sqlalchemy.orm import Session
@@ -81,7 +82,7 @@ class Metadata(BaseUploader):
 
         self.dataset_data.append(dataset_id)
 
-    def add_dataset(self, dataset: Dataset):
+    def add_dataset(self, dataset: Dataset, resource: Resource = None):
         time_period = dataset.get_time_period()
         hapi_time_period = {
             "time_period": {
@@ -92,7 +93,7 @@ class Metadata(BaseUploader):
         hapi_dataset_metadata = Read.get_hapi_dataset_metadata(
             dataset, hapi_time_period
         )
-        hapi_resource_metadata = Read.get_hapi_resource_metadata(
-            dataset.get_resource()
-        )
+        if not resource:
+            resource = dataset.get_resource()
+        hapi_resource_metadata = Read.get_hapi_resource_metadata(resource)
         self.add_hapi_metadata(hapi_dataset_metadata, hapi_resource_metadata)
