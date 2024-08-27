@@ -40,7 +40,7 @@ class ConflictEvent(BaseUploader):
             conflict_event_rows = []
             number_duplicates = 0
             for admin_level, admin_results in dataset["results"].items():
-                # TODO: this is only one resource id, but three resources are downloaded per dataset
+                # TODO: this is only one resource id, but three resources are downloaded per dataset at admintwo
                 resource_id = admin_results["hapi_resource_metadata"]["hdx_id"]
                 hxl_tags = admin_results["headers"][1]
                 admin_codes = list(admin_results["values"][0].keys())
@@ -54,9 +54,11 @@ class ConflictEvent(BaseUploader):
                     for irow in range(len(values[0][admin_code])):
                         for et in EventType:
                             event_type = et.value
-                            events = values[
-                                hxl_tags.index(f"#event+num+{event_type}")
-                            ][admin_code][irow]
+                            events = None
+                            if f"#event+num+{event_type}" in hxl_tags:
+                                events = values[
+                                    hxl_tags.index(f"#event+num+{event_type}")
+                                ][admin_code][irow]
                             fatalities = None
                             if f"#fatality+num+{event_type}" in hxl_tags:
                                 fatalities = values[
@@ -64,6 +66,8 @@ class ConflictEvent(BaseUploader):
                                         f"#fatality+num+{event_type}"
                                     )
                                 ][admin_code][irow]
+                            if events is None and fatalities is None:
+                                continue
                             month = values[
                                 hxl_tags.index(f"#date+month+{event_type}")
                             ][admin_code][irow]

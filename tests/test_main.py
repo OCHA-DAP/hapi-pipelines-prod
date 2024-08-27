@@ -216,7 +216,7 @@ class TestHAPIPipelines:
         check.equal(count, 56)
 
     @pytest.mark.parametrize(
-        "themes_to_run", [{"conflict_event": ("BFA", "GTM")}]
+        "themes_to_run", [{"conflict_event": ("BFA", "COL")}]
     )
     def test_conflict_event(self, configuration, folder, pipelines):
         session = pipelines.session
@@ -227,7 +227,7 @@ class TestHAPIPipelines:
         count = session.scalar(
             select(func.count(DBConflictEvent.resource_hdx_id))
         )
-        check.equal(count, 44646)
+        check.equal(count, 71319)
 
     @pytest.mark.parametrize(
         "themes_to_run", [{"poverty_rate": ("AFG", "BFA")}]
