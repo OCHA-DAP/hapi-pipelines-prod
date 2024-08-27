@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 - Updated Colombia population resource names
+- Remove Ukraine population resource which is now by request only
 
 ## [0.9.48] - 2024-08-21
 
