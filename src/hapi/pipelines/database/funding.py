@@ -29,7 +29,7 @@ class Funding(BaseUploader):
         self._locations = locations
         self._configuration = configuration
 
-    def populate(self):
+    def populate(self) -> None:
         logger.info("Populating funding table")
         reader = Read.get_reader("hdx")
         datasets = reader.search_datasets(
