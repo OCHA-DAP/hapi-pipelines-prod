@@ -16,13 +16,15 @@ logger = logging.getLogger(__name__)
 
 
 class Metadata(BaseUploader):
-    def __init__(self, runner: Runner, session: Session, today: datetime):
+    def __init__(
+        self, runner: Runner, session: Session, today: datetime
+    ) -> None:
         super().__init__(session)
         self.runner = runner
         self.today = today
         self.dataset_data = []
 
-    def populate(self):
+    def populate(self) -> None:
         logger.info("Populating metadata")
         datasets = self.runner.get_hapi_metadata()
         for dataset_id, dataset in datasets.items():
@@ -59,6 +61,30 @@ class Metadata(BaseUploader):
                 )
                 self._session.add(resource_row)
                 self._session.commit()
+
+    def add_hapi_dataset_metadata(self, hapi_dataset_metadata: Dict) -> str:
+        dataset_id = hapi_dataset_metadata["hdx_id"]
+        dataset_row = DBDataset(
+            hdx_id=dataset_id,
+            hdx_stub=hapi_dataset_metadata["hdx_stub"],
+            title=hapi_dataset_metadata["title"],
+            hdx_provider_stub=hapi_dataset_metadata["hdx_provider_stub"],
+            hdx_provider_name=hapi_dataset_metadata["hdx_provider_name"],
+        )
+        self._session.add(dataset_row)
+
+        self.dataset_data.append(dataset_id)
+        return dataset_id
+
+    def add_hapi_resource_metadata(
+        self, dataset_id: str, hapi_resource_metadata: Dict
+    ) -> None:
+        hapi_resource_metadata["dataset_hdx_id"] = dataset_id
+        hapi_resource_metadata["is_hxl"] = True
+        hapi_resource_metadata["hapi_updated_date"] = self.today
+
+        resource_row = DBResource(**hapi_resource_metadata)
+        self._session.add(resource_row)
 
     def add_hapi_metadata(
         self, hapi_dataset_metadata: Dict, hapi_resource_metadata: Dict

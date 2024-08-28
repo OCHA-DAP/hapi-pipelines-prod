@@ -54,7 +54,7 @@ class Pipelines:
             use_live=use_live,
             countries=countries_to_run,
         )
-        self.countries = self.locations.hapi_countries
+        self.countries = configuration["HAPI_countries"]
         libhxl_dataset = AdminLevel.get_libhxl_dataset().cache()
         self.admins = Admins(
             configuration, session, self.locations, libhxl_dataset
