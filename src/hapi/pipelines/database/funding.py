@@ -39,6 +39,7 @@ class Funding(BaseUploader):
         )
         errors = set()
         for dataset in datasets:
+            dataset_id = dataset["id"]
             dataset_name = dataset["name"]
             if dataset["archived"]:
                 continue
@@ -52,7 +53,6 @@ class Funding(BaseUploader):
             if len(resource) != 1:
                 continue
             resource = resource[0]
-            self._metadata.add_dataset(dataset, resource)
             resource_id = resource["id"]
             url = resource["url"]
             headers, rows = reader.get_tabular_rows(
@@ -67,6 +67,8 @@ class Funding(BaseUploader):
                     "appeal_type missing from dataset",
                 )
                 continue
+            self._metadata.add_dataset(dataset)
+            self._metadata.add_resource(dataset_id, resource)
             for row in rows:
                 appeal_code = row["#activity+appeal+id+external"]
                 appeal_name = row["#activity+appeal+name"]
