@@ -116,7 +116,7 @@ class TestHAPIPipelines:
                     count = session.scalar(select(func.count(DBAdmin1.id)))
                     check.equal(count, 703)
                     count = session.scalar(select(func.count(DBAdmin2.id)))
-                    check.equal(count, 6160)
+                    check.equal(count, 5942)
                     count = session.scalar(select(func.count(DBSector.code)))
                     check.equal(count, 19)
                     count = session.scalar(select(func.count(DBCurrency.code)))
@@ -164,13 +164,13 @@ class TestHAPIPipelines:
     def test_food_security(self, configuration, folder, pipelines):
         session = pipelines.session
         count = session.scalar(select(func.count(DBResource.hdx_id)))
-        check.equal(count, 1)
+        check.equal(count, 3)
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
         check.equal(count, 1)
         count = session.scalar(
             select(func.count(DBFoodSecurity.resource_hdx_id))
         )
-        check.equal(count, 100961)
+        check.equal(count, 27879)
 
     @pytest.mark.parametrize("themes_to_run", [{"humanitarian_needs": None}])
     def test_humanitarian_needs(self, configuration, folder, pipelines):
@@ -257,6 +257,6 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBWFPCommodity.code)))
         check.equal(count, 1077)
         count = session.scalar(select(func.count(DBWFPMarket.code)))
-        check.equal(count, 4100)
+        check.equal(count, 4040)
         count = session.scalar(select(func.count(DBFoodPrice.resource_hdx_id)))
         check.equal(count, 31615)

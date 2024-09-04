@@ -5,7 +5,7 @@ echo "Started at $now"
 
 mkdir -p database/csv
 
-views=$(docker exec -t postgres-container psql -t -U postgres -d hapi -c \
+views=$(docker exec -i postgres-container psql -t -U postgres -d hapi -c \
   "select table_name from INFORMATION_SCHEMA.views WHERE table_schema = ANY (current_schemas(false))")
 
 for view in $views
