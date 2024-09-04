@@ -1,7 +1,7 @@
 """Functions specific to the funding theme."""
 
 from collections import defaultdict
-from datetime import date
+from datetime import datetime
 from logging import getLogger
 from typing import Dict
 
@@ -107,11 +107,11 @@ class PovertyRate(BaseUploader):
         self._session.commit()
 
 
-def _convert_year_to_reference_period(year: str) -> [date, date]:
+def _convert_year_to_reference_period(year: str) -> [datetime, datetime]:
     # The year column can either be a single year or a range split by a dash.
     # This function turns this into a reference period start and end date.
     try:
         start_year, end_year = year.split("-")
     except ValueError:
         start_year, end_year = year, year
-    return date(int(start_year), 1, 1), date(int(end_year), 12, 31)
+    return datetime(int(start_year), 1, 1), datetime(int(end_year), 12, 31)
