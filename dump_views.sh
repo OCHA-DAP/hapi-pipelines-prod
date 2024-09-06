@@ -10,7 +10,6 @@ views=$(docker exec -i postgres-container psql -t -U postgres -d hapi -c \
 
 for view in $views
 do
-  view=${view::-1}
   if [[ -z "$view" ]]; then
     continue
   fi
