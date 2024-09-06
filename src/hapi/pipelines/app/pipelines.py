@@ -63,9 +63,9 @@ class Pipelines:
         self.adminone = AdminLevel(admin_config=admin1_config, admin_level=1)
         admin2_config = configuration["admin2"]
         self.admintwo = AdminLevel(admin_config=admin2_config, admin_level=2)
-        self.adminone.setup_from_libhxl_dataset(libhxl_dataset, self.countries)
+        self.adminone.setup_from_libhxl_dataset(libhxl_dataset)
         self.adminone.load_pcode_formats()
-        self.admintwo.setup_from_libhxl_dataset(libhxl_dataset, self.countries)
+        self.admintwo.setup_from_libhxl_dataset(libhxl_dataset)
         self.admintwo.load_pcode_formats()
         self.admintwo.set_parent_admins_from_adminlevels([self.adminone])
         logger.info("Admin one name mappings:")
@@ -199,8 +199,8 @@ class Pipelines:
 
     def output_operational_presence(self):
         if (
-                not self.themes_to_run
-                or "operational_presence" in self.themes_to_run
+            not self.themes_to_run
+            or "operational_presence" in self.themes_to_run
         ):
             results = self.runner.get_hapi_results(
                 self.configurable_scrapers["operational_presence"]
@@ -233,8 +233,8 @@ class Pipelines:
 
     def output_humanitarian_needs(self):
         if (
-                not self.themes_to_run
-                or "humanitarian_needs" in self.themes_to_run
+            not self.themes_to_run
+            or "humanitarian_needs" in self.themes_to_run
         ):
             humanitarian_needs = HumanitarianNeeds(
                 session=self.session,
@@ -323,6 +323,7 @@ class Pipelines:
                 admins=self.admins,
                 adminone=self.adminone,
                 admintwo=self.admintwo,
+                configuration=self.configuration,
             )
             wfp_market.populate()
             food_price = FoodPrice(
