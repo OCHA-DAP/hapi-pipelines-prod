@@ -63,16 +63,9 @@ jobs:
           name: warnings-errors
           path: warnings_errors.log
 
-      - name: Send mail
+      - name: Send slack message
         if: failure()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: ${{secrets.EMAIL_SERVER}}
-          server_port: ${{secrets.EMAIL_PORT}}
-          username: ${{secrets.EMAIL_USERNAME}}
-          password: ${{secrets.EMAIL_PASSWORD}}
-          subject: "FAILED: ${{github.repository}} database export job"
-          body: GitHub Actions database export job for ${{github.repository}} failed!
-          to: ${{secrets.EMAIL_LIST}}
-          from: ${{secrets.EMAIL_FROM}}
-          content_type: text/html
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"Build failed! Check the run details: https://github.com/OCHA-DAP/hapi-pipelines-prod/actions/runs/${{ github.run_id }}\"}" \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
