@@ -37,6 +37,7 @@ class Funding(BaseUploader):
             fq="name:fts-requirements-and-funding-data-for-*",
             configuration=self._configuration,
         )
+        funding_keys = []
         errors = set()
         for dataset in datasets:
             dataset_id = dataset["id"]
@@ -95,13 +96,29 @@ class Funding(BaseUploader):
                     add_message(
                         errors,
                         dataset_name,
-                        f"Date misalignment in funding data for {appeal_code} in {admin_code}",
+                        f"Appeal start date occurs after end date for {appeal_code} in {admin_code}",
                     )
                     continue
 
+                # Check for duplicates (these come up when countries are renamed in the FTS system)
+                location_ref = self._locations.data[admin_code]
+                funding_key = (
+                    appeal_code,
+                    location_ref,
+                    reference_period_start,
+                )
+                if funding_key in funding_keys:
+                    add_message(
+                        errors,
+                        dataset_name,
+                        f"Duplicate location/appeal/time period for {appeal_code} in {admin_code}",
+                    )
+                    continue
+                funding_keys.append(funding_key)
+
                 funding_row = DBFunding(
                     resource_hdx_id=resource_id,
-                    location_ref=self._locations.data[admin_code],
+                    location_ref=location_ref,
                     appeal_code=appeal_code,
                     appeal_name=appeal_name,
                     appeal_type=appeal_type,
