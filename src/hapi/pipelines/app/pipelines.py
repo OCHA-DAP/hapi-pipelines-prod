@@ -176,6 +176,12 @@ class Pipelines:
         _create_configurable_scrapers("funding", "national")
         _create_configurable_scrapers("refugees", "national")
         _create_configurable_scrapers("idps", "national")
+        _create_configurable_scrapers(
+            "idps", "adminone", adminlevel=self.adminone
+        )
+        _create_configurable_scrapers(
+            "idps", "admintwo", adminlevel=self.admintwo
+        )
         _create_configurable_scrapers("poverty_rate", "national")
         _create_configurable_scrapers("conflict_event", "national")
         _create_configurable_scrapers(

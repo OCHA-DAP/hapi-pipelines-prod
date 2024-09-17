@@ -6,6 +6,7 @@ from typing import Dict
 from hapi_schema.db_idps import DBIDPs
 from sqlalchemy.orm import Session
 
+from ..utilities.logging_helpers import add_message
 from . import admins
 from .base_uploader import BaseUploader
 from .metadata import Metadata
@@ -28,12 +29,14 @@ class IDPs(BaseUploader):
 
     def populate(self) -> None:
         logger.info("Populating IDPs table")
+        errors = set()
         # self._results is a dictionary where the keys are the HDX dataset ID and the
         # values are a dictionary with keys containing HDX metadata plus a "results" key
         # containing the results, stored in a dictionary with admin levels as keys.
         # There is only one dataset for now in the results dictionary, take first value
         # (popitem returns a tuple with (key, value) so take the value)
         dataset = self._results.popitem()[1]
+        dataset_name = dataset["hdx_stub"]
         for admin_level, admin_results in dataset["results"].items():
             # admin_results contains the keys "headers", "values", and "hapi_resource_metadata".
             # admin_results["values"] is a list of dictionaries of the format:
@@ -48,6 +51,7 @@ class IDPs(BaseUploader):
                 admin2_code = admins.get_admin2_code_based_on_level(
                     admin_code=admin_code, admin_level=admin_level
                 )
+                duplicate_rows = set()
                 for row in zip(
                     *[
                         values[hxl_tags.index(tag)][admin_code]
@@ -61,6 +65,21 @@ class IDPs(BaseUploader):
                     date_reported = row[hxl_tags.index("#date+reported")]
                     reporting_round = row[hxl_tags.index("#round+code")]
                     operation = row[hxl_tags.index("#operation+name")]
+                    duplicate_row_check = (
+                        admin2_ref,
+                        assessment_type,
+                        date_reported,
+                        reporting_round,
+                        operation,
+                    )
+                    if duplicate_row_check in duplicate_rows:
+                        text = (
+                            f"Duplicate row for admin code {admin2_code}, assessment type {assessment_type}, "
+                            f"reporting round {reporting_round}, operation {operation}, reporting round "
+                            f"{reporting_round}"
+                        )
+                        add_message(errors, dataset_name, text)
+                        continue
                     idps_row = DBIDPs(
                         resource_hdx_id=resource_id,
                         admin2_ref=admin2_ref,
@@ -72,4 +91,7 @@ class IDPs(BaseUploader):
                         reference_period_end=date_reported,
                     )
                     self._session.add(idps_row)
+                    duplicate_rows.add(duplicate_row_check)
         self._session.commit()
+        for error in sorted(errors):
+            logger.error(error)

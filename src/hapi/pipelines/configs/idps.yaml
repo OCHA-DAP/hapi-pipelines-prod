@@ -3,8 +3,6 @@
 idps_default:
   scrapers_with_defaults:
     - "dtm"
-  dataset: "global-iom-dtm-from-api"
-  resource: "Global IOM DTM data for admin levels 0-2"
   format: "csv"
   use_hxl: True
   admin_exact: True
@@ -42,3 +40,27 @@ idps_national:
     prefilter: "#adm1+code is None"
     admin:
       - "#country+code"
+
+idps_adminone:
+  dtm:
+    dataset: "global-iom-dtm-from-api"
+    resource: "Global IOM DTM data for admin levels 0-2"
+    filter_cols:
+      - "#adm1+code"
+      - "#adm2+code"
+    prefilter: "#adm1+code is not None and #adm2+code is None"
+    admin:
+      - "#country+code"
+      - "#adm1+code"
+
+idps_admintwo:
+  dtm:
+    dataset: "global-iom-dtm-from-api"
+    resource: "Global IOM DTM data for admin levels 0-2"
+    filter_cols:
+      - "#adm1+code"
+      - "#adm2+code"
+    prefilter: "#adm1+code is not None and #adm2+code is not None"
+    admin:
+      - "#country+code"
+      - "#adm2+code"
