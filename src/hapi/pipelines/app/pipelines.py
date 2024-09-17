@@ -17,6 +17,7 @@ from hapi.pipelines.database.food_price import FoodPrice
 from hapi.pipelines.database.food_security import FoodSecurity
 from hapi.pipelines.database.funding import Funding
 from hapi.pipelines.database.humanitarian_needs import HumanitarianNeeds
+from hapi.pipelines.database.idps import IDPs
 from hapi.pipelines.database.locations import Locations
 from hapi.pipelines.database.metadata import Metadata
 from hapi.pipelines.database.national_risk import NationalRisk
@@ -174,6 +175,7 @@ class Pipelines:
         _create_configurable_scrapers("national_risk", "national")
         _create_configurable_scrapers("funding", "national")
         _create_configurable_scrapers("refugees", "national")
+        _create_configurable_scrapers("idps", "national")
         _create_configurable_scrapers("poverty_rate", "national")
         _create_configurable_scrapers("conflict_event", "national")
         _create_configurable_scrapers(
@@ -270,6 +272,19 @@ class Pipelines:
             )
             refugees.populate()
 
+    def output_idps(self):
+        if not self.themes_to_run or "idps" in self.themes_to_run:
+            results = self.runner.get_hapi_results(
+                self.configurable_scrapers["idps"]
+            )
+            idps = IDPs(
+                session=self.session,
+                metadata=self.metadata,
+                admins=self.admins,
+                results=results,
+            )
+            idps.populate()
+
     def output_funding(self):
         if not self.themes_to_run or "funding" in self.themes_to_run:
             results = self.runner.get_hapi_results(
@@ -352,6 +367,7 @@ class Pipelines:
         self.output_humanitarian_needs()
         self.output_national_risk()
         self.output_refugees()
+        self.output_idps()
         self.output_funding()
         self.output_poverty_rate()
         self.output_conflict_event()

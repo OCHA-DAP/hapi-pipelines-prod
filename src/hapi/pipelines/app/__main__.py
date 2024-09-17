@@ -221,6 +221,7 @@ if __name__ == "__main__":
         "core.yaml",
         "food_security.yaml",
         "funding.yaml",
+        "idps.yaml",
         "national_risk.yaml",
         "operational_presence.yaml",
         "population.yaml",
