@@ -945,8 +945,9 @@ population_national:
 
   population_tcd:
     dataset: "cod-ps-tcd"
-    resource: "tcd_admpop_adm0_2023.csv"
-    format: "csv"
+    resource: "tcd_admpop_2023.xlsx"
+    format: "xlsx"
+    sheet: "tcd_admpop_adm0_2023"
     use_hxl: False
     admin_single: "TCD"
     input:
@@ -1913,9 +1914,9 @@ population_adminone:
 
   population_tcd:
     dataset: "cod-ps-tcd"
-    resource: "tcd_adm1_pop_2023.xlsx"
+    resource: "tcd_admpop_2023.xlsx"
     format: "xlsx"
-    sheet: "TCD_ADM1_POP_2023"
+    sheet: "tcd_admpop_adm1_2023"
     use_hxl: False
     admin:
       - ~

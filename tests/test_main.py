@@ -131,11 +131,11 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
         check.equal(count, 5)
         count = session.scalar(select(func.count(DBResource.hdx_id)))
-        check.equal(count, 12)
+        check.equal(count, 11)
         count = session.scalar(
             select(func.count(DBPopulation.resource_hdx_id))
         )
-        check.equal(count, 7359)
+        check.equal(count, 8601)
 
     @pytest.mark.parametrize(
         "themes_to_run", [{"operational_presence": ("AFG", "MLI", "NGA")}]
