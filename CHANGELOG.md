@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.58] - 2024-09-18
+
+### Fixed
+
+- Fix for TCD population dataset change (again)
+
 ## [0.9.57] - 2024-09-17
 
 ### Added
@@ -14,7 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
-- Fix for TCD population dataset change 
+- Fix for TCD population dataset change
 
 ## [0.9.55] - 2024-09-17
 
