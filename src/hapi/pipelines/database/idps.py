@@ -28,6 +28,8 @@ class IDPs(BaseUploader):
         self._results = results
 
     def populate(self) -> None:
+        # TODO: This might be better suited to just work with the DTM resource
+        #  directly as done with HNO, rather than using a configurable scraper
         logger.info("Populating IDPs table")
         errors = set()
         # self._results is a dictionary where the keys are the HDX dataset ID and the
