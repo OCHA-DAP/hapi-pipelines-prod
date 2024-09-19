@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.0] - 2024-09-19
+
+### Added
+
+- IDP scraper
+
 ## [0.9.58] - 2024-09-18
 
 ### Fixed

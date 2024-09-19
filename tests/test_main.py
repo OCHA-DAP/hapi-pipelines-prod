@@ -11,6 +11,7 @@ from hapi_schema.db_food_price import DBFoodPrice
 from hapi_schema.db_food_security import DBFoodSecurity
 from hapi_schema.db_funding import DBFunding
 from hapi_schema.db_humanitarian_needs import DBHumanitarianNeeds
+from hapi_schema.db_idps import DBIDPs
 from hapi_schema.db_location import DBLocation
 from hapi_schema.db_national_risk import DBNationalRisk
 from hapi_schema.db_operational_presence import DBOperationalPresence
@@ -51,6 +52,7 @@ class TestHAPIPipelines:
             "conflict_event.yaml",
             "food_security.yaml",
             "funding.yaml",
+            "idps.yaml",
             "national_risk.yaml",
             "operational_presence.yaml",
             "population.yaml",
@@ -205,6 +207,16 @@ class TestHAPIPipelines:
         check.equal(count, 1)
         count = session.scalar(select(func.count(DBRefugees.resource_hdx_id)))
         check.equal(count, 102726)
+
+    @pytest.mark.parametrize("themes_to_run", [{"idps": None}])
+    def test_idps(self, configuration, folder, pipelines):
+        session = pipelines.session
+        count = session.scalar(select(func.count(DBResource.hdx_id)))
+        check.equal(count, 1)
+        count = session.scalar(select(func.count(DBDataset.hdx_id)))
+        check.equal(count, 1)
+        count = session.scalar(select(func.count(DBIDPs.resource_hdx_id)))
+        check.equal(count, 35034)
 
     @pytest.mark.parametrize(
         "themes_to_run", [{"funding": ("AFG", "BFA", "UKR")}]
