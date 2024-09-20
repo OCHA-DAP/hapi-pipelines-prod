@@ -164,9 +164,9 @@ class OperationalPresence(BaseUploader):
                             provider_admin2_name = values[
                                 hxl_tags.index("#adm2+name")
                             ][admin_code][i]
-                        if not provider_admin1_name:
+                        if provider_admin1_name is None:
                             provider_admin1_name = ""
-                        if not provider_admin2_name:
+                        if provider_admin2_name is None:
                             provider_admin2_name = ""
 
                         # * Org processing
