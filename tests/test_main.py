@@ -155,7 +155,7 @@ class TestHAPIPipelines:
         count = session.scalar(
             select(func.count(DBOperationalPresence.resource_hdx_id))
         )
-        check.equal(count, 12920)
+        check.equal(count, 12926)
         # Comparison must be performed in this test method,
         # otherwise error details are not logged
         comparisons = check_org_mappings(pipelines)

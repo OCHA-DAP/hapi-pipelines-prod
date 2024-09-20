@@ -153,6 +153,22 @@ class OperationalPresence(BaseUploader):
                         )
                         admin2_ref = self._admins.admin2_data[admin2_code]
 
+                        # * Admin name processing
+                        provider_admin1_name = ""
+                        provider_admin2_name = ""
+                        if "#adm1+name" in hxl_tags:
+                            provider_admin1_name = values[
+                                hxl_tags.index("#adm1+name")
+                            ][admin_code][i]
+                        if "#adm2+name" in hxl_tags:
+                            provider_admin2_name = values[
+                                hxl_tags.index("#adm2+name")
+                            ][admin_code][i]
+                        if not provider_admin1_name:
+                            provider_admin1_name = ""
+                        if not provider_admin2_name:
+                            provider_admin2_name = ""
+
                         # * Org processing
                         if not org_str:
                             org_str = values[org_acronym_index][admin_code][i]
@@ -177,6 +193,8 @@ class OperationalPresence(BaseUploader):
                         operational_presence_row = dict(
                             resource_hdx_id=resource_id,
                             admin2_ref=admin2_ref,
+                            provider_admin1_name=provider_admin1_name,
+                            provider_admin2_name=provider_admin2_name,
                             org_acronym=org_info.acronym,
                             org_name=org_info.canonical_name,
                             sector_code=sector_code,
