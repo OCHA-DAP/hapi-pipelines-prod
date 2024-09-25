@@ -1440,15 +1440,13 @@ conflict_event_admintwo:
       - "#adm2+name+demonstration"
 
 conflict_event_national:
-  conflict_event_gtm_political_violence:
-    dataset: "guatemala-acled-conflict-data"
-    resource: "guatemala_political_violence_events_and_fatalities_by_month-year"
+  conflict_event_political_violence:
+    dataset: "political-violence-events-and-fatalities"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Data"
+    sheet: "Non_HRP"
     admin:
-      - ~
-    admin_single: "GTM"
+      - "Country"
     input:
       - "Fatalities"
       - "Month"
@@ -1470,15 +1468,13 @@ conflict_event_national:
       - "#date+year+political_violence"
       - "#event+num+political_violence"
 
-  conflict_event_gtm_civilian_targeting:
-    dataset: "guatemala-acled-conflict-data"
-    resource: "guatemala_civilian_targeting_events_and_fatalities_by_month-year"
+  conflict_event_civilian_targeting:
+    dataset: "civilian-targeting-events-and-fatalities"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Data"
+    sheet: "Non_HRP"
     admin:
-      - ~
-    admin_single: "GTM"
+      - "Country"
     input:
       - "Fatalities"
       - "Month"
@@ -1500,187 +1496,13 @@ conflict_event_national:
       - "#date+year+civilian_targeting"
       - "#event+num+civilian_targeting"
 
-  conflict_event_gtm_demonstration:
-    dataset: "guatemala-acled-conflict-data"
-    resource: "guatemala_demonstration_events_by_month-year"
+  conflict_event_demonstration:
+    dataset: "demonstration-events"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Data"
+    sheet: "Non_HRP"
     admin:
-      - ~
-    admin_single: "GTM"
-    input:
-      - "Month"
-      - "Year"
-      - "Events"
-    list:
-      - "Month"
-      - "Year"
-      - "Events"
-    output:
-      - "Month demonstration"
-      - "Year demonstration"
-      - "Events demonstration"
-    output_hxl:
-      - "#date+month+demonstration"
-      - "#date+year+demonstration"
-      - "#event+num+demonstration"
-
-  conflict_event_hnd_political_violence:
-    dataset: "honduras-acled-conflict-data"
-    resource: "honduras_political_violence_events_and_fatalities_by_month-year"
-    format: "xlsx"
-    xlsx2csv: True
-    sheet: "Data"
-    admin:
-      - ~
-    admin_single: "HND"
-    input:
-      - "Fatalities"
-      - "Month"
-      - "Year"
-      - "Events"
-    list:
-      - "Fatalities"
-      - "Month"
-      - "Year"
-      - "Events"
-    output:
-      - "Fatalities political_violence"
-      - "Month political_violence"
-      - "Year political_violence"
-      - "Events political_violence"
-    output_hxl:
-      - "#fatality+num+political_violence"
-      - "#date+month+political_violence"
-      - "#date+year+political_violence"
-      - "#event+num+political_violence"
-
-  conflict_event_hnd_civilian_targeting:
-    dataset: "honduras-acled-conflict-data"
-    resource: "honduras_civilian_targeting_events_and_fatalities_by_month-year"
-    format: "xlsx"
-    xlsx2csv: True
-    sheet: "Data"
-    admin:
-      - ~
-    admin_single: "HND"
-    input:
-      - "Fatalities"
-      - "Month"
-      - "Year"
-      - "Events"
-    list:
-      - "Fatalities"
-      - "Month"
-      - "Year"
-      - "Events"
-    output:
-      - "Fatalities civilian_targeting"
-      - "Month civilian_targeting"
-      - "Year civilian_targeting"
-      - "Events civilian_targeting"
-    output_hxl:
-      - "#fatality+num+civilian_targeting"
-      - "#date+month+civilian_targeting"
-      - "#date+year+civilian_targeting"
-      - "#event+num+civilian_targeting"
-
-  conflict_event_hnd_demonstration:
-    dataset: "honduras-acled-conflict-data"
-    resource: "honduras_demonstration_events_by_month-year"
-    format: "xlsx"
-    xlsx2csv: True
-    sheet: "Data"
-    admin:
-      - ~
-    admin_single: "HND"
-    input:
-      - "Month"
-      - "Year"
-      - "Events"
-    list:
-      - "Month"
-      - "Year"
-      - "Events"
-    output:
-      - "Month demonstration"
-      - "Year demonstration"
-      - "Events demonstration"
-    output_hxl:
-      - "#date+month+demonstration"
-      - "#date+year+demonstration"
-      - "#event+num+demonstration"
-
-  conflict_event_slv_political_violence:
-    dataset: "el-salvador-acled-conflict-data"
-    resource: "el salvador_political_violence_events_and_fatalities_by_month-year"
-    format: "xlsx"
-    xlsx2csv: True
-    sheet: "Data"
-    admin:
-      - ~
-    admin_single: "SLV"
-    input:
-      - "Fatalities"
-      - "Month"
-      - "Year"
-      - "Events"
-    list:
-      - "Fatalities"
-      - "Month"
-      - "Year"
-      - "Events"
-    output:
-      - "Fatalities political_violence"
-      - "Month political_violence"
-      - "Year political_violence"
-      - "Events political_violence"
-    output_hxl:
-      - "#fatality+num+political_violence"
-      - "#date+month+political_violence"
-      - "#date+year+political_violence"
-      - "#event+num+political_violence"
-
-  conflict_event_slv_civilian_targeting:
-    dataset: "el-salvador-acled-conflict-data"
-    resource: "el salvador_civilian_targeting_events_and_fatalities_by_month-year"
-    format: "xlsx"
-    xlsx2csv: True
-    sheet: "Data"
-    admin:
-      - ~
-    admin_single: "SLV"
-    input:
-      - "Fatalities"
-      - "Month"
-      - "Year"
-      - "Events"
-    list:
-      - "Fatalities"
-      - "Month"
-      - "Year"
-      - "Events"
-    output:
-      - "Fatalities civilian_targeting"
-      - "Month civilian_targeting"
-      - "Year civilian_targeting"
-      - "Events civilian_targeting"
-    output_hxl:
-      - "#fatality+num+civilian_targeting"
-      - "#date+month+civilian_targeting"
-      - "#date+year+civilian_targeting"
-      - "#event+num+civilian_targeting"
-
-  conflict_event_slv_demonstration:
-    dataset: "el-salvador-acled-conflict-data"
-    resource: "el salvador_demonstration_events_by_month-year"
-    format: "xlsx"
-    xlsx2csv: True
-    sheet: "Data"
-    admin:
-      - ~
-    admin_single: "SLV"
+      - "Country"
     input:
       - "Month"
       - "Year"
