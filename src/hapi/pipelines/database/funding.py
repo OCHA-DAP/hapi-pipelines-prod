@@ -4,7 +4,7 @@ from logging import getLogger
 
 from hapi_schema.db_funding import DBFunding
 from hdx.api.configuration import Configuration
-from hdx.scraper.utilities.reader import Read
+from hdx.scraper.framework.utilities.reader import Read
 from hdx.utilities.dateparse import parse_date
 from sqlalchemy.orm import Session
 
