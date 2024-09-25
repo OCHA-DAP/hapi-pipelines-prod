@@ -945,14 +945,15 @@ population_national:
 
   population_tcd:
     dataset: "cod-ps-tcd"
-    resource: "tcd_admpop_adm0_2021.csv"
-    format: "csv"
+    resource: "tcd_admpop_2023.xlsx"
+    format: "xlsx"
+    sheet: "tcd_admpop_adm0_2023"
     use_hxl: False
     admin_single: "TCD"
     input:
-      - "F_80PLUS"
-      - "M_80PLUS"
-      - "T_80PLUS"
+      - "F_80Plus"
+      - "M_80Plus"
+      - "T_80Plus"
     output:
       - "F_80plus"
       - "M_80plus"
@@ -1118,14 +1119,17 @@ population_adminone:
       - "Admin1_Code"
     admin_exact: True
     input:
+      - "Admin1_Name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1140,14 +1144,17 @@ population_adminone:
       - "ADM1_PCODE"
     admin_exact: True
     input:
+      - "ADM1_FR"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1161,14 +1168,17 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_EN"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1183,6 +1193,7 @@ population_adminone:
       - ~
       - "admin1Pcode"
     input:
+      - "admin1Name_fr"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1199,6 +1210,7 @@ population_adminone:
 #      - "M_agee"
 #      - "T_agee"
     output:
+      - "adm1_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1215,6 +1227,7 @@ population_adminone:
 #      - "M_65plus"
 #      - "T_65plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -1240,6 +1253,7 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_ES"
       - "F_80_84"
       - "M_80_84"
       - "T_80_84"
@@ -1256,6 +1270,7 @@ population_adminone:
       - "M_100Plus"
       - "T_100Plus"
     output:
+      - "adm1_name"
       - "F_80_84"
       - "M_80_84"
       - "T_80_84"
@@ -1272,6 +1287,7 @@ population_adminone:
       - "M_100plus"
       - "T_100plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_84"
       - "#population+m+age_80_84"
       - "#population+age_80_84+total"
@@ -1297,6 +1313,7 @@ population_adminone:
       - ~
       - "admin1Pcode"
     input:
+      - "admin1Name_en"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1343,6 +1360,7 @@ population_adminone:
       - "M_65plus"
       - "T_65plus"
     output:
+      - "adm1_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1389,6 +1407,7 @@ population_adminone:
       - "M_65plus"
       - "T_65plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -1444,6 +1463,7 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_ES"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1493,6 +1513,7 @@ population_adminone:
       - "M_70Plus"
       - "T_70Plus"
     output:
+      - "adm1_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1542,6 +1563,7 @@ population_adminone:
       - "M_70plus"
       - "T_70plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -1600,14 +1622,17 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_ES"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1621,6 +1646,7 @@ population_adminone:
       - ~
       - "adm1code"
     input:
+      - "adm1_fr"
       - "Femmes"
       - "Hommes"
       - "Population"
@@ -1631,6 +1657,7 @@ population_adminone:
       - "Hommes adultes"
       - "Adultes"
     output:
+      - "adm1_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1641,6 +1668,7 @@ population_adminone:
       - "M_18plus"
       - "T_18plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -1661,14 +1689,17 @@ population_adminone:
       - "admin1Pcode"
     admin_exact: True
     input:
+      - "admin1Name_fr"
       - "F_TL"
       - "M_TL"
       - "T_TL"
     output:
+      - "adm1_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -1682,6 +1713,7 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_EN"
       - "F_80_84"
       - "M_80_84"
       - "T_80_84"
@@ -1692,6 +1724,7 @@ population_adminone:
       - "M_90Plus"
       - "T_90Plus"
     output:
+      - "adm1_name"
       - "F_80_84"
       - "M_80_84"
       - "T_80_84"
@@ -1702,6 +1735,7 @@ population_adminone:
       - "M_90plus"
       - "T_90plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_84"
       - "#population+m+age_80_84"
       - "#population+age_80_84+total"
@@ -1721,14 +1755,17 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_PT"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1742,14 +1779,17 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_FR"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1763,14 +1803,17 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_EM"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1785,14 +1828,17 @@ population_adminone:
       - "ADM1_PCODE"
     admin_exact: True
     input:
+      - "ADM1_EN"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1806,14 +1852,17 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_EN"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1827,14 +1876,17 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_ES"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1848,10 +1900,13 @@ population_adminone:
       - ~
       - "admin1Pcode"
     input:
+      - "admin1Name_en"
       - "T_TL"
     output:
+      - "adm1_name"
       - "T_TL"
     output_hxl:
+      - "#adm1+name"
       - "#population+total"
 
   population_ssd:
@@ -1863,6 +1918,7 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_EN"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1879,6 +1935,7 @@ population_adminone:
       - "M_61plus"
       - "T_61plus"
     output:
+      - "adm1_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1895,6 +1952,7 @@ population_adminone:
       - "M_61plus"
       - "T_61plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -1913,21 +1971,25 @@ population_adminone:
 
   population_tcd:
     dataset: "cod-ps-tcd"
-    resource: "tcd_admpop_adm1_2021.csv"
-    format: "csv"
+    resource: "tcd_admpop_2023.xlsx"
+    format: "xlsx"
+    sheet: "tcd_admpop_adm1_2023"
     use_hxl: False
     admin:
       - ~
       - "ADM1_PCODE"
     input:
-      - "F_80PLUS"
-      - "M_80PLUS"
-      - "T_80PLUS"
+      - "ADM1_NAME"
+      - "F_80Plus"
+      - "M_80Plus"
+      - "T_80Plus"
     output:
+      - "adm1_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -1941,6 +2003,7 @@ population_adminone:
       - ~
       - "ADM1_PCODE"
     input:
+      - "ADM1_ES"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -1987,6 +2050,7 @@ population_adminone:
       - "M_65PLUS"
       - "T_65PLUS"
     output:
+      - "adm1_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2033,6 +2097,7 @@ population_adminone:
       - "M_65plus"
       - "T_65plus"
     output_hxl:
+      - "#adm1+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -2090,14 +2155,20 @@ population_admintwo:
       - "ADM2_PCODE"
     admin_exact: True
     input:
+      - "ADM1_FR"
+      - "ADM2_FR"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -2112,6 +2183,8 @@ population_admintwo:
       - ~
       - "admin2Pcode"
     input:
+      - "admin1Name_fr"
+      - "admin2Name_fr"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2128,6 +2201,8 @@ population_admintwo:
 #      - "M_agee"
 #      - "T_agee"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2144,6 +2219,8 @@ population_admintwo:
 #      - "M_65plus"
 #      - "T_65plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -2169,6 +2246,8 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_ES"
+      - "ADM2_ES"
       - "F_80_84"
       - "M_80_84"
       - "T_80_84"
@@ -2185,6 +2264,8 @@ population_admintwo:
       - "M_100Plus"
       - "T_100Plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_80_84"
       - "M_80_84"
       - "T_80_84"
@@ -2201,6 +2282,8 @@ population_admintwo:
       - "M_100plus"
       - "T_100plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+age_80_84"
       - "#population+m+age_80_84"
       - "#population+age_80_84+total"
@@ -2226,6 +2309,8 @@ population_admintwo:
       - ~
       - "admin2Pcode"
     input:
+      - "admin1Name_en"
+      - "admin2Name_en"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2272,6 +2357,8 @@ population_admintwo:
       - "M_65plus"
       - "T_65plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2318,6 +2405,8 @@ population_admintwo:
       - "M_65plus"
       - "T_65plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -2373,6 +2462,8 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_ES"
+      - "ADM2_ES"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2422,6 +2513,8 @@ population_admintwo:
       - "M_70Plus"
       - "T_70Plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2471,6 +2564,8 @@ population_admintwo:
       - "M_70plus"
       - "T_70plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -2529,14 +2624,20 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_ES"
+      - "ADM2_ES"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -2550,6 +2651,8 @@ population_admintwo:
       - ~
       - "adm2code"
     input:
+      - "adm1_fr"
+      - "adm2_fr"
       - "Femmes"
       - "Hommes"
       - "Population"
@@ -2560,6 +2663,8 @@ population_admintwo:
       - "Hommes adultes"
       - "Adultes"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2570,6 +2675,8 @@ population_admintwo:
       - "M_18plus"
       - "T_18plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -2590,14 +2697,20 @@ population_admintwo:
       - "admin2Pcode"
     admin_exact: True
     input:
+      - "admin1Name_fr"
+      - "admin2Name_fr"
       - "F_TL"
       - "M_TL"
       - "T_TL"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -2611,6 +2724,8 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_EN"
+      - "ADM2_EN"
       - "F_80_84"
       - "M_80_84"
       - "T_80_84"
@@ -2621,6 +2736,8 @@ population_admintwo:
       - "M_90Plus"
       - "T_90Plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_80_84"
       - "M_80_84"
       - "T_80_84"
@@ -2631,6 +2748,8 @@ population_admintwo:
       - "M_90plus"
       - "T_90plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+age_80_84"
       - "#population+m+age_80_84"
       - "#population+age_80_84+total"
@@ -2651,14 +2770,20 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_PT"
+      - "ADM2_PT"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -2672,14 +2797,20 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_FR"
+      - "ADM2_FR"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -2693,14 +2824,20 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_EN"
+      - "ADM2_EN"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -2714,14 +2851,20 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_ES"
+      - "ADM2_ES"
       - "F_80Plus"
       - "M_80Plus"
       - "T_80Plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_80plus"
       - "M_80plus"
       - "T_80plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+age_80_plus"
       - "#population+m+age_80_plus"
       - "#population+age_80_plus+total"
@@ -2735,10 +2878,16 @@ population_admintwo:
       - ~
       - "admin2Pcode"
     input:
+      - "admin1Name_en"
+      - "Admin2Name_en"
       - "T_TL"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "T_TL"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+total"
 
   population_ssd:
@@ -2750,6 +2899,8 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_EN"
+      - "ADM2_EN"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2766,6 +2917,8 @@ population_admintwo:
       - "M_61plus"
       - "T_61plus"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2782,6 +2935,8 @@ population_admintwo:
       - "M_61plus"
       - "T_61plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
@@ -2798,27 +2953,6 @@ population_admintwo:
       - "#population+m+age_61_plus"
       - "#population+age_61_plus+total"
 
-  population_tcd:
-    dataset: "cod-ps-tcd"
-    resource: "tcd_admpop_adm2_2021.csv"
-    format: "csv"
-    use_hxl: False
-    admin:
-      - ~
-      - "ADM2_PCODE"
-    input:
-      - "F_80PLUS"
-      - "M_80PLUS"
-      - "T_80PLUS"
-    output:
-      - "F_80plus"
-      - "M_80plus"
-      - "T_80plus"
-    output_hxl:
-      - "#population+f+age_80_plus"
-      - "#population+m+age_80_plus"
-      - "#population+age_80_plus+total"
-
   population_ven:
     dataset: "cod-ps-ven"
     resource: "ven_admpop_adm2_2011_v3.csv"
@@ -2828,6 +2962,8 @@ population_admintwo:
       - ~
       - "ADM2_PCODE"
     input:
+      - "ADM1_ES"
+      - "ADM2_ES"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2874,6 +3010,8 @@ population_admintwo:
       - "M_65PLUS"
       - "T_65PLUS"
     output:
+      - "adm1_name"
+      - "adm2_name"
       - "F_TL"
       - "M_TL"
       - "T_TL"
@@ -2920,6 +3058,8 @@ population_admintwo:
       - "M_65plus"
       - "T_65plus"
     output_hxl:
+      - "#adm1+name"
+      - "#adm2+name"
       - "#population+f+total"
       - "#population+m+total"
       - "#population+total"
