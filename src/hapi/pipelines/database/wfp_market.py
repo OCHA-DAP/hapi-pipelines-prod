@@ -51,6 +51,8 @@ class WFPMarket(BaseUploader):
                 continue
             admin_level = "admintwo"
             name = market["market"]
+            provider_admin1_name = market["admin1"]
+            provider_admin2_name = market["admin2"]
             adm1_name = market["admin1"]
             adm2_name = market["admin2"]
             if countryiso3 in self._configuration["unused_adm1"]:
@@ -112,8 +114,8 @@ class WFPMarket(BaseUploader):
             market_row = DBWFPMarket(
                 code=code,
                 admin2_ref=ref,
-                provider_admin1_name=adm1_name,
-                provider_admin2_name=adm2_name,
+                provider_admin1_name=provider_admin1_name,
+                provider_admin2_name=provider_admin2_name,
                 name=name,
                 lat=lat,
                 lon=lon,
