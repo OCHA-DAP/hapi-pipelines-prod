@@ -335,6 +335,12 @@ class FoodSecurity(BaseUploader):
                 countryiso3 = row["Country"]
                 if countryiso3 not in self._configuration["HAPI_countries"]:
                     continue
+                provider_admin1_name = row.get("Level 1")
+                if not provider_admin1_name:
+                    provider_admin1_name = ""
+                provider_admin2_name = row.get("Area")
+                if not provider_admin2_name:
+                    provider_admin2_name = ""
                 if admin_level == "national":
                     admin2_ref = self._admins.get_admin2_ref(
                         admin_level, countryiso3, dataset_name, errors
@@ -357,6 +363,8 @@ class FoodSecurity(BaseUploader):
                 food_security_row = DBFoodSecurity(
                     resource_hdx_id=resource_id,
                     admin2_ref=admin2_ref,
+                    provider_admin1_name=provider_admin1_name,
+                    provider_admin2_name=provider_admin2_name,
                     ipc_phase=row["Phase"],
                     ipc_type=row["Validity period"],
                     reference_period_start=time_period_start,

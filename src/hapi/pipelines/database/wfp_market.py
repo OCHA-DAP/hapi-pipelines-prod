@@ -82,7 +82,13 @@ class WFPMarket(BaseUploader):
             dict_of_dicts_add(self.name_to_code, countryiso3, name, code)
             self.data[code] = name
             market_row = DBWFPMarket(
-                code=code, admin2_ref=ref, name=name, lat=lat, lon=lon
+                code=code,
+                admin2_ref=ref,
+                provider_admin1_name=adm1_name,
+                provider_admin2_name=adm2_name,
+                name=name,
+                lat=lat,
+                lon=lon,
             )
             self._session.add(market_row)
         self._session.commit()

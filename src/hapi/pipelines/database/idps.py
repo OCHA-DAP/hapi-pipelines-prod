@@ -81,9 +81,21 @@ class IDPs(BaseUploader):
                         )
                         add_message(errors, dataset_name, text)
                         continue
+                    provider_admin1_name = ""
+                    provider_admin2_name = ""
+                    if "#adm1+name" in hxl_tags:
+                        provider_admin1_name = row[
+                            hxl_tags.index("#adm1+name")
+                        ]
+                    if "#adm2+name" in hxl_tags:
+                        provider_admin2_name = row[
+                            hxl_tags.index("#adm2+name")
+                        ]
                     idps_row = DBIDPs(
                         resource_hdx_id=resource_id,
                         admin2_ref=admin2_ref,
+                        provider_admin1_name=provider_admin1_name,
+                        provider_admin2_name=provider_admin2_name,
                         assessment_type=assessment_type,
                         reporting_round=reporting_round,
                         operation=operation,
