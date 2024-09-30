@@ -11,6 +11,7 @@ from hapi_schema.db_food_price import DBFoodPrice
 from hapi_schema.db_food_security import DBFoodSecurity
 from hapi_schema.db_funding import DBFunding
 from hapi_schema.db_humanitarian_needs import DBHumanitarianNeeds
+from hapi_schema.db_idps import DBIDPs
 from hapi_schema.db_location import DBLocation
 from hapi_schema.db_national_risk import DBNationalRisk
 from hapi_schema.db_operational_presence import DBOperationalPresence
@@ -20,6 +21,7 @@ from hapi_schema.db_population import DBPopulation
 from hapi_schema.db_poverty_rate import DBPovertyRate
 from hapi_schema.db_refugees import DBRefugees
 from hapi_schema.db_resource import DBResource
+from hapi_schema.db_returnees import DBReturnees
 from hapi_schema.db_sector import DBSector
 from hapi_schema.db_wfp_commodity import DBWFPCommodity
 from hapi_schema.db_wfp_market import DBWFPMarket
@@ -51,11 +53,12 @@ class TestHAPIPipelines:
             "conflict_event.yaml",
             "food_security.yaml",
             "funding.yaml",
+            "idps.yaml",
             "national_risk.yaml",
             "operational_presence.yaml",
             "population.yaml",
             "poverty_rate.yaml",
-            "refugees.yaml",
+            "refugees_and_returnees.yaml",
             "wfp.yaml",
         ]
         project_config_dict = load_yamls(project_configs)
@@ -170,7 +173,7 @@ class TestHAPIPipelines:
         count = session.scalar(
             select(func.count(DBFoodSecurity.resource_hdx_id))
         )
-        check.equal(count, 27879)
+        check.equal(count, 26941)
 
     @pytest.mark.parametrize("themes_to_run", [{"humanitarian_needs": None}])
     def test_humanitarian_needs(self, configuration, folder, pipelines):
@@ -196,15 +199,29 @@ class TestHAPIPipelines:
         )
         check.equal(count, 25)
 
-    @pytest.mark.parametrize("themes_to_run", [{"refugees": None}])
-    def test_refugees(self, configuration, folder, pipelines):
+    @pytest.mark.parametrize(
+        "themes_to_run", [{"refugees_and_returnees": None}]
+    )
+    def test_refugees_and_returnees(self, configuration, folder, pipelines):
         session = pipelines.session
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
         check.equal(count, 1)
         count = session.scalar(select(func.count(DBResource.hdx_id)))
         check.equal(count, 1)
         count = session.scalar(select(func.count(DBRefugees.resource_hdx_id)))
-        check.equal(count, 102726)
+        check.equal(count, 570921)
+        count = session.scalar(select(func.count(DBReturnees.resource_hdx_id)))
+        check.equal(count, 5408)
+
+    @pytest.mark.parametrize("themes_to_run", [{"idps": None}])
+    def test_idps(self, configuration, folder, pipelines):
+        session = pipelines.session
+        count = session.scalar(select(func.count(DBResource.hdx_id)))
+        check.equal(count, 1)
+        count = session.scalar(select(func.count(DBDataset.hdx_id)))
+        check.equal(count, 1)
+        count = session.scalar(select(func.count(DBIDPs.resource_hdx_id)))
+        check.equal(count, 35034)
 
     @pytest.mark.parametrize(
         "themes_to_run", [{"funding": ("AFG", "BFA", "UKR")}]
