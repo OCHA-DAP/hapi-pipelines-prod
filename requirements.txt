@@ -54,7 +54,8 @@ greenlet==3.1.1
     # via sqlalchemy
 gspread==6.1.3
     # via hdx-python-scraper
-hapi-schema@git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@develop
+hapi-schema @ git+https://github.com/OCHA-DAP/hapi-sqlalchemy-schema@04d402d23d89a5dd489d8255f5462a6b115a5afa
+    # via hapi-pipelines (pyproject.toml)
 hdx-python-api==6.3.4
     # via
     #   hapi-pipelines (pyproject.toml)
@@ -115,7 +116,7 @@ markdown-it-py==3.0.0
     # via rich
 marko==2.1.2
     # via frictionless
-markupsafe==2.1.5
+markupsafe==3.0.0
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
