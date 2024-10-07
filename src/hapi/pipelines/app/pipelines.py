@@ -5,6 +5,7 @@ from typing import Dict, Optional
 from hdx.api.configuration import Configuration
 from hdx.location.adminlevel import AdminLevel
 from hdx.scraper.framework.runner import Runner
+from hdx.scraper.framework.utilities.reader import Read
 from hdx.scraper.framework.utilities.sources import Sources
 from hdx.utilities.errors_onexit import ErrorsOnExit
 from hdx.utilities.typehint import ListTuple
@@ -44,7 +45,6 @@ class Pipelines:
         scrapers_to_run: Optional[ListTuple[str]] = None,
         errors_on_exit: Optional[ErrorsOnExit] = None,
         use_live: bool = True,
-        countries_to_run: Optional[ListTuple[str]] = None,
     ):
         self.configuration = configuration
         self.session = session
@@ -53,10 +53,15 @@ class Pipelines:
             configuration=configuration,
             session=session,
             use_live=use_live,
-            countries=countries_to_run,
         )
-        self.countries = self.locations.hapi_countries
-        libhxl_dataset = AdminLevel.get_libhxl_dataset().cache()
+        self.countries = configuration["HAPI_countries"]
+        reader = Read.get_reader("hdx")
+        libhxl_dataset = AdminLevel.get_libhxl_dataset(
+            retriever=reader
+        ).cache()
+        libhxl_format_dataset = AdminLevel.get_libhxl_dataset(
+            url=AdminLevel.formats_url, retriever=reader
+        ).cache()
         self.admins = Admins(
             configuration, session, self.locations, libhxl_dataset
         )
@@ -64,10 +69,14 @@ class Pipelines:
         self.adminone = AdminLevel(admin_config=admin1_config, admin_level=1)
         admin2_config = configuration["admin2"]
         self.admintwo = AdminLevel(admin_config=admin2_config, admin_level=2)
-        self.adminone.setup_from_libhxl_dataset(libhxl_dataset)
-        self.adminone.load_pcode_formats()
-        self.admintwo.setup_from_libhxl_dataset(libhxl_dataset)
-        self.admintwo.load_pcode_formats()
+        self.adminone.setup_from_libhxl_dataset(libhxl_dataset, self.countries)
+        self.adminone.load_pcode_formats_from_libhxl_dataset(
+            libhxl_format_dataset
+        )
+        self.admintwo.setup_from_libhxl_dataset(libhxl_dataset, self.countries)
+        self.admintwo.load_pcode_formats_from_libhxl_dataset(
+            libhxl_format_dataset
+        )
         self.admintwo.set_parent_admins_from_adminlevels([self.adminone])
         logger.info("Admin one name mappings:")
         self.adminone.output_admin_name_mappings()
@@ -175,6 +184,7 @@ class Pipelines:
         )
         _create_configurable_scrapers("operational_presence", "national")
         _create_configurable_scrapers("national_risk", "national")
+        _create_configurable_scrapers("funding", "national")
         _create_configurable_scrapers("refugees_and_returnees", "national")
         _create_configurable_scrapers("idps", "national")
         _create_configurable_scrapers(
@@ -297,11 +307,14 @@ class Pipelines:
 
     def output_funding(self):
         if not self.themes_to_run or "funding" in self.themes_to_run:
+            results = self.runner.get_hapi_results(
+                self.configurable_scrapers["funding"]
+            )
             funding = Funding(
                 session=self.session,
                 metadata=self.metadata,
                 locations=self.locations,
-                configuration=self.configuration,
+                results=results,
             )
             funding.populate()
 
@@ -347,7 +360,6 @@ class Pipelines:
                 admins=self.admins,
                 adminone=self.adminone,
                 admintwo=self.admintwo,
-                configuration=self.configuration,
             )
             wfp_market.populate()
             food_price = FoodPrice(
