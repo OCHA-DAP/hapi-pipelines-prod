@@ -5,6 +5,7 @@ from typing import Dict, Optional
 from hdx.api.configuration import Configuration
 from hdx.location.adminlevel import AdminLevel
 from hdx.scraper.framework.runner import Runner
+from hdx.scraper.framework.utilities.reader import Read
 from hdx.scraper.framework.utilities.sources import Sources
 from hdx.utilities.errors_onexit import ErrorsOnExit
 from hdx.utilities.typehint import ListTuple
@@ -54,7 +55,13 @@ class Pipelines:
             use_live=use_live,
         )
         self.countries = configuration["HAPI_countries"]
-        libhxl_dataset = AdminLevel.get_libhxl_dataset().cache()
+        reader = Read.get_reader("hdx")
+        libhxl_dataset = AdminLevel.get_libhxl_dataset(
+            retriever=reader
+        ).cache()
+        libhxl_format_dataset = AdminLevel.get_libhxl_dataset(
+            url=AdminLevel.formats_url, retriever=reader
+        ).cache()
         self.admins = Admins(
             configuration, session, self.locations, libhxl_dataset
         )
@@ -63,9 +70,13 @@ class Pipelines:
         admin2_config = configuration["admin2"]
         self.admintwo = AdminLevel(admin_config=admin2_config, admin_level=2)
         self.adminone.setup_from_libhxl_dataset(libhxl_dataset, self.countries)
-        self.adminone.load_pcode_formats()
+        self.adminone.load_pcode_formats_from_libhxl_dataset(
+            libhxl_format_dataset
+        )
         self.admintwo.setup_from_libhxl_dataset(libhxl_dataset, self.countries)
-        self.admintwo.load_pcode_formats()
+        self.admintwo.load_pcode_formats_from_libhxl_dataset(
+            libhxl_format_dataset
+        )
         self.admintwo.set_parent_admins_from_adminlevels([self.adminone])
         logger.info("Admin one name mappings:")
         self.adminone.output_admin_name_mappings()
