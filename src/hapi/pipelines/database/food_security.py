@@ -356,7 +356,9 @@ class FoodSecurity(BaseUploader):
                         row,
                     )
                 if not admin2_ref:
-                    continue
+                    admin2_ref = self._admins.get_admin2_ref(
+                        "national", countryiso3, dataset_name, errors
+                    )
                 time_period_start = parse_date(row["From"])
                 time_period_end = parse_date(row["To"])
 
