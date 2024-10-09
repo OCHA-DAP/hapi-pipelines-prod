@@ -89,7 +89,7 @@ inflect==7.4.0
     # via quantulum3
 iniconfig==2.0.0
     # via pytest
-isodate==0.6.1
+isodate==0.7.2
     # via frictionless
 jinja2==3.1.4
     # via frictionless
@@ -101,7 +101,7 @@ jsonschema==4.23.0
     # via
     #   frictionless
     #   tableschema-to-template
-jsonschema-specifications==2023.12.1
+jsonschema-specifications==2024.10.1
     # via jsonschema
 libhxl==5.2.1
     # via
@@ -116,7 +116,7 @@ markdown-it-py==3.0.0
     # via rich
 marko==2.1.2
     # via frictionless
-markupsafe==2.1.5
+markupsafe==3.0.1
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
@@ -144,7 +144,7 @@ ply==3.11
     #   libhxl
 pockets==0.9.1
     # via sphinxcontrib-napoleon
-pre-commit==4.0.0
+pre-commit==4.0.1
     # via hapi-pipelines (pyproject.toml)
 psycopg==3.2.3
     # via hdx-python-database
@@ -239,7 +239,6 @@ simplejson==3.19.3
 six==1.16.0
     # via
     #   ckanapi
-    #   isodate
     #   pockets
     #   python-dateutil
     #   sphinxcontrib-napoleon
