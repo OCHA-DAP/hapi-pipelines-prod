@@ -20,4 +20,6 @@ def get_provider_name(
         provider_name = provider_name[admin_code]
     if i is not None:
         provider_name = provider_name[i]
+    if provider_name is None:
+        provider_name = ""
     return provider_name
