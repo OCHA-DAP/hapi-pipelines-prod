@@ -120,6 +120,8 @@ class HumanitarianNeeds(BaseUploader):
                 humanitarian_needs_row = DBHumanitarianNeeds(
                     resource_hdx_id=resource_id,
                     admin2_ref=admin2_ref,
+                    provider_admin1_name="",
+                    provider_admin2_name="",
                     gender=gender,
                     age_range=age_range,
                     min_age=min_age,
