@@ -63,13 +63,15 @@ class HumanitarianNeeds(BaseUploader):
         self._metadata.add_dataset(dataset)
         dataset_id = dataset["id"]
         dataset_name = dataset["name"]
-        resource = dataset.get_resource()  # assumes first resource is latest!
+        resource = dataset.get_resource(
+            1
+        )  # assumes second resource is latest!
         self._metadata.add_resource(dataset_id, resource)
         negative_values_by_iso3 = {}
         rounded_values_by_iso3 = {}
         resource_id = resource["id"]
         resource_name = resource["name"]
-        year = int(resource_name[-4:])
+        year = int(resource_name[-15:-11])
         time_period_start = datetime(year, 1, 1)
         time_period_end = datetime(year, 12, 31, 23, 59, 59)
         url = resource["url"]
@@ -118,6 +120,8 @@ class HumanitarianNeeds(BaseUploader):
                 humanitarian_needs_row = DBHumanitarianNeeds(
                     resource_hdx_id=resource_id,
                     admin2_ref=admin2_ref,
+                    provider_admin1_name="",
+                    provider_admin2_name="",
                     gender=gender,
                     age_range=age_range,
                     min_age=min_age,
