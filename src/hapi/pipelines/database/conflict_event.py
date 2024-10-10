@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 
 from ..utilities.batch_populate import batch_populate
 from ..utilities.logging_helpers import add_message
+from ..utilities.provider_admin_names import get_provider_name
 from . import admins
 from .base_uploader import BaseUploader
 from .metadata import Metadata
@@ -77,15 +78,20 @@ class ConflictEvent(BaseUploader):
                             time_period_range = parse_date_range(
                                 f"{month} {year}", "%B %Y"
                             )
-                            provider_admin1_name = ""
-                            provider_admin2_name = ""
-                            if admin_level == "admintwo":
-                                provider_admin1_name = values[
-                                    hxl_tags.index(f"#adm1+name+{event_type}")
-                                ][admin_code][irow]
-                                provider_admin2_name = values[
-                                    hxl_tags.index(f"#adm2+name+{event_type}")
-                                ][admin_code][irow]
+                            provider_admin1_name = get_provider_name(
+                                values,
+                                f"#adm1+name+{event_type}",
+                                hxl_tags,
+                                admin_code,
+                                irow,
+                            )
+                            provider_admin2_name = get_provider_name(
+                                values,
+                                f"#adm2+name+{event_type}",
+                                hxl_tags,
+                                admin_code,
+                                irow,
+                            )
                             conflict_event_row = dict(
                                 resource_hdx_id=resource_id,
                                 admin2_ref=self._admins.admin2_data[

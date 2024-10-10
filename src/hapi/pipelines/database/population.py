@@ -11,6 +11,7 @@ from ..utilities.parse_tags import (
     get_gender_and_age_range,
     get_min_and_max_age,
 )
+from ..utilities.provider_admin_names import get_provider_name
 from . import admins
 from .base_uploader import BaseUploader
 from .metadata import Metadata
@@ -63,16 +64,12 @@ class Population(BaseUploader):
                         admin2_code = admins.get_admin2_code_based_on_level(
                             admin_code=admin_code, admin_level=admin_level
                         )
-                        provider_admin1_name = ""
-                        provider_admin2_name = ""
-                        if "#adm1+name" in hxl_tags:
-                            provider_admin1_name = values[
-                                hxl_tags.index("#adm1+name")
-                            ][admin_code]
-                        if "#adm2+name" in hxl_tags:
-                            provider_admin2_name = values[
-                                hxl_tags.index("#adm2+name")
-                            ][admin_code]
+                        provider_admin1_name = get_provider_name(
+                            values, "#adm1+name", hxl_tags, admin_code
+                        )
+                        provider_admin2_name = get_provider_name(
+                            values, "#adm2+name", hxl_tags, admin_code
+                        )
                         population_row = DBPopulation(
                             resource_hdx_id=resource_id,
                             admin2_ref=self._admins.admin2_data[admin2_code],

@@ -13,6 +13,7 @@ from hdx.utilities.typehint import ListTuple
 from sqlalchemy.orm import Session
 
 from ..utilities.logging_helpers import add_message
+from ..utilities.provider_admin_names import get_provider_name
 from . import admins
 from .base_uploader import BaseUploader
 from .metadata import Metadata
@@ -335,12 +336,8 @@ class FoodSecurity(BaseUploader):
                 countryiso3 = row["Country"]
                 if countryiso3 not in self._configuration["HAPI_countries"]:
                     continue
-                provider_admin1_name = row.get("Level 1")
-                if not provider_admin1_name:
-                    provider_admin1_name = ""
-                provider_admin2_name = row.get("Area")
-                if not provider_admin2_name:
-                    provider_admin2_name = ""
+                provider_admin1_name = get_provider_name(row, "Level 1")
+                provider_admin2_name = get_provider_name(row, "Area")
                 if admin_level == "national":
                     admin2_ref = self._admins.get_admin2_ref(
                         admin_level, countryiso3, dataset_name, errors

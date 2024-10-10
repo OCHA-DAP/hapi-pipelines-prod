@@ -11,6 +11,7 @@ from hdx.utilities.dictandlist import dict_of_dicts_add
 from sqlalchemy.orm import Session
 
 from ..utilities.logging_helpers import add_missing_value_message
+from ..utilities.provider_admin_names import get_provider_name
 from . import admins
 from .base_uploader import BaseUploader
 
@@ -51,8 +52,8 @@ class WFPMarket(BaseUploader):
                 continue
             admin_level = "admintwo"
             name = market["market"]
-            provider_admin1_name = market["admin1"]
-            provider_admin2_name = market["admin2"]
+            provider_admin1_name = get_provider_name(market, "admin1")
+            provider_admin2_name = get_provider_name(market, "admin2")
             adm1_name = market["admin1"]
             adm2_name = market["admin2"]
             if countryiso3 in self._configuration["unused_adm1"]:
