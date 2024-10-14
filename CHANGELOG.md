@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.6] - 2024-10-09
+
+### Fixed
+
+- Fix to use deprecated humanitarian needs resource temporarily
+
 ## [0.10.5] - 2024-10-08
 
 ### Fixed
