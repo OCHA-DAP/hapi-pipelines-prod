@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from logging import getLogger
-from typing import Dict, Optional, Set
+from typing import Dict, List, Optional, Set
 
 from hapi_schema.db_food_security import DBFoodSecurity
 from hdx.api.configuration import Configuration
@@ -38,6 +38,7 @@ class FoodSecurity(BaseUploader):
         admins: admins.Admins,
         adminone: AdminLevel,
         admintwo: AdminLevel,
+        countryiso3s: List[str],
         configuration: Configuration,
     ):
         super().__init__(session)
@@ -45,6 +46,7 @@ class FoodSecurity(BaseUploader):
         self._admins = admins
         self._adminone = adminone
         self._admintwo = admintwo
+        self._countryiso3s = countryiso3s
         self._configuration = configuration
         self._country_status = {}
 
@@ -334,7 +336,7 @@ class FoodSecurity(BaseUploader):
                 if "#" in row["Date of analysis"]:  # ignore HXL row
                     continue
                 countryiso3 = row["Country"]
-                if countryiso3 not in self._configuration["HAPI_countries"]:
+                if countryiso3 not in self._countryiso3s:
                     continue
                 provider_admin1_name = get_provider_name(row, "Level 1")
                 provider_admin2_name = get_provider_name(row, "Area")

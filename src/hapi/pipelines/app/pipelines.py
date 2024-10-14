@@ -246,6 +246,7 @@ class Pipelines:
                 admins=self.admins,
                 adminone=self.adminone,
                 admintwo=self.admintwo,
+                countryiso3s=self.countries,
                 configuration=self.configuration,
             )
             food_security.populate()
