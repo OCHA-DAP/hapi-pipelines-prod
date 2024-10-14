@@ -312,6 +312,7 @@ class Pipelines:
             funding = Funding(
                 session=self.session,
                 metadata=self.metadata,
+                countryiso3s=self.countries,
                 locations=self.locations,
                 configuration=self.configuration,
             )
