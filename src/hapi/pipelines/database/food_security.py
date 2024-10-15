@@ -214,7 +214,23 @@ class FoodSecurity(BaseUploader):
             admin_level == "admintwo"
             and countryiso3 in food_sec_config["adm1_only"]
         ):
-            return None
+            self._country_status[countryiso3] = (
+                "Level 1: Admin 1, Area: ignored"
+            )
+            adminoneinfo = self.get_adminoneinfo(
+                food_sec_config["adm_ignore_patterns"],
+                warnings,
+                dataset_name,
+                countryiso3,
+                row["Level 1"],
+            )
+            return self.get_adminone_admin2_ref(
+                food_sec_config,
+                warnings,
+                errors,
+                dataset_name,
+                adminoneinfo,
+            )
         # The YAML configuration "adm2_only" specifies locations where
         # "Level 1" is not populated and "Area" is admin 2. (These are
         # exceptions since "Level 1" would normally be populated if "Area" is
@@ -233,6 +249,43 @@ class FoodSecurity(BaseUploader):
                 errors,
                 dataset_name,
                 row,
+                adminoneinfo,
+            )
+
+        if countryiso3 in food_sec_config["adm2_in_level1"]:
+            row["Area"] = row["Level 1"]
+            row["Level 1"] = None
+            adminoneinfo = AdminInfo(countryiso3, "NOT GIVEN", "", None, False)
+            self._country_status[countryiso3] = (
+                "Level 1: Admin 2, Area: ignored"
+            )
+            return self.get_admintwo_admin2_ref(
+                food_sec_config,
+                warnings,
+                errors,
+                dataset_name,
+                row,
+                adminoneinfo,
+            )
+
+        if countryiso3 in food_sec_config["adm1_in_area"]:
+            if admin_level == "adminone":
+                return None
+            self._country_status[countryiso3] = (
+                "Level 1: ignored, Area: Admin 1"
+            )
+            adminoneinfo = self.get_adminoneinfo(
+                food_sec_config["adm_ignore_patterns"],
+                warnings,
+                dataset_name,
+                countryiso3,
+                row["Area"],
+            )
+            return self.get_adminone_admin2_ref(
+                food_sec_config,
+                warnings,
+                errors,
+                dataset_name,
                 adminoneinfo,
             )
 

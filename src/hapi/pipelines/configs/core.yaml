@@ -44,6 +44,7 @@ admin1:
     "CMR|Far-North": "CM004"
     "CMR|West": "CM008"
     "CPV|Santo Antao": "CV06"
+    "DJI|Djibouti Ville": "DJ04"
     "ETH|B. Gumuz": "ET06"
     "HTI|Nord-Ouest": "HT09"
     "HTI|Sud": "HT07"
@@ -90,6 +91,8 @@ admin2:
     "AF08|Onaba": "AF0805"
     "AF14|Khost": "AF1401"
     "AF23|Chaghcharan": "AF2301"
+    "AO09|Município dos Gambos (ex-chiange)": "AO09073"
+    "AO16|Mocamedes": "AO16139"
     "CD43|Ville de Gbadolite": "CD4301"
     "CD83|Territoire de LODJA": "CD8303"
     "CO08|Distrito Especial, Industrial Y Portuario De Barranquilla": "CO08001"
@@ -117,6 +120,10 @@ admin2:
     "ET12|ZONE 3": "ET1201"
     "ET13|HARAR/HUNDENE": "ET1301"
     "ET14|AA ZONE1": "ET1401"
+#    "GH02|Ashanti": "GH02-XXX"  TODO: this unit can't be added because of the unspecified admin2
+#    "GH03|Bono": "GH03-XXX"  TODO: this unit can't be added because of the unspecified admin2
+#    "GH04|Bono east": "GH04-XXX"  TODO: this unit can't be added because of the unspecified admin2
+#    "GH05|Central": "GH05-XXX"  TODO: this unit can't be added because of the unspecified admin2
     "GM05|Kombo Saint Mary": "GM0308"  # TODO: this unit is not getting picked up because of the mismatched admin1
     "GN005|Conakry": "GN002001"  # TODO: this unit is not getting picked up because of the mismatched admin1
     "GN005|Fria": "GN001005"  # TODO: this unit is not getting picked up because of the mismatched admin1
@@ -132,6 +139,7 @@ admin2:
     "NG027|Munya": "NG027018"
     "PH08|Samar": "PH08060"
     "PK2|Mekran": "PK211"
+    "PK5|Dera Ismail Khan": "PK509"
     "PS01|Ramallah and Albireh": "PS0130"
     "RUS|Sankt-peterburg": "RU004002"
     "SD01|Sharq El Nile": "SD01004"
@@ -144,6 +152,7 @@ admin2:
     "TD11|La kabbia": "TD1102"
     "TD17|Iriba": "TD1703"
     "TD22|Tibest-Ouest": "TD2202"
+    "TG05|Kpendial- Ouest": "TG0513"
     "TZ12|Mbozi": "TZ2606"  # TODO: this unit is not getting picked up because of the mismatched admin1
     "UA12|Apostolivskyi": "UA1206"
     "UA12|Marhanetska": "UA1208"
