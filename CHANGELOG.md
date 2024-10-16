@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.13] - 2024-10-16
+
+### Added
+
+- Added global food security data with additional p-code mappings
+
 ## [0.10.12] - 2024-10-16
 
 ### Fixed
