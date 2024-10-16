@@ -60,7 +60,7 @@ hdx-python-api==6.3.4
     # via
     #   hapi-pipelines (pyproject.toml)
     #   hdx-python-scraper
-hdx-python-country==3.8.1
+hdx-python-country==3.8.2
     # via
     #   hapi-pipelines (pyproject.toml)
     #   hdx-python-api
@@ -228,7 +228,7 @@ ruamel-yaml==0.18.6
     # via hdx-python-utilities
 ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
-setuptools==75.1.0
+setuptools==75.2.0
     # via ckanapi
 shellingham==1.5.4
     # via typer
