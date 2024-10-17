@@ -25,6 +25,7 @@ food_security:
   # This is where all "Areas" are non-admin units and so there is only admin 1
   # data available in "Level 1"
   adm1_only:
+    - "DJI"
     - "HTI"
     - "MMR"
     - "SOM"
@@ -32,7 +33,22 @@ food_security:
   # This is where "Level 1" is blank and there is only admin 2 data available
   # in "Area" (usually blank "Level 1" means "Area" is admin 1 rather than 2)
   adm2_only:
+    - "DOM"
+    - "GMB"
+    - "MWI"
     - "PSE"
+    - "TZA"
+    - "UGA"
+
+  # This is where there is only admin 2 data available in "Level 1" whether
+  # "Area" is blank or not
+  adm2_in_level1:
+    - "LBN"
+
+  # This is where "Level 1" is non-admin units and so there is only admin 1
+  # data available in "Area"
+  adm1_in_area:
+    - "KEN"
 
   # The errors below were picked up from the logging which outputs all the
   # fuzzy matches

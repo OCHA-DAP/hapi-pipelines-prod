@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from logging import getLogger
-from typing import Dict, Optional, Set
+from typing import Dict, List, Optional, Set
 
 from hapi_schema.db_food_security import DBFoodSecurity
 from hdx.api.configuration import Configuration
@@ -38,6 +38,7 @@ class FoodSecurity(BaseUploader):
         admins: admins.Admins,
         adminone: AdminLevel,
         admintwo: AdminLevel,
+        countryiso3s: List[str],
         configuration: Configuration,
     ):
         super().__init__(session)
@@ -45,6 +46,7 @@ class FoodSecurity(BaseUploader):
         self._admins = admins
         self._adminone = adminone
         self._admintwo = admintwo
+        self._countryiso3s = countryiso3s
         self._configuration = configuration
         self._country_status = {}
 
@@ -212,7 +214,23 @@ class FoodSecurity(BaseUploader):
             admin_level == "admintwo"
             and countryiso3 in food_sec_config["adm1_only"]
         ):
-            return None
+            self._country_status[countryiso3] = (
+                "Level 1: Admin 1, Area: ignored"
+            )
+            adminoneinfo = self.get_adminoneinfo(
+                food_sec_config["adm_ignore_patterns"],
+                warnings,
+                dataset_name,
+                countryiso3,
+                row["Level 1"],
+            )
+            return self.get_adminone_admin2_ref(
+                food_sec_config,
+                warnings,
+                errors,
+                dataset_name,
+                adminoneinfo,
+            )
         # The YAML configuration "adm2_only" specifies locations where
         # "Level 1" is not populated and "Area" is admin 2. (These are
         # exceptions since "Level 1" would normally be populated if "Area" is
@@ -231,6 +249,43 @@ class FoodSecurity(BaseUploader):
                 errors,
                 dataset_name,
                 row,
+                adminoneinfo,
+            )
+
+        if countryiso3 in food_sec_config["adm2_in_level1"]:
+            row["Area"] = row["Level 1"]
+            row["Level 1"] = None
+            adminoneinfo = AdminInfo(countryiso3, "NOT GIVEN", "", None, False)
+            self._country_status[countryiso3] = (
+                "Level 1: Admin 2, Area: ignored"
+            )
+            return self.get_admintwo_admin2_ref(
+                food_sec_config,
+                warnings,
+                errors,
+                dataset_name,
+                row,
+                adminoneinfo,
+            )
+
+        if countryiso3 in food_sec_config["adm1_in_area"]:
+            if admin_level == "adminone":
+                return None
+            self._country_status[countryiso3] = (
+                "Level 1: ignored, Area: Admin 1"
+            )
+            adminoneinfo = self.get_adminoneinfo(
+                food_sec_config["adm_ignore_patterns"],
+                warnings,
+                dataset_name,
+                countryiso3,
+                row["Area"],
+            )
+            return self.get_adminone_admin2_ref(
+                food_sec_config,
+                warnings,
+                errors,
+                dataset_name,
                 adminoneinfo,
             )
 
@@ -334,7 +389,7 @@ class FoodSecurity(BaseUploader):
                 if "#" in row["Date of analysis"]:  # ignore HXL row
                     continue
                 countryiso3 = row["Country"]
-                if countryiso3 not in self._configuration["HAPI_countries"]:
+                if countryiso3 not in self._countryiso3s:
                     continue
                 provider_admin1_name = get_provider_name(row, "Level 1")
                 provider_admin2_name = get_provider_name(row, "Area")
