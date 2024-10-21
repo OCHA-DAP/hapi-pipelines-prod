@@ -1,6 +1,7 @@
 """Functions specific to the funding theme."""
 
 from logging import getLogger
+from typing import List
 
 from hapi_schema.db_funding import DBFunding
 from hdx.api.configuration import Configuration
@@ -21,11 +22,13 @@ class Funding(BaseUploader):
         self,
         session: Session,
         metadata: Metadata,
+        countryiso3s: List[str],
         locations: locations,
         configuration: Configuration,
     ):
         super().__init__(session)
         self._metadata = metadata
+        self._countryiso3s = countryiso3s
         self._locations = locations
         self._configuration = configuration
 
@@ -45,6 +48,8 @@ class Funding(BaseUploader):
             if dataset["archived"]:
                 continue
             admin_code = dataset.get_location_iso3s()[0]
+            if admin_code not in self._countryiso3s:
+                continue
             resource = [
                 r
                 for r in dataset.get_resources()
