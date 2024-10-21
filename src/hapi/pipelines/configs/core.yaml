@@ -54,6 +54,7 @@ admin1:
     "KEN|Meru South": "KE013"
     "KEN|Moyale": "KE010"
     "MDA|Tighina": "MD009"
+    "NAM|Khomas Region": "NA06"
     "NGA|Abuja": "NG015"
     "NIC|Atlantico Sur": "NI93"
     "PAK|FATA": "PK5"
@@ -94,8 +95,10 @@ admin2:
     "AO09|Município dos Gambos (ex-chiange)": "AO09073"
     "AO16|Mocamedes": "AO16139"
     "CD43|Ville de Gbadolite": "CD4301"
+    "CD61|Beni-ville": "CD6109"
     "CD83|Territoire de LODJA": "CD8303"
     "CO08|Distrito Especial, Industrial Y Portuario De Barranquilla": "CO08001"
+    "DOM|Santiago": "DO0303"
     "ET01|C. TIGRAY": "ET0102"
     "ET01|NW. TIGRAY": "ET0101"
     "ET02|ZONE1": "ET0201"
@@ -120,10 +123,6 @@ admin2:
     "ET12|ZONE 3": "ET1201"
     "ET13|HARAR/HUNDENE": "ET1301"
     "ET14|AA ZONE1": "ET1401"
-#    "GH02|Ashanti": "GH02-XXX"  TODO: this unit can't be added because of the unspecified admin2
-#    "GH03|Bono": "GH03-XXX"  TODO: this unit can't be added because of the unspecified admin2
-#    "GH04|Bono east": "GH04-XXX"  TODO: this unit can't be added because of the unspecified admin2
-#    "GH05|Central": "GH05-XXX"  TODO: this unit can't be added because of the unspecified admin2
     "GM05|Kombo Saint Mary": "GM0308"  # TODO: this unit is not getting picked up because of the mismatched admin1
     "GN005|Conakry": "GN002001"  # TODO: this unit is not getting picked up because of the mismatched admin1
     "GN005|Fria": "GN001005"  # TODO: this unit is not getting picked up because of the mismatched admin1
@@ -280,6 +279,10 @@ admin2:
     - "maguindanao"
     - "meru south"
     - "metropolitan manila"
+    - "GHA|ashanti"
+    - "GHA|bono"
+    - "GHA|bono east"
+    - "GHA|central"
 
 orphan_admin2s:
   SS0001: "SSD"
