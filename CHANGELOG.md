@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 2024-10-22
+
+### Added
+
+- This PR has everything except HNO freeform category changes
+
+## [0.10.13] - 2024-10-17
+
+### Added
+
+- Added global food security data with additional p-code mappings
+
+## [0.10.12] - 2024-10-16
+
+### Fixed
+
+- Error in handling admin2_ref in humanitarian needs
+
+## [0.10.11] - 2024-10-16
+
+### NOT IN THIS PR
+
+- Use freeform category for humanitarian needs
+- Populate provider_admin1_name and provider_admin2_name
+
 ## [0.10.10] - 2024-10-16
 
 ### Fixed

@@ -246,6 +246,7 @@ class Pipelines:
                 admins=self.admins,
                 adminone=self.adminone,
                 admintwo=self.admintwo,
+                countryiso3s=self.countries,
                 configuration=self.configuration,
             )
             food_security.populate()
@@ -311,6 +312,7 @@ class Pipelines:
             funding = Funding(
                 session=self.session,
                 metadata=self.metadata,
+                countryiso3s=self.countries,
                 locations=self.locations,
                 configuration=self.configuration,
             )
