@@ -128,7 +128,14 @@ class ConflictEvent(BaseUploader):
                 continue
             batch_populate(conflict_event_rows, self._session, DBConflictEvent)
 
-        for dataset, msg in self._config.get(
+        for identifier, message in self._config.get(
             "conflict_event_error_messages", {}
         ).items():
-            self._error_manager.add_message("ConfictEvent", dataset, msg)
+            dataset, resource_name = identifier.split("|")
+            self._error_manager.add_message(
+                "ConfictEvent",
+                dataset,
+                message,
+                resource_name=resource_name,
+                flag_in_hdx=True,
+            )
