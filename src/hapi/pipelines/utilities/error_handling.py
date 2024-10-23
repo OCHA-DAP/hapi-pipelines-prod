@@ -173,5 +173,5 @@ def write_error_to_resource(identifier: Tuple[str], errors: set[str]) -> bool:
     if resource_error and resource_error == error_text:
         return False
     resource["qa_hapi_report"] = error_text
-    # resource.update_in_hdx(operation="patch")
+    resource.update_in_hdx(operation="patch")
     return True
