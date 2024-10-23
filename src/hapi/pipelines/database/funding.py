@@ -61,6 +61,7 @@ class Funding(BaseUploader):
                 continue
             resource = resource[0]
             resource_id = resource["id"]
+            resource_name = resource["name"]
             url = resource["url"]
             headers, rows = reader.get_tabular_rows(
                 url,
@@ -100,6 +101,8 @@ class Funding(BaseUploader):
                         dataset_name,
                         "funding_usd",
                         appeal_code,
+                        resource_name=resource_name,
+                        flag_in_hdx=True,
                     )
                     continue
                 funding_pct = row["#value+funding+pct"]
@@ -111,6 +114,8 @@ class Funding(BaseUploader):
                         "Funding",
                         dataset_name,
                         f"Appeal start date occurs after end date for {appeal_code} in {admin_code}",
+                        resource_name=resource_name,
+                        flag_in_hdx=True,
                     )
                     continue
 
