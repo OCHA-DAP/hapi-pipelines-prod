@@ -168,7 +168,7 @@ class HumanitarianNeeds(BaseUploader):
                 f"{countryiso3} - negative values removed",
                 values,
                 resource_name=resource_name,
-                flag_in_hdx=True,
+                flag_to_hdx=True,
             )
         for countryiso3, values in rounded_values_by_iso3.items():
             self._error_manager.add_multi_valued_message(
