@@ -49,9 +49,7 @@ class ErrorManager:
         )
         if flag_to_hdx:
             error_id = (pipeline, identifier, resource_name)
-            dict_of_sets_add(
-                self.shared_errors["hdx_error"], error_id, text
-            )
+            dict_of_sets_add(self.shared_errors["hdx_error"], error_id, text)
 
     def add_missing_value_message(
         self,
