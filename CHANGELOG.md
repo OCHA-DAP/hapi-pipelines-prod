@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+
+## [0.10.14] - 2024-10-23
+
+### Fixed
+
+- Errors in some food security data p-code mappings
+
 ## [0.10.13] - 2024-10-17
 
 ### Added
