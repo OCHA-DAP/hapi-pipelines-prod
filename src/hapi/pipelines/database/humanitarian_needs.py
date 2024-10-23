@@ -164,15 +164,17 @@ class HumanitarianNeeds(BaseUploader):
         for countryiso3, values in negative_values_by_iso3.items():
             self._error_manager.add_multi_valued_message(
                 "HumanitarianNeeds",
-                f"{dataset_name} - {countryiso3}",
-                "negative values removed",
+                dataset_name,
+                f"{countryiso3} - negative values removed",
                 values,
+                resource_name=resource_name,
+                flag_in_hdx=True,
             )
         for countryiso3, values in rounded_values_by_iso3.items():
             self._error_manager.add_multi_valued_message(
                 "HumanitarianNeeds",
-                f"{dataset_name} - {countryiso3}",
-                "float values rounded",
+                dataset_name,
+                f"{countryiso3} - values rounded",
                 values,
                 message_type="warning",
             )
