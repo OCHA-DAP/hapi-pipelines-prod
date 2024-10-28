@@ -13,6 +13,7 @@ operational_presence_default:
     - "operational_presence_hti"
     - "operational_presence_lbn"
     - "operational_presence_mli"
+    - "operational_presence_moz"
     - "operational_presence_ner"
     - "operational_presence_nga"
     - "operational_presence_sdn"
@@ -329,39 +330,36 @@ operational_presence_admintwo:
 
   operational_presence_moz:
     dataset: "mozambique-operational-presence"
-    resource: "MOZ-Humanitarian Operational Presence May 2024"
+    resource: "Mozambique_2024_3Ws and Response_ Monitoring_January to August.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Operationa Presence May 2024"
+    sheet: "Consolidated_3Ws"
     headers: 1
     source_date:
-      start: "01/05/2024"
-      end: "31/05/2024"
-    use_hxl: True
+      start: "01/01/2024"
+      end: "31/08/2024"
+    use_hxl: False
     admin:
       - ~
-      - "#adm2+code"
+      - "District (Admin 2)-pcode (distrito/ cidade)"
     admin_exact: True
+    filter_cols:
+      - "Implementing Partner (parceiro de implementação)"
+    prefilter: "Implementing Partner (parceiro de implementação) is not None"
     input:
-      - "#org+name+impl"
-      - "#org+type+impl"
-      - "#adm1+name"
-      - "#adm2+name"
+      - "Implementing Partner (parceiro de implementação)"
+      - "Implementing Partner (parceiro de implementação)"
+      - "Organization Type ((tipo de organização)2"
+      - "Cluster/ Sector (Cluster/ Setor)"
+      - "Province (Admin 1)- (provincia)"
+      - "District (Admin 2)- (distrito/ cidade)"
     list:
-      - "#org+name+impl"
-      - "#org+type+impl"
-      - "#adm1+name"
-      - "#adm2+name"
-    output:
-      - "org_name"
-      - "org_type_name"
-      - "adm1_name"
-      - "adm2_name"
-    output_hxl:
-      - "#org+name"
-      - "#org+type+name"
-      - "#adm1+name"
-      - "#adm2+name"
+      - "Implementing Partner (parceiro de implementação)"
+      - "Implementing Partner (parceiro de implementação)"
+      - "Organization Type ((tipo de organização)2"
+      - "Cluster/ Sector (Cluster/ Setor)"
+      - "Province (Admin 1)- (provincia)"
+      - "District (Admin 2)- (distrito/ cidade)"
 
   operational_presence_nga:
     dataset: "nigeria-3w"
@@ -577,15 +575,15 @@ operational_presence_national:
 
   operational_presence_eth:
     dataset: "ethiopia-operational-presence"
-    resource: "Ethiopia Who is Doing What Where (4W) - July 2024.xlsx"
+    resource: "Ethiopia Who is Doing What Where (4W) - August 2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "July 2024"
+    sheet: "April 2024"
     headers: 1
     use_hxl: True
     source_date:
-      start: "01/07/2024"
-      end: "31/07/2024"
+      start: "01/08/2024"
+      end: "31/08/2024"
     admin_single: "ETH"
     input:
       - "#org+impl+name"
@@ -672,15 +670,15 @@ operational_presence_national:
 
   operational_presence_sdn:
     dataset: "sudan-operational-presence"
-    resource: "2024-consolidated-3w-data-jan-to-30-june.xlsx"
+    resource: "2024-consolidated-3w-data-jan-to-30-aug.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "3W_master_data"
+    sheet: "Sheet1"
     headers: 1
     use_hxl: True
     source_date:
       start: "01/01/2024"
-      end: "30/06/2024"
+      end: "30/08/2024"
     admin_single: "SDN"
     input:
       - "#org+name"
@@ -699,14 +697,14 @@ operational_presence_national:
 
   operational_presence_ssd:
     dataset: "south-sudan-operational-presence"
-    resource: "ss_20240904_3w_oerational presence_Jan to Jul_2024.xlsx"
+    resource: "ss_20241003_3w_oerational presence_Jan to Aug_2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
     sheet: "data"
     headers: 1
     source_date:
       start: "01/01/2024"
-      end: "31/07/2024"
+      end: "31/08/2024"
     admin_single: "SSD"
     input:
       - "Name of organization"
