@@ -4,6 +4,7 @@ from logging import getLogger
 from typing import Dict
 
 from hapi_schema.db_idps import DBIDPs
+from hdx.utilities.dateparse import parse_date
 from sqlalchemy.orm import Session
 
 from ..utilities.error_handling import ErrorManager
@@ -100,8 +101,8 @@ class IDPs(BaseUploader):
                         reporting_round=reporting_round,
                         operation=operation,
                         population=row[hxl_tags.index("#affected+idps")],
-                        reference_period_start=date_reported,
-                        reference_period_end=date_reported,
+                        reference_period_start=parse_date(date_reported),
+                        reference_period_end=parse_date(date_reported),
                     )
                     self._session.add(idps_row)
                     duplicate_rows.add(duplicate_row_check)

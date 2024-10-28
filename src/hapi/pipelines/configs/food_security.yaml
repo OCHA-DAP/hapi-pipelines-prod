@@ -21,6 +21,7 @@ food_security:
     - "returnee"
     - " cluster "
     - " commune "
+    - " accessible"
 
   # This is where all "Areas" are non-admin units and so there is only admin 1
   # data available in "Level 1"
@@ -34,7 +35,6 @@ food_security:
   # in "Area" (usually blank "Level 1" means "Area" is admin 1 rather than 2)
   adm2_only:
     - "DOM"
-    - "GMB"
     - "MWI"
     - "PSE"
     - "TZA"
