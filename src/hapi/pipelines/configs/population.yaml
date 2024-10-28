@@ -2609,7 +2609,7 @@ population_admintwo:
 
   population_hti:
     dataset: "cod-ps-hti"
-    resource: "TOM HAYTHORNTHWAITE"
+    resource: "hti_admpop_adm2_2024.csv"
     format: "csv"
     use_hxl: False
     admin:
