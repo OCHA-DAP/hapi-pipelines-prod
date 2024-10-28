@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.10.16] - 2024-10-28
 
+### Changed
+
+- Updated 3W data for MOZ, ETH, SDN, SSD
+
 ### Fixed
 
 - Food security p-code mappings for ZAF
