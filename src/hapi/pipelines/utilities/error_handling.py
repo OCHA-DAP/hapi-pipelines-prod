@@ -25,7 +25,7 @@ class ErrorManager:
         text: str,
         resource_name: str = None,
         message_type: str = "error",
-        flag_to_hdx: bool = False,
+        err_to_hdx: bool = False,
     ) -> None:
         """
         Add a new message (typically a warning or error) to a dictionary of messages in a
@@ -36,9 +36,9 @@ class ErrorManager:
             pipeline (str): Name of the pipeline originating the error
             identifier (str): Identifier e.g. dataset name
             text (str): Text to use e.g. "sector CSS not found in table"
-            resource_name (str): The resource name that the message applies to. Only needed if flagging on HDX
+            resource_name (str): The resource name that the message applies to. Only needed if writing errors to HDX
             message_type (str): The type of message (error or warning). Default is "error"
-            flag_to_hdx (bool): Flag indicating if the message should be added to HDX metadata. Default is False
+            err_to_hdx (bool): Flag indicating if the message should be added to HDX metadata. Default is False
         Returns:
             None
         """
@@ -47,7 +47,7 @@ class ErrorManager:
         dict_of_sets_add(
             self.shared_errors[message_type], error_id, error_message
         )
-        if flag_to_hdx:
+        if err_to_hdx:
             error_id = (pipeline, identifier, resource_name)
             dict_of_sets_add(self.shared_errors["hdx_error"], error_id, text)
 
@@ -59,7 +59,7 @@ class ErrorManager:
         value: str,
         resource_name: str = None,
         message_type: str = "error",
-        flag_to_hdx: bool = False,
+        err_to_hdx: bool = False,
     ) -> None:
         """
         Add a new message (typically a warning or error) concerning a missing value
@@ -71,9 +71,9 @@ class ErrorManager:
             identifier (str): Identifier e.g. dataset name
             value_type (str): Type of value e.g. "sector"
             value (str): Missing value
-            resource_name (str): The resource name that the message applies to. Only needed if flagging on HDX
+            resource_name (str): The resource name that the message applies to. Only needed if writing errors to HDX
             message_type (str): The type of message (error or warning). Default is "error"
-            flag_to_hdx (bool): Flag indicating if the message should be added to HDX metadata. Default is False
+            err_to_hdx (bool): Flag indicating if the message should be added to HDX metadata. Default is False
         Returns:
             None
         """
@@ -84,7 +84,7 @@ class ErrorManager:
             text,
             resource_name,
             message_type,
-            flag_to_hdx,
+            err_to_hdx,
         )
 
     def add_multi_valued_message(
@@ -95,7 +95,7 @@ class ErrorManager:
         values: List,
         resource_name: str = None,
         message_type: str = "error",
-        flag_to_hdx: bool = False,
+        err_to_hdx: bool = False,
     ) -> bool:
         """
         Add a new message (typically a warning or error) concerning a list of
@@ -108,9 +108,9 @@ class ErrorManager:
             identifier (str): Identifier e.g. dataset name
             text (str): Text to use e.g. "negative values removed"
             values (List[str]): List of values of concern
-            resource_name (str): The resource name that the message applies to. Only needed if flagging on HDX
+            resource_name (str): The resource name that the message applies to. Only needed if writing errors to HDX
             message_type (str): The type of message (error or warning). Default is "error"
-            flag_to_hdx (bool): Flag indicating if the message should be added to HDX metadata. Default is False
+            err_to_hdx (bool): Flag indicating if the message should be added to HDX metadata. Default is False
         Returns:
             bool: True if a message was added, False if not
         """
@@ -129,11 +129,11 @@ class ErrorManager:
             text,
             resource_name,
             message_type,
-            flag_to_hdx,
+            err_to_hdx,
         )
         return True
 
-    def output_errors(self, flag_to_hdx: bool) -> None:
+    def output_errors(self, err_to_hdx: bool) -> None:
         for _, errors in self.shared_errors["error"].items():
             errors = sorted(errors)
             for error in errors:
@@ -142,7 +142,7 @@ class ErrorManager:
             warnings = sorted(warnings)
             for warning in warnings:
                 logger.warning(warning)
-        if flag_to_hdx:
+        if err_to_hdx:
             for identifier, errors in self.shared_errors["hdx_error"].items():
                 write_error_to_resource(identifier, errors)
 

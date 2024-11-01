@@ -137,5 +137,4 @@ class ConflictEvent(BaseUploader):
                 dataset,
                 message,
                 resource_name=resource_name,
-                flag_to_hdx=True,
             )

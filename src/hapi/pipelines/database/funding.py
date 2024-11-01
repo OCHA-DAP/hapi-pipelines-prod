@@ -102,7 +102,6 @@ class Funding(BaseUploader):
                         "funding_usd",
                         appeal_code,
                         resource_name=resource_name,
-                        flag_to_hdx=True,
                     )
                     continue
                 funding_pct = row["#value+funding+pct"]
@@ -115,7 +114,6 @@ class Funding(BaseUploader):
                         dataset_name,
                         f"Appeal start date occurs after end date for {appeal_code} in {admin_code}",
                         resource_name=resource_name,
-                        flag_to_hdx=True,
                     )
                     continue
 
