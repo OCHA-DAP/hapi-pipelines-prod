@@ -56,10 +56,8 @@ gspread==6.1.4
     # via hdx-python-scraper
 hapi-schema==0.9.3
     # via hapi-pipelines (pyproject.toml)
-hdx-python-api==6.3.4
-    # via
-    #   hapi-pipelines (pyproject.toml)
-    #   hdx-python-scraper
+hdx-python-api @ git+https://github.com/OCHA-DAP/hdx-python-api@add-hapi-errors
+
 hdx-python-country==3.8.2
     # via
     #   hapi-pipelines (pyproject.toml)

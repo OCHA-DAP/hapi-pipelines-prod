@@ -160,16 +160,12 @@ def write_error_to_resource(identifier: Tuple[str], errors: set[str]) -> bool:
     # We are using the names here because errors may be specified in the YAML by us
     _, dataset_name, resource_name = identifier
     error_text = ", ".join(sorted(errors))
+    dataset = Dataset.read_from_hdx(dataset_name)
     try:
-        dataset = Dataset.read_from_hdx(dataset_name)
-        resource = [
-            r for r in dataset.get_resources() if r["name"] == resource_name
-        ][0]
-    except (HDXError, IndexError):
+        success = dataset.add_hapi_error(
+            error_text, resource_name=resource_name
+        )
+    except (HDXError, AttributeError):
+        logger.error(f"Could not write error to {dataset_name}")
         return False
-    resource_error = resource.get("qa_hapi_report")
-    if resource_error and resource_error == error_text:
-        return False
-    resource["qa_hapi_report"] = error_text
-    resource.update_in_hdx(operation="patch")
-    return True
+    return success
