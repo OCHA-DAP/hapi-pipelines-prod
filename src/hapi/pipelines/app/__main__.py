@@ -207,6 +207,9 @@ if __name__ == "__main__":
         basic_auths = string_params_to_dict(ba)
     else:
         basic_auths = None
+    ehx = args.err_to_hdx
+    if ehx is None:
+        ehx = getenv("ERR_TO_HDX")
     project_configs = [
         "conflict_event.yaml",
         "core.yaml",
@@ -234,5 +237,5 @@ if __name__ == "__main__":
         save=args.save,
         use_saved=args.use_saved,
         debug=args.debug,
-        err_to_hdx=args.err_to_hdx,
+        err_to_hdx=ehx,
     )
