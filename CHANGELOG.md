@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Centralized error handling and added function to write errors to HDX resource metadata
+
+## [0.10.17] - 2024-11-11
+
+### Changed
+
 - Updated 3W data for SSD
 
 ## [0.10.16] - 2024-10-28
