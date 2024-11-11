@@ -99,7 +99,7 @@ class Funding(BaseUploader):
                     self._error_manager.add_missing_value_message(
                         "Funding",
                         dataset_name,
-                        "funding_usd",
+                        "funding_usd for appeal code",
                         appeal_code,
                         resource_name=resource_name,
                         err_to_hdx=True,
