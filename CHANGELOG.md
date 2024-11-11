@@ -4,7 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.17] - 2024-11-11
+
+### Changed
+
+- Updated 3W data for SSD
+
 ## [0.10.16] - 2024-10-28
+
+### Changed
+
+- Updated 3W data for MOZ, ETH, SDN, SSD
+
+### Fixed
+
+- Food security p-code mappings for ZAF
+
+## [0.10.15] - 2024-10-28
 
 ### Fixed
 
