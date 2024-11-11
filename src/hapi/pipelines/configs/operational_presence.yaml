@@ -697,14 +697,14 @@ operational_presence_national:
 
   operational_presence_ssd:
     dataset: "south-sudan-operational-presence"
-    resource: "ss_20241003_3w_oerational presence_Jan to Aug_2024.xlsx"
+    resource: "ss_20241106_3w_oerational presence_Jan to Sep_2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
     sheet: "data"
     headers: 1
     source_date:
       start: "01/01/2024"
-      end: "31/08/2024"
+      end: "30/09/2024"
     admin_single: "SSD"
     input:
       - "Name of organization"
