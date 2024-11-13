@@ -168,4 +168,6 @@ def write_error_to_resource(identifier: Tuple[str], errors: set[str]) -> bool:
     except (HDXError, AttributeError):
         logger.error(f"Could not write error to {dataset_name}")
         return False
+    if success:
+        logger.info(f"Wrote error message to {dataset_name}")
     return success
