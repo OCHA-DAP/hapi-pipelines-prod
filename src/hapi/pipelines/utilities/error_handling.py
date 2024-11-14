@@ -143,6 +143,7 @@ class ErrorManager:
             for warning in warnings:
                 logger.warning(warning)
         if err_to_hdx:
+            logger.info("Writing errors to HDX")
             for identifier, errors in self.shared_errors["hdx_error"].items():
                 write_error_to_resource(identifier, errors)
 
