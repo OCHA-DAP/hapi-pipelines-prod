@@ -226,7 +226,6 @@ if __name__ == "__main__":
     project_config_dict = add_defaults(project_config_dict)
     facade(
         main,
-        hdx_site="stage",
         hdx_read_only=False,
         user_agent_config_yaml=join(expanduser("~"), ".useragents.yaml"),
         user_agent_lookup=lookup,
