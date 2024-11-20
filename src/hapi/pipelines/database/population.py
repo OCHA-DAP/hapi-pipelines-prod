@@ -7,6 +7,7 @@ from hapi_schema.db_population import DBPopulation
 from hdx.utilities.dateparse import parse_date_range
 from sqlalchemy.orm import Session
 
+from ..utilities.batch_populate import batch_populate
 from ..utilities.provider_admin_names import get_provider_name
 from . import admins
 from .base_uploader import BaseUploader
@@ -31,6 +32,7 @@ class Population(BaseUploader):
     def populate(self) -> None:
         logger.info("Populating population table")
         for dataset in self._results.values():
+            population_rows = []
             for admin_level, admin_results in dataset["results"].items():
                 resource_id = admin_results["hapi_resource_metadata"]["hdx_id"]
                 hxl_tags = admin_results["headers"][1]
@@ -76,7 +78,7 @@ class Population(BaseUploader):
                             admin_code,
                             irow,
                         )
-                        population_row = DBPopulation(
+                        population_row = dict(
                             resource_hdx_id=resource_id,
                             admin2_ref=self._admins.admin2_data[admin2_code],
                             provider_admin1_name=provider_admin1_name,
@@ -89,6 +91,5 @@ class Population(BaseUploader):
                             reference_period_start=time_period_range[0],
                             reference_period_end=time_period_range[1],
                         )
-
-                        self._session.add(population_row)
-        self._session.commit()
+                        population_rows.append(population_row)
+            batch_populate(population_rows, self._session, DBPopulation)
