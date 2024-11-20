@@ -126,18 +126,18 @@ class TestHAPIPipelines:
                     yield pipelines
 
     @pytest.mark.parametrize(
-        "themes_to_run", [{"population": ("AFG", "BFA", "MLI", "NGA", "TCD")}]
+        "themes_to_run", [{"population": None}]
     )
     def test_population(self, configuration, folder, pipelines):
         session = pipelines.session
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
-        check.equal(count, 5)
+        check.equal(count, 1)
         count = session.scalar(select(func.count(DBResource.hdx_id)))
-        check.equal(count, 11)
+        check.equal(count, 3)
         count = session.scalar(
             select(func.count(DBPopulation.resource_hdx_id))
         )
-        check.equal(count, 8601)
+        check.equal(count, 61115)
 
     @pytest.mark.parametrize(
         "themes_to_run", [{"operational_presence": ("AFG", "MLI", "NGA")}]
