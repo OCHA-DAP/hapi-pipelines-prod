@@ -125,9 +125,7 @@ class TestHAPIPipelines:
                     check.equal(count, 127)
                     yield pipelines
 
-    @pytest.mark.parametrize(
-        "themes_to_run", [{"population": None}]
-    )
+    @pytest.mark.parametrize("themes_to_run", [{"population": None}])
     def test_population(self, configuration, folder, pipelines):
         session = pipelines.session
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
