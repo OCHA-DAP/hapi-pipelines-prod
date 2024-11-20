@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.19] - 2024-11-20
+
+### Changed
+
+- Read poverty rate data from global dataset at national and subnational level
+
 ## [0.10.18] - 2024-11-19
 
 ### Changed
