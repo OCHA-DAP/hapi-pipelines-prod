@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Updated 3W data for BFA
+- Updated 3W data for BFA and COL
 
 ## [0.10.19] - 2024-11-20
 
