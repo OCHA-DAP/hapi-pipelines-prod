@@ -46,8 +46,8 @@ jobs:
         env:
           HDX_SITE: ${{ vars.HDX_SITE }}
           HDX_KEY: ${{ secrets.HDX_BOT_SCRAPERS_API_TOKEN }}
-          PREPREFIX: ${{ secrets.HDX_PIPELINE_PREPREFIX }}
-          USER_AGENT: ${{ secrets.USER_AGENT }}
+          PREPREFIX: ${{ vars.HDX_USER_AGENT_PREPREFIX }}
+          USER_AGENT: ${{ vars.USER_AGENT }}
           BASIC_AUTHS: ${{ secrets.BASIC_AUTHS }}
           ERR_TO_HDX: ${{ secrets.ERR_TO_HDX }}
         run: python3.11 -m hapi.pipelines.app -db "postgresql+psycopg://postgres:postgres@localhost:5432/hapi"
@@ -73,12 +73,12 @@ jobs:
         if: failure()
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: ${{secrets.EMAIL_SERVER}}
-          server_port: ${{secrets.EMAIL_PORT}}
-          username: ${{secrets.EMAIL_USERNAME}}
-          password: ${{secrets.EMAIL_PASSWORD}}
+          server_address: ${{secrets.HDX_PIPELINE_EMAIL_SERVER}}
+          server_port: ${{secrets.HDX_PIPELINE_EMAIL_PORT}}
+          username: ${{secrets.HDX_PIPELINE_EMAIL_USERNAME}}
+          password: ${{secrets.HDX_PIPELINE_EMAIL_PASSWORD}}
           subject: "FAILED: ${{github.repository}} database export job"
           body: GitHub Actions database export job for ${{github.repository}} failed!
-          to: ${{secrets.EMAIL_LIST}}
-          from: ${{secrets.EMAIL_FROM}}
+          to: ${{vars.HDX_PIPELINE_EMAIL_LIST}}
+          from: ${{secrets.HDX_PIPELINE_EMAIL_FROM}}
           content_type: text/html
