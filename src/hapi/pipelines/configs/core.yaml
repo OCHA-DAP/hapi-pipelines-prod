@@ -427,6 +427,7 @@ sector_map:
   logistica: "LOG"
   logistique: "LOG"
   manejo y gestion de campamentos: "CCM"
+  mpca: "Cash"
   ms: "Multi"
   multi secteur: "Multi"
   multisectoriel: "Multi"
