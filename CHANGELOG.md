@@ -4,6 +4,42 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.22] - 2024-11-21
+
+### Changed
+
+- Updated 3W data for AFG, NER, TCD
+
+## [0.10.21] - 2024-11-21
+
+### Changed
+
+- Updated population pipeline to read from global dataset
+
+## [0.10.20] - 2024-11-20
+
+### Changed
+
+- Updated 3W data for BFA and COL
+
+## [0.10.19] - 2024-11-20
+
+### Changed
+
+- Read poverty rate data from global dataset at national and subnational level
+
+## [0.10.18] - 2024-11-19
+
+### Changed
+
+- Centralized error handling and added function to write errors to HDX resource metadata
+
+## [0.10.17] - 2024-11-11
+
+### Changed
+
+- Updated 3W data for SSD
+
 ## [0.10.16] - 2024-10-28
 
 ### Changed

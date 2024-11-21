@@ -184,9 +184,9 @@ def check_org_mappings(pipelines) -> List[Tuple]:
         normalised_name="medair",
         acronym="MEDAIR",
         normalised_acronym="medair",
-        type_code=None,
+        type_code="437",
         used=True,
-        complete=False,
+        complete=True,
     )
     street_child = OrgInfo(
         canonical_name="Street Child",
