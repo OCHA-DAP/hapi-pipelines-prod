@@ -173,13 +173,6 @@ class Pipelines:
                 current_scrapers + scraper_names
             )
 
-        _create_configurable_scrapers("population", "national")
-        _create_configurable_scrapers(
-            "population", "adminone", adminlevel=self.adminone
-        )
-        _create_configurable_scrapers(
-            "population", "admintwo", adminlevel=self.admintwo
-        )
         _create_configurable_scrapers(
             "operational_presence", "admintwo", adminlevel=self.admintwo
         )
@@ -206,14 +199,12 @@ class Pipelines:
 
     def output_population(self):
         if not self.themes_to_run or "population" in self.themes_to_run:
-            results = self.runner.get_hapi_results(
-                self.configurable_scrapers["population"]
-            )
             population = Population(
                 session=self.session,
                 metadata=self.metadata,
                 admins=self.admins,
-                results=results,
+                configuration=self.configuration,
+                error_manager=self.error_manager,
             )
             population.populate()
 

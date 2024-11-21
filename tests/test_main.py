@@ -55,7 +55,6 @@ class TestHAPIPipelines:
             "idps.yaml",
             "national_risk.yaml",
             "operational_presence.yaml",
-            "population.yaml",
             "refugees_and_returnees.yaml",
             "wfp.yaml",
         ]
@@ -135,7 +134,7 @@ class TestHAPIPipelines:
         count = session.scalar(
             select(func.count(DBPopulation.resource_hdx_id))
         )
-        check.equal(count, 61115)
+        check.equal(count, 62537)
 
     @pytest.mark.parametrize(
         "themes_to_run", [{"operational_presence": ("AFG", "MLI", "NGA")}]
