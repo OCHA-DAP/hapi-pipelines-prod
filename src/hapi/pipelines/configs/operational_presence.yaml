@@ -124,17 +124,17 @@ operational_presence_admintwo:
 
   operational_presence_cod:
     dataset: "drc_presence_operationnelle"
-    resource: "rdc-3w_avril-2024"
+    resource: "rdc-3w_juillet-2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Compilation_VF"
+    sheet: "Data"
     headers: 1
     source_date:
-      start: "01/04/2024"
-      end: "30/04/2024"
+      start: "01/06/2024"
+      end: "30/06/2024"
     admin:
       - ~
-      - "Code Terrtoire"
+      - "Code Territoire"
     admin_exact: True
     input:
       - "NOM ORGANISATION
@@ -146,8 +146,9 @@ operational_presence_admintwo:
       - "CLUSTER
         (Choisir dans la liste déroulante)
         Pour les projets humanitaires uniquement"
-      - "Province"
-      - "Territoire"
+      - "PROVINCE"
+      - "TERRITOIRE
+         (Choisir dans la liste déroulante)"
     list:
       - "NOM ORGANISATION
         (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
@@ -158,8 +159,9 @@ operational_presence_admintwo:
       - "CLUSTER
         (Choisir dans la liste déroulante)
          Pour les projets humanitaires uniquement"
-      - "Province"
-      - "Territoire"
+      - "PROVINCE"
+      - "TERRITOIRE
+         (Choisir dans la liste déroulante)"
 
   operational_presence_col:
     dataset: "colombia-4ws"
@@ -394,31 +396,34 @@ operational_presence_admintwo:
 
   operational_presence_som:
     dataset: "somalia-operational-presence"
-    resource: "3Ws_All_Clusters_1st_Qtr_2024.xlsx"
+    resource: "Operational Partners Presence Jan-Sep 2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "1st Qtr 3Ws"
+    sheet: "Data"
     headers: 1
-    use_hxl: True
+    use_hxl: False
     source_date:
       start: "01/01/2024"
-      end: "31/03/2024"
+      end: "30/10/2024"
+    filter_cols:
+      - "Implementing Partner"
+    prefilter: "Implementing Partner is not None"
     admin:
       - ~
-      - "#adm2+code"
+      - "DistrictCode"
     admin_exact: True
     input:
-      - "#org+name"
-      - "#org+type"
-      - "#sector+cluster+name"
-      - "#adm1+name"
-      - "#adm2+name"
+      - "Implementing Partner"
+      - "The type of organisation of implementing partner"
+      - "Cluster/AoR"
+      - "REGION"
+      - "DISTRICT"
     list:
-      - "#org+name"
-      - "#org+type"
-      - "#sector+cluster+name"
-      - "#adm1+name"
-      - "#adm2+name"
+      - "Implementing Partner"
+      - "The type of organisation of implementing partner"
+      - "Cluster/AoR"
+      - "REGION"
+      - "DISTRICT"
     output:
       - "org_name"
       - "org_type_name"
@@ -469,14 +474,17 @@ operational_presence_admintwo:
 
   operational_presence_yem:
     dataset: "yemen-monthly-organizations-presence-3w"
-    resource: "presence-data-jan-may-2024.xlsx"
+    resource: "presence-data-jan-sep-2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
     sheet: "v_4w_presence_admin2"
     headers: 1
     source_date:
       start: "01/01/2024"
-      end: "31/05/2024"
+      end: "30/10/2024"
+    filter_cols:
+      - "organisation_name"
+    prefilter: "organisation_name is not None"
     admin:
       - ~
       - "admin2pcode"
@@ -576,15 +584,15 @@ operational_presence_national:
 
   operational_presence_eth:
     dataset: "ethiopia-operational-presence"
-    resource: "Ethiopia Who is Doing What Where (4W) - August 2024.xlsx"
+    resource: "Ethiopia Who is Doing What Where (4W) - October 2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "April 2024"
+    sheet: "October 2024"
     headers: 1
     use_hxl: True
     source_date:
-      start: "01/08/2024"
-      end: "31/08/2024"
+      start: "01/10/2024"
+      end: "31/10/2024"
     admin_single: "ETH"
     input:
       - "#org+impl+name"
@@ -655,15 +663,15 @@ operational_presence_national:
 
   operational_presence_sdn:
     dataset: "sudan-operational-presence"
-    resource: "2024-consolidated-3w-data-jan-to-30-aug.xlsx"
+    resource: "2024-consolidated-3w-data-jan-to-oct.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Sheet1"
+    sheet: "HDX"
     headers: 1
     use_hxl: True
     source_date:
       start: "01/01/2024"
-      end: "30/08/2024"
+      end: "31/10/2024"
     admin_single: "SDN"
     input:
       - "#org+name"
