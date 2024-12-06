@@ -324,6 +324,7 @@ org_type_map:
   entite gouvernementale: "435"
   gouvernement: "435"
   gov: "435"
+  government agency: "435"
   govt: "435"
   iglesia grupo religioso: "446"
   ingo: "437"

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.26] - 2024-12-06
+
+### Changed
+
+- Updated 3W data for NGA
+
 ## [0.10.25] - 2024-12-05
 
 ### Fixed
