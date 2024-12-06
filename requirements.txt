@@ -22,7 +22,7 @@ ckanapi==4.8
     # via hdx-python-api
 click==8.1.7
     # via typer
-coverage==7.6.8
+coverage==7.6.9
     # via pytest-cov
 defopt==6.4.0
     # via hdx-python-api
@@ -108,7 +108,7 @@ libhxl==5.2.2
     #   hapi-pipelines (pyproject.toml)
     #   hdx-python-api
     #   hdx-python-country
-loguru==0.7.2
+loguru==0.7.3
     # via hdx-python-utilities
 makefun==1.15.6
     # via hdx-python-api
@@ -236,7 +236,7 @@ simpleeval==1.0.3
     # via frictionless
 simplejson==3.19.3
     # via ckanapi
-six==1.17.0
+six==1.16.0
     # via
     #   ckanapi
     #   pockets
