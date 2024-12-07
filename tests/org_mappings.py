@@ -188,11 +188,11 @@ def check_org_mappings(pipelines) -> List[Tuple]:
         used=True,
         complete=True,
     )
-    street_child = OrgInfo(
-        canonical_name="Street Child",
-        normalised_name="street child",
-        acronym="Street Child",
-        normalised_acronym="street child",
+    sci = OrgInfo(
+        canonical_name="Save the Children International",
+        normalised_name="save the children international",
+        acronym="SCI",
+        normalised_acronym="sci",
         type_code="437",
         used=True,
         complete=True,
@@ -200,7 +200,7 @@ def check_org_mappings(pipelines) -> List[Tuple]:
     comparisons.extend(
         [
             (org_map[("AFG", "MEDAIR")], medair),
-            (org_map[("NGA", "Street Child")], street_child),
+            (org_map[("NGA", "Save The Children International")], sci),
         ]
     )
 

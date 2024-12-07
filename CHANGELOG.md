@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.26] - 2024-12-06
+
+### Changed
+
+- Updated 3W data for NGA
+
+## [0.10.25] - 2024-12-05
+
+### Fixed
+
+- Update requirements to use latest `hapi-schema`
+
+## [0.10.24] - 2024-12-04
+
+### Changed
+
+- Updated 3W data for COD, ETH, SDN, SOM, YEM
+- Added 3W data for LBY, MWI, ZWE
+
+## [0.10.23] - 2024-11-22
+
+### Changed
+
+- Add missing poverty rate trends data
+
 ## [0.10.22] - 2024-11-21
 
 ### Changed
