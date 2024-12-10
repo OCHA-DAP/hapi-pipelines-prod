@@ -122,47 +122,6 @@ operational_presence_admintwo:
       - "#adm1 +name"
       - "#adm2 +name"
 
-  operational_presence_cod:
-    dataset: "drc_presence_operationnelle"
-    resource: "rdc-3w_juillet-2024.xlsx"
-    format: "xlsx"
-    xlsx2csv: True
-    sheet: "Data"
-    headers: 1
-    source_date:
-      start: "01/06/2024"
-      end: "30/06/2024"
-    admin:
-      - ~
-      - "Code Territoire"
-    admin_exact: True
-    input:
-      - "NOM ORGANISATION
-        (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
-      - "ACCRONYME
-        (Choisir dans la liste déroulante)"
-      - "TYPE ORGANISATION
-        (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
-      - "CLUSTER
-        (Choisir dans la liste déroulante)
-        Pour les projets humanitaires uniquement"
-      - "PROVINCE"
-      - "TERRITOIRE
-         (Choisir dans la liste déroulante)"
-    list:
-      - "NOM ORGANISATION
-        (cette colonne est renseignée automatiquement selon la selection dans le colonne A)"
-      - "ACCRONYME
-        (Choisir dans la liste déroulante)"
-      - "TYPE ORGANISATION
-        (cette colonne est renseignée automatiquement selon la selection dans le colonne B)"
-      - "CLUSTER
-        (Choisir dans la liste déroulante)
-         Pour les projets humanitaires uniquement"
-      - "PROVINCE"
-      - "TERRITOIRE
-         (Choisir dans la liste déroulante)"
-
   operational_presence_col:
     dataset: "colombia-4ws"
     resource: "COL_345W_Jan-oct2024.xlsx"
@@ -243,32 +202,32 @@ operational_presence_admintwo:
 
   operational_presence_hti:
     dataset: "haiti-operational-presence"
-    resource: "3W_Haiti_HDX_Presence operationnelle"
+    resource: "3W_Haiti_july_sept2024"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Pres Op_FINAL"
+    sheet: "3W_Data_July to Sept 2024"
     headers: 1
     source_date:
-      start: "01/09/2023"
-      end: "28/02/2024"
+      start: "01/07/2024"
+      end: "30/10/2024"
     admin:
       - ~
       - "adm2code"
     admin_exact: True
     input:
-      - "ORG_NAME_fr"
-      - "ORG_ACRONYM_fr"
-      - "ORG_TYPE_fr"
-      - "SECTORS_fr"
-      - "adm1Name"
-      - "adm2_Name"
+      - "Nom de l'organisation"
+      - "Acronyme"
+      - "Type d'organisation"
+      - "Secteurs/Clusters"
+      - "Département"
+      - "Commune"
     list:
-      - "ORG_NAME_fr"
-      - "ORG_ACRONYM_fr"
-      - "ORG_TYPE_fr"
-      - "SECTORS_fr"
-      - "adm1Name"
-      - "adm2_Name"
+      - "Nom de l'organisation"
+      - "Acronyme"
+      - "Type d'organisation"
+      - "Secteurs/Clusters"
+      - "Département"
+      - "Commune"
 
   operational_presence_lbn:
     dataset: "lebanon-operational-presence"
@@ -610,6 +569,40 @@ operational_presence_national:
       - "#sector"
       - "#adm1+name"
       - "#adm2+name"
+
+  operational_presence_cod:
+    dataset: "drc_presence_operationnelle"
+    resource: "rdc_3w_septembre-2024.xlsx"
+    format: "xlsx"
+    xlsx2csv: True
+    sheet: "Data"
+    headers: 1
+    source_date:
+      start: "01/09/2024"
+      end: "30/09/2024"
+    admin_single: "COD"
+    input:
+      - "Nom Organization"
+      - "Acronyme"
+      - "Type Organisation"
+      - "CLUSTER
+        (Choisir dans la liste déroulante)
+        Pour les projets humanitaires uniquement"
+      - "PROVINCE
+        (Choisir dans la liste déroulante)"
+      - "TERRITOIRE
+        (Choisir dans la liste déroulante)"
+    list:
+      - "Nom Organization"
+      - "Acronyme"
+      - "Type Organisation"
+      - "CLUSTER
+        (Choisir dans la liste déroulante)
+        Pour les projets humanitaires uniquement"
+      - "PROVINCE
+        (Choisir dans la liste déroulante)"
+      - "TERRITOIRE
+        (Choisir dans la liste déroulante)"
 
   operational_presence_eth:
     dataset: "ethiopia-operational-presence"
