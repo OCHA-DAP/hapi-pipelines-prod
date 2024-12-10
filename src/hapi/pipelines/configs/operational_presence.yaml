@@ -202,32 +202,32 @@ operational_presence_admintwo:
 
   operational_presence_hti:
     dataset: "haiti-operational-presence"
-    resource: "3W_Haiti_HDX_Presence operationnelle"
+    resource: "3W_Haiti_july_sept2024"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Pres Op_FINAL"
+    sheet: "3W_Data_July to Sept 2024"
     headers: 1
     source_date:
-      start: "01/09/2023"
-      end: "28/02/2024"
+      start: "01/07/2024"
+      end: "30/10/2024"
     admin:
       - ~
       - "adm2code"
     admin_exact: True
     input:
-      - "ORG_NAME_fr"
-      - "ORG_ACRONYM_fr"
-      - "ORG_TYPE_fr"
-      - "SECTORS_fr"
-      - "adm1Name"
-      - "adm2_Name"
+      - "Nom de l'organisation"
+      - "Acronyme"
+      - "Type d'organisation"
+      - "Secteurs/Clusters"
+      - "Département"
+      - "Commune"
     list:
-      - "ORG_NAME_fr"
-      - "ORG_ACRONYM_fr"
-      - "ORG_TYPE_fr"
-      - "SECTORS_fr"
-      - "adm1Name"
-      - "adm2_Name"
+      - "Nom de l'organisation"
+      - "Acronyme"
+      - "Type d'organisation"
+      - "Secteurs/Clusters"
+      - "Département"
+      - "Commune"
 
   operational_presence_lbn:
     dataset: "lebanon-operational-presence"
