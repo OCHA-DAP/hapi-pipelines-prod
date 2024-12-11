@@ -356,7 +356,7 @@ operational_presence_admintwo:
 
   operational_presence_nga:
     dataset: "nigeria-3w"
-    resource: "who-is-doing-what-and-where_nga_3w_apr_jun_2024.xlsx.csv"
+    resource: "who-is-doing-what-and-where_nga_3w_apr_jun_2024.csv"
     format: "csv"
     headers: 1
     source_date:
