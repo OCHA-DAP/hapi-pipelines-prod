@@ -95,86 +95,87 @@ class HumanitarianNeeds(BaseUploader):
         self._metadata.add_dataset(dataset)
         dataset_id = dataset["id"]
         dataset_name = dataset["name"]
-        resource = dataset.get_resource(0)  # assumes first resource is latest!
-        self._metadata.add_resource(dataset_id, resource)
-        negative_values_by_iso3 = {}
-        rounded_values_by_iso3 = {}
-        resource_id = resource["id"]
-        resource_name = resource["name"]
-        year = int(resource_name[-4:])
-        time_period_start = datetime(year, 1, 1)
-        time_period_end = datetime(year, 12, 31, 23, 59, 59)
-        url = resource["url"]
-        headers, rows = reader.get_tabular_rows(url, dict_form=True)
-        # Admin 1 PCode,Admin 2 PCode,Sector,Gender,Age Group,Disabled,Population Group,Population,In Need,Targeted,Affected,Reached
-        for row in rows:
-            countryiso3 = row["Country ISO3"]
-            admin2_ref = self.get_admin2_ref(row, dataset_name)
-            if not admin2_ref:
-                continue
-            provider_admin1_name = get_provider_name(row, "Admin 1 Name")
-            provider_admin2_name = get_provider_name(row, "Admin 2 Name")
-            sector = row["Sector"]
-            sector_code = self._sector.get_sector_code(sector)
-            if not sector_code:
-                self._error_manager.add_missing_value_message(
-                    "HumanitarianNeeds", dataset_name, "sector", sector
-                )
-                continue
-            category = row["Category"]
-            if category is None:
-                category = ""
-
-            def create_row(in_col, population_status):
-                value = row[in_col]
-                if value is None:
-                    return
-                value = get_numeric_if_possible(value)
-                if value < 0:
-                    dict_of_lists_add(
-                        negative_values_by_iso3, countryiso3, str(value)
+        resources = dataset.get_resources()
+        for resource in resources:
+            self._metadata.add_resource(dataset_id, resource)
+            negative_values_by_iso3 = {}
+            rounded_values_by_iso3 = {}
+            resource_id = resource["id"]
+            resource_name = resource["name"]
+            year = int(resource_name[-4:])
+            time_period_start = datetime(year, 1, 1)
+            time_period_end = datetime(year, 12, 31, 23, 59, 59)
+            url = resource["url"]
+            headers, rows = reader.get_tabular_rows(url, dict_form=True)
+            # Admin 1 PCode,Admin 2 PCode,Sector,Gender,Age Group,Disabled,Population Group,Population,In Need,Targeted,Affected,Reached
+            for row in rows:
+                countryiso3 = row["Country ISO3"]
+                admin2_ref = self.get_admin2_ref(row, dataset_name)
+                if not admin2_ref:
+                    continue
+                provider_admin1_name = get_provider_name(row, "Admin 1 Name")
+                provider_admin2_name = get_provider_name(row, "Admin 2 Name")
+                sector = row["Sector"]
+                sector_code = self._sector.get_sector_code(sector)
+                if not sector_code:
+                    self._error_manager.add_missing_value_message(
+                        "HumanitarianNeeds", dataset_name, "sector", sector
                     )
-                    return
-                if isinstance(value, float):
-                    dict_of_lists_add(
-                        rounded_values_by_iso3, countryiso3, str(value)
+                    continue
+                category = row["Category"]
+                if category is None:
+                    category = ""
+
+                def create_row(in_col, population_status):
+                    value = row[in_col]
+                    if value is None:
+                        return
+                    value = get_numeric_if_possible(value)
+                    if value < 0:
+                        dict_of_lists_add(
+                            negative_values_by_iso3, countryiso3, str(value)
+                        )
+                        return
+                    if isinstance(value, float):
+                        dict_of_lists_add(
+                            rounded_values_by_iso3, countryiso3, str(value)
+                        )
+                        value = round(value)
+                    humanitarian_needs_row = DBHumanitarianNeeds(
+                        resource_hdx_id=resource_id,
+                        admin2_ref=admin2_ref,
+                        provider_admin1_name=provider_admin1_name,
+                        provider_admin2_name=provider_admin2_name,
+                        category=category,
+                        sector_code=sector_code,
+                        population_status=population_status,
+                        population=value,
+                        reference_period_start=time_period_start,
+                        reference_period_end=time_period_end,
                     )
-                    value = round(value)
-                humanitarian_needs_row = DBHumanitarianNeeds(
-                    resource_hdx_id=resource_id,
-                    admin2_ref=admin2_ref,
-                    provider_admin1_name=provider_admin1_name,
-                    provider_admin2_name=provider_admin2_name,
-                    category=category,
-                    sector_code=sector_code,
-                    population_status=population_status,
-                    population=value,
-                    reference_period_start=time_period_start,
-                    reference_period_end=time_period_end,
+                    self._session.add(humanitarian_needs_row)
+
+                create_row("Population", "all")
+                create_row("Affected", "AFF")
+                create_row("In Need", "INN")
+                create_row("Targeted", "TGT")
+                create_row("Reached", "REA")
+
+            self._session.commit()
+            for countryiso3, values in negative_values_by_iso3.items():
+                self._error_manager.add_multi_valued_message(
+                    "HumanitarianNeeds",
+                    dataset_name,
+                    f"negative population value(s) removed in {countryiso3}",
+                    values,
+                    resource_name=resource_name,
+                    err_to_hdx=True,
                 )
-                self._session.add(humanitarian_needs_row)
-
-            create_row("Population", "all")
-            create_row("Affected", "AFF")
-            create_row("In Need", "INN")
-            create_row("Targeted", "TGT")
-            create_row("Reached", "REA")
-
-        self._session.commit()
-        for countryiso3, values in negative_values_by_iso3.items():
-            self._error_manager.add_multi_valued_message(
-                "HumanitarianNeeds",
-                dataset_name,
-                f"negative population value(s) removed in {countryiso3}",
-                values,
-                resource_name=resource_name,
-                err_to_hdx=True,
-            )
-        for countryiso3, values in rounded_values_by_iso3.items():
-            self._error_manager.add_multi_valued_message(
-                "HumanitarianNeeds",
-                dataset_name,
-                f"population value(s) rounded in {countryiso3}",
-                values,
-                message_type="warning",
-            )
+            for countryiso3, values in rounded_values_by_iso3.items():
+                self._error_manager.add_multi_valued_message(
+                    "HumanitarianNeeds",
+                    dataset_name,
+                    f"population value(s) rounded in {countryiso3}",
+                    values,
+                    message_type="warning",
+                )
