@@ -96,16 +96,10 @@ class Funding(BaseUploader):
                 # This check for a missing funding line has been added due to
                 # an error in the UKR funding requirements data
                 if funding_usd is None:
-                    self._error_manager.add_missing_value_message(
-                        "Funding",
-                        dataset_name,
-                        "funding_usd for appeal code",
-                        appeal_code,
-                        resource_name=resource_name,
-                        err_to_hdx=True,
-                    )
-                    continue
+                    funding_usd = 0
                 funding_pct = row["#value+funding+pct"]
+                if funding_pct is None and funding_usd == 0:
+                    funding_pct = 0
                 reference_period_start = parse_date(row["#date+start"])
                 reference_period_end = parse_date(row["#date+end"])
 
