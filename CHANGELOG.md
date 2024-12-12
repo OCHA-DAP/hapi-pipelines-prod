@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Added ability to read historical humanitarian needs data
 - Replaced missing funding amounts with zeros
+- Updated 3W data for CAF, SSD
 
 ## [0.10.28] - 2024-12-10
 

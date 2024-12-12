@@ -62,35 +62,33 @@ operational_presence_admintwo:
 
   operational_presence_caf:
     dataset: "republique-centrafricaine-presence-operationnelle"
-    resource: "3W_CAR_Mar2024"
+    resource: "3W_CAR_Sep2024"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "OCHA CAR 3W OP T1 2024"
-    headers:
-      - 1
-      - 2
+    sheet: "3W T3 2024"
+    headers: 1
     source_date:
-      start: "01/01/2024"
-      end: "31/03/2024"
+      start: "01/04/2024"
+      end: "30/09/2024"
     use_hxl: False
     admin:
       - ~
-      - "PCODE2 #adm2+code"
+      - "PCODE2"
     admin_exact: True
     input:
-      - "Description_Acteur"
-      - "ACTEUR #org+acronym"
+      - "DESCRIPTION_ACTEUR"
+      - "ACTEUR"
       - "TYPE_ORG"
-      - "SECTEUR #sector"
-      - "PREFECTURE #adm1+name"
-      - "SOUSPREFECTURE #adm2+name"
+      - "SECTEUR"
+      - "PREFECTURE"
+      - "SOUSPREFECTURE"
     list:
-      - "Description_Acteur"
-      - "ACTEUR #org+acronym"
+      - "DESCRIPTION_ACTEUR"
+      - "ACTEUR"
       - "TYPE_ORG"
-      - "SECTEUR #sector"
-      - "PREFECTURE #adm1+name"
-      - "SOUSPREFECTURE #adm2+name"
+      - "SECTEUR"
+      - "PREFECTURE"
+      - "SOUSPREFECTURE"
 
   operational_presence_cmr:
     dataset: "cameroon-5w-operational-presence"
@@ -759,14 +757,14 @@ operational_presence_national:
 
   operational_presence_ssd:
     dataset: "south-sudan-operational-presence"
-    resource: "ss_20241106_3w_oerational presence_Jan to Sep_2024.xlsx"
+    resource: "ss_20241212_3w_oerational presence_Jan to Oct_2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "data"
+    sheet: "Data"
     headers: 1
     source_date:
       start: "01/01/2024"
-      end: "30/09/2024"
+      end: "31/10/2024"
     admin_single: "SSD"
     input:
       - "Name of organization"
