@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.30] = 2024-12-24
+
+### Fixed
+
+- 3W for COL, ETH, SDN, VEN
+
 ## [0.10.29] - 2024-12-12
 
 ### Fixed

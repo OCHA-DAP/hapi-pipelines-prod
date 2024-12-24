@@ -18,6 +18,7 @@ operational_presence_default:
     - "operational_presence_nga"
     - "operational_presence_sdn"
     - "operational_presence_ssd"
+    - "operational_presence_ven"
     - "operational_presence_yem"
   output:
     - "org_name"
@@ -122,33 +123,33 @@ operational_presence_admintwo:
 
   operational_presence_col:
     dataset: "colombia-4ws"
-    resource: "COL_345W_Jan-oct2024.xlsx"
+    resource: "345W_1_enero_23_dic_2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
     sheet: "Hoja-1"
     headers: 1
-    use_hxl: True
+    use_hxl: False
     source_date:
       start: "01/01/2024"
-      end: "31/10/2024"
+      end: "23/12/2024"
     admin:
       - ~
-      - "#adm2+code"
+      - "Pcode 2"
     admin_exact: True
     input:
-      - "#org+impl+name"
-      - "#org+impl"
-      - "#org+impl+type"
-      - "#sector"
-      - "#adm1+name"
-      - "#adm2+name"
+      - "ORGANIZACIÓN IMPLEMENTADORA"
+      - "Acrónimo de la organización"
+      - "Tipo de organización implementadora"
+      - "SECTOR / CLUSTER"
+      - "DEPARTAMENTO"
+      - "MUNICIPIO"
     list:
-      - "#org+impl+name"
-      - "#org+impl"
-      - "#org+impl+type"
-      - "#sector"
-      - "#adm1+name"
-      - "#adm2+name"
+      - "ORGANIZACIÓN IMPLEMENTADORA"
+      - "Acrónimo de la organización"
+      - "Tipo de organización implementadora"
+      - "SECTOR / CLUSTER"
+      - "DEPARTAMENTO"
+      - "MUNICIPIO"
 
   operational_presence_gtm:
     dataset: "guatemala-operational-presence"
@@ -425,35 +426,27 @@ operational_presence_admintwo:
 
   operational_presence_ven:
     dataset: "venezuela-who-does-what-and-where-3w"
-    resource: "VEN_5W_Jan-Oct2023.xlsx"
-    format: "xlsx"
-    xlsx2csv: True
-    sheet: "DATOS"
-    headers: 1
+    resource: "VEN_5W_2024.csv"
+    format: "csv"
+    use_hxl: True
     source_date:
-      start: "01/01/2023"
-      end: "31/10/2023"
+      start: "01/01/2024"
+      end: "31/12/2024"
     admin:
       - ~
       - "#adm2+code"
     admin_exact: True
     input:
-      - "#org+impl"
-      - "#sector+acronym"
+      - "#org+impl+ve"
+      - "#org+impl+name"
+      - "#org+impl+type"
+      - "#sector"
       - "#adm1+name"
       - "#adm2+name"
     list:
-      - "#org+impl"
-      - "#sector+acronym"
-      - "#adm1+name"
-      - "#adm2+name"
-    output:
-      - "org_name"
-      - "sector"
-      - "adm1_name"
-      - "adm2_name"
-    output_hxl:
-      - "#org+name"
+      - "#org+impl+ve"
+      - "#org+impl+name"
+      - "#org+impl+type"
       - "#sector"
       - "#adm1+name"
       - "#adm2+name"
@@ -604,15 +597,15 @@ operational_presence_national:
 
   operational_presence_eth:
     dataset: "ethiopia-operational-presence"
-    resource: "Ethiopia Who is Doing What Where (4W) - October 2024.xlsx"
+    resource: "Ethiopia Who is Doing What Where (4W) - November 2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
     sheet: "October 2024"
     headers: 1
     use_hxl: True
     source_date:
-      start: "01/10/2024"
-      end: "31/10/2024"
+      start: "01/11/2024"
+      end: "30/11/2024"
     admin_single: "ETH"
     input:
       - "#org+impl+name"
@@ -730,30 +723,30 @@ operational_presence_national:
 
   operational_presence_sdn:
     dataset: "sudan-operational-presence"
-    resource: "2024-consolidated-3w-data-jan-to-oct.xlsx"
+    resource: "2024-consolidated-3w-data-jan-to-nov.xlsx"
     format: "xlsx"
     xlsx2csv: True
     sheet: "HDX"
     headers: 1
-    use_hxl: True
+    use_hxl: False
     source_date:
       start: "01/01/2024"
-      end: "31/10/2024"
+      end: "30/11/2024"
     admin_single: "SDN"
     input:
-      - "#org+name"
-      - "#org+acronym"
-      - "#org+type"
-      - "#sector+cluster"
-      - "#adm1+name"
-      - "#adm2+name"
+      - "Org name"
+      - "Org acronym"
+      - "Org type"
+      - "Cluster"
+      - "State"
+      - "Locality"
     list:
-      - "#org+name"
-      - "#org+acronym"
-      - "#org+type"
-      - "#sector+cluster"
-      - "#adm1+name"
-      - "#adm2+name"
+      - "Org name"
+      - "Org acronym"
+      - "Org type"
+      - "Cluster"
+      - "State"
+      - "Locality"
 
   operational_presence_ssd:
     dataset: "south-sudan-operational-presence"
