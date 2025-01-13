@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.31] = 2025-01-13
+
+### Changed
+
+- 3W for CMR, MLI, MOZ, SOM, SSD
+- Moved error handling logic to hdx-python-utilities
+
 ## [0.10.30] = 2024-12-24
 
 ### Fixed
