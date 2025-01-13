@@ -146,13 +146,13 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBResource.hdx_id)))
         check.equal(count, 3)
         count = session.scalar(select(func.count(DBOrg.acronym)))
-        check.equal(count, 483)
+        check.equal(count, 451)
         count = session.scalar(select(func.count(DBOrgType.code)))
         check.equal(count, 18)
         count = session.scalar(
             select(func.count(DBOperationalPresence.resource_hdx_id))
         )
-        check.equal(count, 13001)
+        check.equal(count, 12150)
         # Comparison must be performed in this test method,
         # otherwise error details are not logged
         comparisons = check_org_mappings(pipelines)

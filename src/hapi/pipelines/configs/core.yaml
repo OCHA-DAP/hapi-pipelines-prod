@@ -322,6 +322,7 @@ org_type_map:
   croix rouge: "445"
   donantes: "433"
   entite gouvernementale: "435"
+  gouv: "435"
   gouvernement: "435"
   gov: "435"
   government agency: "435"
