@@ -17,6 +17,7 @@ operational_presence_default:
     - "operational_presence_ner"
     - "operational_presence_nga"
     - "operational_presence_sdn"
+    - "operational_presence_som"
     - "operational_presence_ssd"
     - "operational_presence_ven"
     - "operational_presence_yem"
@@ -93,30 +94,30 @@ operational_presence_admintwo:
 
   operational_presence_cmr:
     dataset: "cameroon-5w-operational-presence"
-    resource: "cmr_3w_national_june_2024"
+    resource: "cmr_3w_national_sep_2024"
     format: "xlsx"
     xlsx2csv: True
     sheet: "db"
     headers: 1
     use_hxl: True
     source_date:
-      start: "04/01/2024"
-      end: "30/06/2024"
+      start: "01/07/2024"
+      end: "30/09/2024"
     admin:
       - ~
       - "#adm2 +code"
     admin_exact: True
     input:
-      - "#org +impl +name"
-      - "#org  + impl +acronym"
-      - "#org +impl +type"
+      - "#org +name"
+      - "#org +acronym"
+      - "#org +type"
       - "#sector +cluster +name"
       - "#adm1 +name"
       - "#adm2 +name"
     list:
-      - "#org +impl +name"
-      - "#org  + impl +acronym"
-      - "#org +impl +type"
+      - "#org +name"
+      - "#org +acronym"
+      - "#org +type"
       - "#sector +cluster +name"
       - "#adm1 +name"
       - "#adm2 +name"
@@ -293,65 +294,65 @@ operational_presence_admintwo:
 
   operational_presence_mli:
     dataset: "mali-operational-presence"
-    resource: "MALI_3W_June_2024"
+    resource: "MALI_3W_November2024.xlsx"
     format: "xlsx"
     sheet: "ML_5W"
     headers: 1
     source_date:
-      start: "01/04/2024"
-      end: "30/06/2024"
-    use_hxl: False
+      start: "01/07/2024"
+      end: "30/11/2024"
+    use_hxl: True
     admin:
       - ~
-      - "admin2Pcod"
+      - "#adm2+code"
     admin_exact: True
     input:
-      - "Nom Organisation"
-      - "Organisation Accronyme"
-      - "Type Organisation"
-      - "Cluster"
-      - "Region"
-      - "Cercle"
+      - "#org+name"
+      - "#org+acronym"
+      - "#org+type"
+      - "#sector+cluster"
+      - "#adm1+name"
+      - "#adm2+name"
     list:
-      - "Nom Organisation"
-      - "Organisation Accronyme"
-      - "Type Organisation"
-      - "Cluster"
-      - "Region"
-      - "Cercle"
+      - "#org+name"
+      - "#org+acronym"
+      - "#org+type"
+      - "#sector+cluster"
+      - "#adm1+name"
+      - "#adm2+name"
 
   operational_presence_moz:
     dataset: "mozambique-operational-presence"
-    resource: "Mozambique_2024_3Ws and Response_ Monitoring_January to August.xlsx"
+    resource: "Mozambique_2024_3Ws and Response_ Monitoring_Jan to Nov 2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
     sheet: "Consolidated_3Ws"
     headers: 1
     source_date:
       start: "01/01/2024"
-      end: "31/08/2024"
-    use_hxl: False
+      end: "30/11/2024"
+    use_hxl: True
     admin:
       - ~
-      - "District (Admin 2)-pcode (distrito/ cidade)"
+      - "#adm2+code"
     admin_exact: True
     filter_cols:
-      - "Implementing Partner (parceiro de implementação)"
-    prefilter: "Implementing Partner (parceiro de implementação) is not None"
+      - "#org +impl"
+    prefilter: "#org +impl is not None"
     input:
-      - "Implementing Partner (parceiro de implementação)"
-      - "Implementing Partner (parceiro de implementação)"
-      - "Organization Type ((tipo de organização)2"
-      - "Cluster/ Sector (Cluster/ Setor)"
-      - "Province (Admin 1)- (provincia)"
-      - "District (Admin 2)- (distrito/ cidade)"
+      - "#org +impl"
+      - "#org +impl"
+      - "#org +type"
+      - "#sector +cluster"
+      - "#adm1+name"
+      - "#adm2+name"
     list:
-      - "Implementing Partner (parceiro de implementação)"
-      - "Implementing Partner (parceiro de implementação)"
-      - "Organization Type ((tipo de organização)2"
-      - "Cluster/ Sector (Cluster/ Setor)"
-      - "Province (Admin 1)- (provincia)"
-      - "District (Admin 2)- (distrito/ cidade)"
+      - "#org +impl"
+      - "#org +impl"
+      - "#org +type"
+      - "#sector +cluster"
+      - "#adm1+name"
+      - "#adm2+name"
 
   operational_presence_nga:
     dataset: "nigeria-3w"
@@ -383,44 +384,31 @@ operational_presence_admintwo:
 
   operational_presence_som:
     dataset: "somalia-operational-presence"
-    resource: "Operational Partners Presence Jan-Sep 2024.xlsx"
+    resource: "3W Operational Presence Dataset Jan-Nov 2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Data"
+    sheet: "3W_Dataset_November 2024"
     headers: 1
-    use_hxl: False
+    use_hxl: True
     source_date:
       start: "01/01/2024"
-      end: "30/10/2024"
-    filter_cols:
-      - "Implementing Partner"
-    prefilter: "Implementing Partner is not None"
+      end: "30/11/2024"
     admin:
       - ~
-      - "DistrictCode"
+      - "#adm2+code"
     admin_exact: True
     input:
-      - "Implementing Partner"
-      - "The type of organisation of implementing partner"
-      - "Cluster/AoR"
-      - "REGION"
-      - "DISTRICT"
+      - "#org"
+      - "#org"
+      - "#org +type"
+      - "#sector +cluster"
+      - "#adm1+name"
+      - "#adm2+name"
     list:
-      - "Implementing Partner"
-      - "The type of organisation of implementing partner"
-      - "Cluster/AoR"
-      - "REGION"
-      - "DISTRICT"
-    output:
-      - "org_name"
-      - "org_type_name"
-      - "sector"
-      - "adm1_name"
-      - "adm2_name"
-    output_hxl:
-      - "#org+name"
-      - "#org+type+name"
-      - "#sector"
+      - "#org"
+      - "#org"
+      - "#org +type"
+      - "#sector +cluster"
       - "#adm1+name"
       - "#adm2+name"
 
@@ -750,14 +738,14 @@ operational_presence_national:
 
   operational_presence_ssd:
     dataset: "south-sudan-operational-presence"
-    resource: "ss_20241212_3w_oerational presence_Jan to Oct_2024.xlsx"
+    resource: "ss_20250106_3w_oerational presence_Jan to Nov_2024.xlsx"
     format: "xlsx"
     xlsx2csv: True
-    sheet: "Data"
+    sheet: "data3w"
     headers: 1
     source_date:
       start: "01/01/2024"
-      end: "31/10/2024"
+      end: "30/11/2024"
     admin_single: "SSD"
     input:
       - "Name of organization"
