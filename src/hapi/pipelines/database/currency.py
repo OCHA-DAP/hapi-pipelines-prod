@@ -15,8 +15,8 @@ logger = getLogger(__name__)
 class Currency(BaseUploader):
     def __init__(
         self,
-        session: Session,
         configuration: Configuration,
+        session: Session,
     ):
         super().__init__(session)
         self._configuration = configuration

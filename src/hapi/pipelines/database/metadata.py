@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime
-from typing import Dict, List
+from typing import Dict
 
 from hapi_schema.db_dataset import DBDataset
 from hapi_schema.db_resource import DBResource
@@ -20,21 +20,20 @@ class Metadata(BaseUploader):
         self, runner: Runner, session: Session, today: datetime
     ) -> None:
         super().__init__(session)
-        self._runner = runner
-        self._today = today
-        self._dataset_ids = []
-        self._resource_ids = []
+        self.runner = runner
+        self.today = today
+        self.dataset_data = []
 
     def populate(self) -> None:
         logger.info("Populating metadata")
-        datasets = self._runner.get_hapi_metadata()
+        datasets = self.runner.get_hapi_metadata()
         for dataset_id, dataset in datasets.items():
             # First add dataset
 
             # Make sure dataset hasn't already been added - hapi_metadata
             # contains duplicate datasets since it contains
             # dataset-resource pairs
-            if dataset_id in self._dataset_ids:
+            if dataset_id in self.dataset_data:
                 continue
             dataset_row = DBDataset(
                 hdx_id=dataset_id,
@@ -45,7 +44,7 @@ class Metadata(BaseUploader):
             )
             self._session.add(dataset_row)
             self._session.commit()
-            self._dataset_ids.append(dataset_id)
+            self.dataset_data.append(dataset_id)
 
             resources = dataset["resources"]
             for resource_id, resource in resources.items():
@@ -58,11 +57,10 @@ class Metadata(BaseUploader):
                     update_date=resource["update_date"],
                     is_hxl=resource["is_hxl"],
                     download_url=resource["download_url"],
-                    hapi_updated_date=self._today,
+                    hapi_updated_date=self.today,
                 )
                 self._session.add(resource_row)
                 self._session.commit()
-                self._resource_ids.append(resource_id)
 
     def add_hapi_dataset_metadata(self, hapi_dataset_metadata: Dict) -> str:
         dataset_id = hapi_dataset_metadata["hdx_id"]
@@ -75,7 +73,7 @@ class Metadata(BaseUploader):
         )
         self._session.add(dataset_row)
 
-        self._dataset_ids.append(dataset_id)
+        self.dataset_data.append(dataset_id)
         return dataset_id
 
     def add_hapi_resource_metadata(
@@ -83,10 +81,9 @@ class Metadata(BaseUploader):
     ) -> None:
         hapi_resource_metadata["dataset_hdx_id"] = dataset_id
         hapi_resource_metadata["is_hxl"] = True
-        hapi_resource_metadata["hapi_updated_date"] = self._today
+        hapi_resource_metadata["hapi_updated_date"] = self.today
 
         resource_row = DBResource(**hapi_resource_metadata)
-        self._resource_ids.append(hapi_resource_metadata["hdx_id"])
         self._session.add(resource_row)
 
     def add_hapi_metadata(
@@ -120,9 +117,3 @@ class Metadata(BaseUploader):
             dataset.get_resource()
         )
         self.add_hapi_metadata(hapi_dataset_metadata, hapi_resource_metadata)
-
-    def get_dataset_ids(self) -> List[str]:
-        return self._dataset_ids
-
-    def get_resource_ids(self) -> List[str]:
-        return self._resource_ids
