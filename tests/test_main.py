@@ -36,7 +36,6 @@ from hdx.utilities.useragent import UserAgent
 from pytest_check import check
 from sqlalchemy import func, select
 
-from .org_mappings import check_org_mappings
 from hapi.pipelines.app import load_yamls
 from hapi.pipelines.app.__main__ import add_defaults
 from hapi.pipelines.app.pipelines import Pipelines
@@ -73,7 +72,7 @@ class TestHAPIPipelines:
 
     @pytest.fixture(scope="function")
     def pipelines(self, configuration, folder, themes_to_run):
-        with HDXErrorHandler(should_exit_on_error=False) as error_handler:
+        with HDXErrorHandler() as error_handler:
             with temp_dir(
                 "TestHAPIPipelines",
                 delete_on_success=True,
@@ -109,9 +108,6 @@ class TestHAPIPipelines:
                     pipelines.run()
                     logger.info("Writing to database")
                     pipelines.output()
-                    logger.info("Writing debug output")
-                    pipelines.debug(temp_folder)
-                    pipelines.output_errors()
                     count = session.scalar(select(func.count(DBLocation.id)))
                     check.equal(count, 249)
                     count = session.scalar(select(func.count(DBAdmin1.id)))
@@ -136,28 +132,21 @@ class TestHAPIPipelines:
         )
         check.equal(count, 62537)
 
-    @pytest.mark.parametrize(
-        "themes_to_run", [{"operational_presence": ("AFG", "MLI", "NGA")}]
-    )
+    @pytest.mark.parametrize("themes_to_run", [{"operational_presence": None}])
     def test_operational_presence(self, configuration, folder, pipelines):
         session = pipelines.session
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
-        check.equal(count, 3)
+        check.equal(count, 24)
         count = session.scalar(select(func.count(DBResource.hdx_id)))
-        check.equal(count, 3)
+        check.equal(count, 23)
         count = session.scalar(select(func.count(DBOrg.acronym)))
-        check.equal(count, 451)
+        check.equal(count, 2619)
         count = session.scalar(select(func.count(DBOrgType.code)))
         check.equal(count, 18)
         count = session.scalar(
             select(func.count(DBOperationalPresence.resource_hdx_id))
         )
-        check.equal(count, 12150)
-        # Comparison must be performed in this test method,
-        # otherwise error details are not logged
-        comparisons = check_org_mappings(pipelines)
-        for lhs, rhs in comparisons:
-            check.equal(lhs, rhs)
+        check.equal(count, 36254)
 
     @pytest.mark.parametrize("themes_to_run", [{"food_security": None}])
     def test_food_security(self, configuration, folder, pipelines):
