@@ -80,13 +80,6 @@ def parse_args():
         help="Use saved data",
     )
     parser.add_argument(
-        "-dbg",
-        "--debug",
-        default=False,
-        action="store_true",
-        help="Debug",
-    )
-    parser.add_argument(
         "-ehx",
         "--err-to-hdx",
         default=False,
@@ -104,7 +97,6 @@ def main(
     basic_auths: Optional[Dict[str, str]] = None,
     save: bool = False,
     use_saved: bool = False,
-    debug: bool = False,
     err_to_hdx: bool = False,
     **ignore,
 ) -> None:
@@ -121,7 +113,6 @@ def main(
         basic_auths (Optional[Dict[str, str]]): Basic authorisations
         save (bool): Whether to save state for testing. Defaults to False.
         use_saved (bool): Whether to use saved state for testing. Defaults to False.
-        debug (bool): Whether to output debug info. Defaults to False.
         err_to_hdx (bool): Whether to write any errors to HDX metadata. Defaults to False.
 
     Returns:
@@ -142,7 +133,7 @@ def main(
         params["prepare_fn"] = prepare_hapi_views
     logger.info(f"> Database parameters: {params}")
     configuration = Configuration.read()
-    with HDXErrorHandler(should_exit_on_error=False) as error_handler:
+    with HDXErrorHandler(write_to_hdx=err_to_hdx) as error_handler:
         with temp_dir() as temp_folder:
             with Database(**params) as database:
                 session = database.get_session()
@@ -169,9 +160,6 @@ def main(
                 )
                 pipelines.run()
                 pipelines.output()
-                pipelines.output_errors(err_to_hdx)
-                if debug:
-                    pipelines.debug("debug")
     logger.info("HAPI pipelines completed!")
 
 
@@ -216,7 +204,6 @@ if __name__ == "__main__":
         "food_security.yaml",
         "idps.yaml",
         "national_risk.yaml",
-        "operational_presence.yaml",
         "refugees_and_returnees.yaml",
         "wfp.yaml",
     ]
@@ -235,6 +222,5 @@ if __name__ == "__main__":
         basic_auths=basic_auths,
         save=args.save,
         use_saved=args.use_saved,
-        debug=args.debug,
         err_to_hdx=ehx,
     )
