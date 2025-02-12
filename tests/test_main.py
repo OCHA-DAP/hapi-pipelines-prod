@@ -118,9 +118,9 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBLocation.id)))
         check.equal(count, 249)
         count = session.scalar(select(func.count(DBAdmin1.id)))
-        check.equal(count, 2759)
+        check.equal(count, 2792)
         count = session.scalar(select(func.count(DBAdmin2.id)))
-        check.equal(count, 32102)
+        check.equal(count, 33479)
         admins = pipelines._admins
         max_admin_level = admins.get_max_admin_from_hxltags(
             [
@@ -274,13 +274,13 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBResource.hdx_id)))
         check.equal(count, 25)
         count = session.scalar(select(func.count(DBOrg.acronym)))
-        check.equal(count, 2619)
+        check.equal(count, 2585)
         count = session.scalar(select(func.count(DBOrgType.code)))
         check.equal(count, 18)
         count = session.scalar(
             select(func.count(DBOperationalPresence.resource_hdx_id))
         )
-        check.equal(count, 41655)
+        check.equal(count, 43524)
 
     @pytest.mark.parametrize("themes_to_run", [{"food_security": None}])
     def test_food_security(self, configuration, folder, pipelines):
