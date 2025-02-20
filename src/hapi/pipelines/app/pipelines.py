@@ -178,10 +178,6 @@ class Pipelines:
         _create_configurable_scrapers(
             "idps", "admintwo", adminlevel=self._admintwo
         )
-        _create_configurable_scrapers("conflict_event", "national")
-        _create_configurable_scrapers(
-            "conflict_event", "admintwo", adminlevel=self._admintwo
-        )
 
     def run(self):
         self._runner.run()
@@ -313,14 +309,10 @@ class Pipelines:
 
     def output_conflict_event(self):
         if not self._themes_to_run or "conflict_event" in self._themes_to_run:
-            results = self._runner.get_hapi_results(
-                self._configurable_scrapers["conflict_event"]
-            )
             conflict_event = ConflictEvent(
                 session=self._session,
                 metadata=self._metadata,
                 admins=self._admins,
-                results=results,
                 configuration=self._configuration,
                 error_handler=self._error_handler,
             )

@@ -51,7 +51,6 @@ class TestHAPIPipelines:
         UserAgent.set_global("test")
         project_configs = [
             "core.yaml",
-            "conflict_event.yaml",
             "food_security.yaml",
             "idps.yaml",
             "national_risk.yaml",
@@ -354,19 +353,17 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBFunding.resource_hdx_id)))
         check.equal(count, 57)
 
-    @pytest.mark.parametrize(
-        "themes_to_run", [{"conflict_event": ("BFA", "COL")}]
-    )
+    @pytest.mark.parametrize("themes_to_run", [{"conflict_event": None}])
     def test_conflict_event(self, configuration, folder, pipelines):
         session = pipelines._session
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
-        check.equal(count, 2)
+        check.equal(count, 3)
         count = session.scalar(select(func.count(DBResource.hdx_id)))
-        check.equal(count, 6)
+        check.equal(count, 3)
         count = session.scalar(
             select(func.count(DBConflictEvent.resource_hdx_id))
         )
-        check.equal(count, 313455)
+        check.equal(count, 28740)
 
     @pytest.mark.parametrize("themes_to_run", [{"poverty_rate": None}])
     def test_poverty_rate(self, configuration, folder, pipelines):

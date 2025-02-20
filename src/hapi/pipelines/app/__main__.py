@@ -199,7 +199,6 @@ if __name__ == "__main__":
     if ehx is None:
         ehx = getenv("ERR_TO_HDX")
     project_configs = [
-        "conflict_event.yaml",
         "core.yaml",
         "food_security.yaml",
         "idps.yaml",
