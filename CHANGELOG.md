@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.40] = 2025-02-20
+
+### Changed
+
+- Humanitarian needs reads from HAPI dataset
+
+## [0.10.39] = 2025-02-18
+
+### Changed
+
+- TD -> TCD due to changes in global p-codes
+
+## [0.10.38] = 2025-02-11
+
+### Changed
+
+- Operational presence reads from HAPI dataset
+
+## [0.10.37] = 2025-02-10
+
+### Changed
+
+- Upgrade requirements to incorporate schema changes and fixes
+
 ## [0.10.36] = 2025-01-30
 
 ### Changed

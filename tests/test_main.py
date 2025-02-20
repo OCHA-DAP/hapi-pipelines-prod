@@ -55,7 +55,6 @@ class TestHAPIPipelines:
             "food_security.yaml",
             "idps.yaml",
             "national_risk.yaml",
-            "operational_presence.yaml",
             "refugees_and_returnees.yaml",
             "wfp.yaml",
         ]
@@ -118,9 +117,9 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBLocation.id)))
         check.equal(count, 249)
         count = session.scalar(select(func.count(DBAdmin1.id)))
-        check.equal(count, 2759)
+        check.equal(count, 2704)
         count = session.scalar(select(func.count(DBAdmin2.id)))
-        check.equal(count, 32102)
+        check.equal(count, 33391)
         admins = pipelines._admins
         max_admin_level = admins.get_max_admin_from_hxltags(
             [
@@ -274,13 +273,13 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBResource.hdx_id)))
         check.equal(count, 25)
         count = session.scalar(select(func.count(DBOrg.acronym)))
-        check.equal(count, 2619)
+        check.equal(count, 2585)
         count = session.scalar(select(func.count(DBOrgType.code)))
         check.equal(count, 18)
         count = session.scalar(
             select(func.count(DBOperationalPresence.resource_hdx_id))
         )
-        check.equal(count, 41655)
+        check.equal(count, 43524)
 
     @pytest.mark.parametrize("themes_to_run", [{"food_security": None}])
     def test_food_security(self, configuration, folder, pipelines):
@@ -300,12 +299,12 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
         check.equal(count, 1)
         count = session.scalar(select(func.count(DBResource.hdx_id)))
-        check.equal(count, 1)
+        check.equal(count, 2)
         count = session.scalar(
             select(func.count(DBHumanitarianNeeds.resource_hdx_id))
         )
-        # This test uses a cut down test file with MLI, SDN and UKR
-        check.equal(count, 44938)
+        # This test uses a cut down test file
+        check.equal(count, 16122)
 
     @pytest.mark.parametrize("themes_to_run", [{"national_risk": None}])
     def test_national_risk(self, configuration, folder, pipelines):
@@ -341,7 +340,7 @@ class TestHAPIPipelines:
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
         check.equal(count, 1)
         count = session.scalar(select(func.count(DBIDPs.resource_hdx_id)))
-        check.equal(count, 46746)
+        check.equal(count, 46638)
 
     @pytest.mark.parametrize(
         "themes_to_run", [{"funding": ("AFG", "BFA", "UKR")}]
