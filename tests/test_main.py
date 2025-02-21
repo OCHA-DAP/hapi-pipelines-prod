@@ -256,13 +256,13 @@ class TestHAPIPipelines:
     def test_population(self, configuration, folder, pipelines):
         session = pipelines._session
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
-        check.equal(count, 1)
+        check.equal(count, 2)
         count = session.scalar(select(func.count(DBResource.hdx_id)))
-        check.equal(count, 3)
+        check.equal(count, 6)
         count = session.scalar(
             select(func.count(DBPopulation.resource_hdx_id))
         )
-        check.equal(count, 62537)
+        check.equal(count, 12906)
 
     @pytest.mark.parametrize("themes_to_run", [{"operational_presence": None}])
     def test_operational_presence(self, configuration, folder, pipelines):
