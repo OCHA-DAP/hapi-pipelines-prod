@@ -20,5 +20,5 @@ class ConflictEvent(HapiDatasetUploader):
         self.hapi_populate(
             "conflict-event",
             DBConflictEvent,
-            end_resource=29,
+            end_resource=None,
         )

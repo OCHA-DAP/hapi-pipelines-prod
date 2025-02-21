@@ -41,6 +41,7 @@ class HapiDatasetUploader(BaseUploader, ABC):
         name_suffix: str,
         hapi_table: Type[Base],
         end_resource: Optional[int] = 1,
+        max_admin_level: int = 2,
     ):
         log_name = name_suffix.replace("-", " ")
         pipeline = []
@@ -71,21 +72,8 @@ class HapiDatasetUploader(BaseUploader, ABC):
                     output_str = dataset_name
                 else:
                     output_str = dataset_id
-                admin_level = self._admins.get_admin_level_from_row(
-                    hxltag_to_header, row, 2
-                )
-                admin2_ref = self._admins.get_admin2_ref_from_row(
-                    hxltag_to_header,
-                    row,
-                    output_str,
-                    pipeline,
-                    admin_level,
-                )
 
                 countryiso3 = row["location_code"]
-                provider_admin1_name = row["provider_admin1_name"] or ""
-                provider_admin2_name = row["provider_admin2_name"] or ""
-
                 resource_name = self._metadata.get_resource_name(resource_id)
                 if not resource_name:
                     dataset = reader.read_dataset(
@@ -108,11 +96,11 @@ class HapiDatasetUploader(BaseUploader, ABC):
                         resources_to_ignore.append(resource_id)
                         continue
 
+                admin_level = self._admins.get_admin_level_from_row(
+                    hxltag_to_header, row, max_admin_level
+                )
                 output_row = {
                     "resource_hdx_id": resource_id,
-                    "admin2_ref": admin2_ref,
-                    "provider_admin1_name": provider_admin1_name,
-                    "provider_admin2_name": provider_admin2_name,
                     "reference_period_start": parse_date(
                         row["reference_period_start"]
                     ),
@@ -120,6 +108,36 @@ class HapiDatasetUploader(BaseUploader, ABC):
                         row["reference_period_end"], max_time=True
                     ),
                 }
+                if max_admin_level == 2:
+                    admin2_ref = self._admins.get_admin2_ref_from_row(
+                        hxltag_to_header,
+                        row,
+                        output_str,
+                        pipeline,
+                        admin_level,
+                    )
+                    output_row["admin2_ref"] = admin2_ref
+                    output_row["provider_admin1_name"] = (
+                        row["provider_admin1_name"] or ""
+                    )
+                    output_row["provider_admin2_name"] = (
+                        row["provider_admin2_name"] or ""
+                    )
+                elif max_admin_level == 1:
+                    admin1_ref = self._admins.get_admin1_ref_from_row(
+                        hxltag_to_header,
+                        row,
+                        output_str,
+                        pipeline,
+                        admin_level,
+                    )
+                    output_row["admin1_ref"] = admin1_ref
+                    output_row["provider_admin1_name"] = (
+                        row["provider_admin1_name"] or ""
+                    )
+                else:
+                    output_row["location_ref"] = countryiso3
+
                 self.populate_row(output_row, row)
                 output_rows.append(output_row)
         logger.info(f"Writing to {log_name} table")
