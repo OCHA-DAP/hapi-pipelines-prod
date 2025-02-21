@@ -171,13 +171,6 @@ class Pipelines:
 
         _create_configurable_scrapers("national_risk", "national")
         _create_configurable_scrapers("refugees_and_returnees", "national")
-        _create_configurable_scrapers("idps", "national")
-        _create_configurable_scrapers(
-            "idps", "adminone", adminlevel=self._adminone
-        )
-        _create_configurable_scrapers(
-            "idps", "admintwo", adminlevel=self._admintwo
-        )
 
     def run(self):
         self._runner.run()
@@ -272,14 +265,11 @@ class Pipelines:
 
     def output_idps(self):
         if not self._themes_to_run or "idps" in self._themes_to_run:
-            results = self._runner.get_hapi_results(
-                self._configurable_scrapers["idps"]
-            )
             idps = IDPs(
                 session=self._session,
                 metadata=self._metadata,
                 admins=self._admins,
-                results=results,
+                configuration=self._configuration,
                 error_handler=self._error_handler,
             )
             idps.populate()
