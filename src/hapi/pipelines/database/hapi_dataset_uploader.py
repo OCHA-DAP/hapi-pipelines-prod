@@ -61,7 +61,7 @@ class HapiDatasetUploader(BaseUploader, ABC):
             hxltag_to_header = invert_dictionary(next(rows))
 
             for row in rows:
-                if row["error"]:
+                if row.get("error"):
                     continue
                 resource_id = row["resource_hdx_id"]
                 if resource_id in resources_to_ignore:
