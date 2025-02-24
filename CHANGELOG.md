@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Poverty rate reads from HAPI dataset
+- Fix hapi-schema version
 
 ## [0.10.41] = 2025-02-20
 
