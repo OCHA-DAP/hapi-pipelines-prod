@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.43] = 2025-02-25
+
+### Changed
+
+- Refugees and returnees read from HAPI datasets
+
 ## [0.10.42] = 2025-02-24
 
 ### Changed

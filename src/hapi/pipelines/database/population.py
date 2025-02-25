@@ -14,17 +14,13 @@ class Population(HapiDatasetUploader):
     def populate_row(self, output_row: Dict, row: Dict) -> None:
         output_row["gender"] = row["gender"]
         output_row["age_range"] = row["age_range"]
-        output_row["min_age"] = (
-            int(float(row["min_age"])) if row["min_age"] else None
-        )
-        output_row["max_age"] = (
-            int(float(row["max_age"])) if row["max_age"] else None
-        )
+        output_row["min_age"] = row["min_age"] and int(row["min_age"])
+        output_row["max_age"] = row["max_age"] and int(row["max_age"])
         output_row["population"] = int(row["population"])
 
     def populate(self) -> None:
         self.hapi_populate(
             "population",
             DBPopulation,
-            end_resource=2,
+            end_resource=None,
         )

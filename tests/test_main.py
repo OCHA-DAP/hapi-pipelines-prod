@@ -53,7 +53,6 @@ class TestHAPIPipelines:
             "core.yaml",
             "food_security.yaml",
             "national_risk.yaml",
-            "refugees_and_returnees.yaml",
             "wfp.yaml",
         ]
         project_config_dict = load_yamls(project_configs)
@@ -316,17 +315,23 @@ class TestHAPIPipelines:
         )
         check.equal(count, 191)
 
-    @pytest.mark.parametrize(
-        "themes_to_run", [{"refugees_and_returnees": None}]
-    )
-    def test_refugees_and_returnees(self, configuration, folder, pipelines):
+    @pytest.mark.parametrize("themes_to_run", [{"refugees": None}])
+    def test_refugees(self, configuration, folder, pipelines):
         session = pipelines._session
         count = session.scalar(select(func.count(DBDataset.hdx_id)))
         check.equal(count, 1)
         count = session.scalar(select(func.count(DBResource.hdx_id)))
         check.equal(count, 1)
         count = session.scalar(select(func.count(DBRefugees.resource_hdx_id)))
-        check.equal(count, 1989065)
+        check.equal(count, 43888)
+
+    @pytest.mark.parametrize("themes_to_run", [{"returnees": None}])
+    def test_returnees(self, configuration, folder, pipelines):
+        session = pipelines._session
+        count = session.scalar(select(func.count(DBDataset.hdx_id)))
+        check.equal(count, 1)
+        count = session.scalar(select(func.count(DBResource.hdx_id)))
+        check.equal(count, 1)
         count = session.scalar(select(func.count(DBReturnees.resource_hdx_id)))
         check.equal(count, 13988)
 
