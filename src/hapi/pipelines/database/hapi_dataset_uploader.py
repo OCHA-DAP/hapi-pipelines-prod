@@ -1,6 +1,6 @@
 from abc import ABC
 from logging import getLogger
-from typing import Dict, Optional, Type
+from typing import Dict, List, Optional, Type
 
 from hapi_schema.utils.base import Base
 from hdx.api.configuration import Configuration
@@ -11,7 +11,7 @@ from hdx.utilities.dictandlist import invert_dictionary
 from sqlalchemy.orm import Session
 
 from ..utilities.batch_populate import batch_populate
-from . import admins
+from . import admins, locations
 from hapi.pipelines.database.base_uploader import BaseUploader
 from hapi.pipelines.database.metadata import Metadata
 
@@ -23,12 +23,14 @@ class HapiDatasetUploader(BaseUploader, ABC):
         self,
         session: Session,
         metadata: Metadata,
+        locations: locations.Locations,
         admins: admins.Admins,
         configuration: Configuration,
         error_handler: HDXErrorHandler,
     ):
         super().__init__(session)
         self._metadata = metadata
+        self._locations = locations
         self._admins = admins
         self._configuration = configuration
         self._error_handler = error_handler
@@ -42,6 +44,7 @@ class HapiDatasetUploader(BaseUploader, ABC):
         hapi_table: Type[Base],
         end_resource: Optional[int] = 1,
         max_admin_level: int = 2,
+        location_headers: Optional[List[str]] = None,
     ):
         log_name = name_suffix.replace("-", " ")
         pipeline = []
@@ -73,7 +76,9 @@ class HapiDatasetUploader(BaseUploader, ABC):
                 else:
                     output_str = dataset_id
 
-                countryiso3 = row["location_code"]
+                if location_headers is None:
+                    location_headers = ["location_code"]
+                countryiso3 = row.get(location_headers[0])
                 resource_name = self._metadata.get_resource_name(resource_id)
                 if not resource_name:
                     dataset = reader.read_dataset(
@@ -136,7 +141,13 @@ class HapiDatasetUploader(BaseUploader, ABC):
                         row["provider_admin1_name"] or ""
                     )
                 else:
-                    output_row["location_ref"] = countryiso3
+                    for location_header in location_headers:
+                        countryiso3 = row[location_header]
+                        output_header = location_header.replace(
+                            "_code", "_ref"
+                        )
+                        location_ref = self._locations.data[countryiso3]
+                        output_row[output_header] = location_ref
 
                 self.populate_row(output_row, row)
                 output_rows.append(output_row)

@@ -202,7 +202,6 @@ if __name__ == "__main__":
         "core.yaml",
         "food_security.yaml",
         "national_risk.yaml",
-        "refugees_and_returnees.yaml",
         "wfp.yaml",
     ]
     project_config_dict = load_yamls(project_configs)

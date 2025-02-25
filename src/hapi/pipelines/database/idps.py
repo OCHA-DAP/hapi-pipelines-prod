@@ -1,4 +1,4 @@
-"""Functions specific to the refugees theme."""
+"""Functions specific to the idps theme."""
 
 from logging import getLogger
 from typing import Dict
