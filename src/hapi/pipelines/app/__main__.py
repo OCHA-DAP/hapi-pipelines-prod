@@ -199,12 +199,9 @@ if __name__ == "__main__":
     if ehx is None:
         ehx = getenv("ERR_TO_HDX")
     project_configs = [
-        "conflict_event.yaml",
         "core.yaml",
         "food_security.yaml",
-        "idps.yaml",
         "national_risk.yaml",
-        "refugees_and_returnees.yaml",
         "wfp.yaml",
     ]
     project_config_dict = load_yamls(project_configs)
