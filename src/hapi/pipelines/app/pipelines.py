@@ -27,7 +27,8 @@ from hapi.pipelines.database.org import Org
 from hapi.pipelines.database.org_type import OrgType
 from hapi.pipelines.database.population import Population
 from hapi.pipelines.database.poverty_rate import PovertyRate
-from hapi.pipelines.database.refugees_and_returnees import RefugeesAndReturnees
+from hapi.pipelines.database.refugees import Refugees
+from hapi.pipelines.database.returnees import Returnees
 from hapi.pipelines.database.sector import Sector
 from hapi.pipelines.database.wfp_commodity import WFPCommodity
 from hapi.pipelines.database.wfp_market import WFPMarket
@@ -170,18 +171,6 @@ class Pipelines:
             )
 
         _create_configurable_scrapers("national_risk", "national")
-        _create_configurable_scrapers("refugees_and_returnees", "national")
-        _create_configurable_scrapers("idps", "national")
-        _create_configurable_scrapers(
-            "idps", "adminone", adminlevel=self._adminone
-        )
-        _create_configurable_scrapers(
-            "idps", "admintwo", adminlevel=self._admintwo
-        )
-        _create_configurable_scrapers("conflict_event", "national")
-        _create_configurable_scrapers(
-            "conflict_event", "admintwo", adminlevel=self._admintwo
-        )
 
     def run(self):
         self._runner.run()
@@ -191,6 +180,7 @@ class Pipelines:
             population = Population(
                 session=self._session,
                 metadata=self._metadata,
+                locations=self._locations,
                 admins=self._admins,
                 configuration=self._configuration,
                 error_handler=self._error_handler,
@@ -211,6 +201,7 @@ class Pipelines:
             operational_presence = OperationalPresence(
                 session=self._session,
                 metadata=self._metadata,
+                locations=self._locations,
                 admins=self._admins,
                 configuration=self._configuration,
                 error_handler=self._error_handler,
@@ -239,6 +230,7 @@ class Pipelines:
             humanitarian_needs = HumanitarianNeeds(
                 session=self._session,
                 metadata=self._metadata,
+                locations=self._locations,
                 admins=self._admins,
                 configuration=self._configuration,
                 error_handler=self._error_handler,
@@ -258,32 +250,38 @@ class Pipelines:
             )
             national_risk.populate()
 
-    def output_refugees_and_returnees(self):
-        if (
-            not self._themes_to_run
-            or "refugees_and_returnees" in self._themes_to_run
-        ):
-            results = self._runner.get_hapi_results(
-                self._configurable_scrapers["refugees_and_returnees"]
-            )
-            refugees_and_returnees = RefugeesAndReturnees(
+    def output_refugees(self):
+        if not self._themes_to_run or "refugees" in self._themes_to_run:
+            refugees = Refugees(
                 session=self._session,
                 metadata=self._metadata,
                 locations=self._locations,
-                results=results,
+                admins=self._admins,
+                configuration=self._configuration,
+                error_handler=self._error_handler,
             )
-            refugees_and_returnees.populate()
+            refugees.populate()
+
+    def output_returnees(self):
+        if not self._themes_to_run or "returnees" in self._themes_to_run:
+            returnees = Returnees(
+                session=self._session,
+                metadata=self._metadata,
+                locations=self._locations,
+                admins=self._admins,
+                configuration=self._configuration,
+                error_handler=self._error_handler,
+            )
+            returnees.populate()
 
     def output_idps(self):
         if not self._themes_to_run or "idps" in self._themes_to_run:
-            results = self._runner.get_hapi_results(
-                self._configurable_scrapers["idps"]
-            )
             idps = IDPs(
                 session=self._session,
                 metadata=self._metadata,
+                locations=self._locations,
                 admins=self._admins,
-                results=results,
+                configuration=self._configuration,
                 error_handler=self._error_handler,
             )
             idps.populate()
@@ -305,6 +303,7 @@ class Pipelines:
             poverty_rate = PovertyRate(
                 session=self._session,
                 metadata=self._metadata,
+                locations=self._locations,
                 admins=self._admins,
                 configuration=self._configuration,
                 error_handler=self._error_handler,
@@ -313,14 +312,11 @@ class Pipelines:
 
     def output_conflict_event(self):
         if not self._themes_to_run or "conflict_event" in self._themes_to_run:
-            results = self._runner.get_hapi_results(
-                self._configurable_scrapers["conflict_event"]
-            )
             conflict_event = ConflictEvent(
                 session=self._session,
                 metadata=self._metadata,
+                locations=self._locations,
                 admins=self._admins,
-                results=results,
                 configuration=self._configuration,
                 error_handler=self._error_handler,
             )
@@ -368,7 +364,8 @@ class Pipelines:
         self.output_food_security()
         self.output_humanitarian_needs()
         self.output_national_risk()
-        self.output_refugees_and_returnees()
+        self.output_refugees()
+        self.output_returnees()
         self.output_idps()
         self.output_funding()
         self.output_poverty_rate()

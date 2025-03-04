@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.44] = 2025-02-26
+
+### Changed
+
+- Update to latest schema
+
+## [0.10.43] = 2025-02-25
+
+### Changed
+
+- Refugees and returnees read from HAPI datasets
+
+## [0.10.42] = 2025-02-24
+
+### Changed
+
+- Poverty rate reads from HAPI dataset
+- Fix hapi-schema version
+
+## [0.10.41] = 2025-02-20
+
+### Changed
+
+- Conflict event, IDPs, and Population read from HAPI dataset
+
 ## [0.10.40] = 2025-02-20
 
 ### Changed
