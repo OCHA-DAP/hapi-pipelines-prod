@@ -77,7 +77,7 @@ hdx-python-utilities==3.8.4
     #   hdx-python-scraper
 humanize==4.12.1
     # via frictionless
-identify==2.6.8
+identify==2.6.9
     # via pre-commit
 idna==3.10
     # via
@@ -91,7 +91,7 @@ iniconfig==2.0.0
     # via pytest
 isodate==0.7.2
     # via frictionless
-jinja2==3.1.5
+jinja2==3.1.6
     # via frictionless
 jsonlines==4.0.0
     # via hdx-python-utilities
@@ -228,7 +228,7 @@ ruamel-yaml==0.18.10
     # via hdx-python-utilities
 ruamel-yaml-clib==0.2.12
     # via ruamel-yaml
-setuptools==75.8.2
+setuptools==76.0.0
     # via ckanapi
 shellingham==1.5.4
     # via typer
@@ -285,7 +285,7 @@ urllib3==2.3.0
     #   requests
 validators==0.34.0
     # via frictionless
-virtualenv==20.29.2
+virtualenv==20.29.3
     # via pre-commit
 wheel==0.45.1
     # via libhxl
