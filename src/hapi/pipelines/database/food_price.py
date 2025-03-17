@@ -6,9 +6,9 @@ from typing import Dict, List
 from dateutil.relativedelta import relativedelta
 from hapi_schema.db_food_price import DBFoodPrice
 from hdx.api.utilities.hdx_error_handler import HDXErrorHandler
+from hdx.database import Database
 from hdx.scraper.framework.utilities.reader import Read
 from hdx.utilities.dateparse import parse_date
-from sqlalchemy.orm import Session
 
 from .base_uploader import BaseUploader
 from .currency import Currency
@@ -22,7 +22,7 @@ logger = getLogger(__name__)
 class FoodPrice(BaseUploader):
     def __init__(
         self,
-        session: Session,
+        database: Database,
         datasetinfo: Dict[str, str],
         countryiso3s: List[str],
         metadata: Metadata,
@@ -31,7 +31,7 @@ class FoodPrice(BaseUploader):
         market: WFPMarket,
         error_handler: HDXErrorHandler,
     ):
-        super().__init__(session)
+        super().__init__(database)
         self._datasetinfo = datasetinfo
         self._countryiso3s = countryiso3s
         self._metadata = metadata

@@ -5,10 +5,10 @@ from typing import Dict, Optional
 
 from hapi_schema.db_wfp_commodity import DBWFPCommodity
 from hapi_schema.utils.enums import CommodityCategory
+from hdx.database import Database
 from hdx.scraper.framework.utilities.reader import Read
 from hdx.utilities.matching import get_code_from_name
 from hdx.utilities.text import normalise
-from sqlalchemy.orm import Session
 
 from .base_uploader import BaseUploader
 
@@ -18,10 +18,10 @@ logger = getLogger(__name__)
 class WFPCommodity(BaseUploader):
     def __init__(
         self,
-        session: Session,
+        database: Database,
         datasetinfo: Dict[str, str],
     ):
-        super().__init__(session)
+        super().__init__(database)
         self._datasetinfo = datasetinfo
         self.data = {}
         self.unmatched = []

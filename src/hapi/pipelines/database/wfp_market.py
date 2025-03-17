@@ -6,10 +6,10 @@ from typing import Dict, List, Optional
 from hapi_schema.db_wfp_market import DBWFPMarket
 from hdx.api.configuration import Configuration
 from hdx.api.utilities.hdx_error_handler import HDXErrorHandler
+from hdx.database import Database
 from hdx.location.adminlevel import AdminLevel
 from hdx.scraper.framework.utilities.reader import Read
 from hdx.utilities.dictandlist import dict_of_dicts_add
-from sqlalchemy.orm import Session
 
 from ..utilities.provider_admin_names import get_provider_name
 from . import admins
@@ -21,7 +21,7 @@ logger = getLogger(__name__)
 class WFPMarket(BaseUploader):
     def __init__(
         self,
-        session: Session,
+        database: Database,
         datasetinfo: Dict[str, str],
         countryiso3s: List[str],
         admins: admins.Admins,
@@ -30,7 +30,7 @@ class WFPMarket(BaseUploader):
         configuration: Configuration,
         error_handler: HDXErrorHandler,
     ):
-        super().__init__(session)
+        super().__init__(database)
         self._datasetinfo = datasetinfo
         self._countryiso3s = countryiso3s
         self._admins = admins

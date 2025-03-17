@@ -5,12 +5,11 @@ from typing import Dict, List, Optional, Type
 from hapi_schema.utils.base import Base
 from hdx.api.configuration import Configuration
 from hdx.api.utilities.hdx_error_handler import HDXErrorHandler
+from hdx.database import Database
 from hdx.scraper.framework.utilities.reader import Read
 from hdx.utilities.dateparse import parse_date
 from hdx.utilities.dictandlist import invert_dictionary
-from sqlalchemy.orm import Session
 
-from ..utilities.batch_populate import batch_populate
 from . import admins, locations
 from hapi.pipelines.database.base_uploader import BaseUploader
 from hapi.pipelines.database.metadata import Metadata
@@ -21,14 +20,14 @@ logger = getLogger(__name__)
 class HapiDatasetUploader(BaseUploader, ABC):
     def __init__(
         self,
-        session: Session,
+        database: Database,
         metadata: Metadata,
         locations: locations.Locations,
         admins: admins.Admins,
         configuration: Configuration,
         error_handler: HDXErrorHandler,
     ):
-        super().__init__(session)
+        super().__init__(database)
         self._metadata = metadata
         self._locations = locations
         self._admins = admins
@@ -152,4 +151,4 @@ class HapiDatasetUploader(BaseUploader, ABC):
                 self.populate_row(output_row, row)
                 output_rows.append(output_row)
         logger.info(f"Writing to {log_name} table")
-        batch_populate(output_rows, self._session, hapi_table)
+        self._database.batch_populate(output_rows, hapi_table)

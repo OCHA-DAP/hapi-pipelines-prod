@@ -4,10 +4,10 @@ from typing import List, Optional
 
 from hapi_schema.db_location import DBLocation
 from hdx.api.configuration import Configuration
+from hdx.database import Database
 from hdx.location.country import Country
 from hdx.scraper.framework.utilities.reader import Read
 from hdx.utilities.dateparse import parse_date
-from sqlalchemy.orm import Session
 
 from .base_uploader import BaseUploader
 
@@ -16,11 +16,11 @@ class Locations(BaseUploader):
     def __init__(
         self,
         configuration: Configuration,
-        session: Session,
+        database: Database,
         use_live: bool = True,
         countries: Optional[List[str]] = None,
     ):
-        super().__init__(session)
+        super().__init__(database)
         Country.countriesdata(
             use_live=use_live,
             country_name_overrides=configuration["country_name_overrides"],

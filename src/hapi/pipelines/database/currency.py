@@ -4,8 +4,8 @@ from logging import getLogger
 
 from hapi_schema.db_currency import DBCurrency
 from hdx.api.configuration import Configuration
+from hdx.database import Database
 from hdx.scraper.framework.utilities.reader import Read
-from sqlalchemy.orm import Session
 
 from .base_uploader import BaseUploader
 
@@ -15,10 +15,10 @@ logger = getLogger(__name__)
 class Currency(BaseUploader):
     def __init__(
         self,
-        session: Session,
+        database: Database,
         configuration: Configuration,
     ):
-        super().__init__(session)
+        super().__init__(database)
         self._configuration = configuration
 
     def populate(self) -> None:

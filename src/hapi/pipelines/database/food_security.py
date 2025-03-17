@@ -7,11 +7,11 @@ from typing import Dict, List, Optional
 from hapi_schema.db_food_security import DBFoodSecurity
 from hdx.api.configuration import Configuration
 from hdx.api.utilities.hdx_error_handler import HDXErrorHandler
+from hdx.database import Database
 from hdx.location.adminlevel import AdminLevel
 from hdx.scraper.framework.utilities.reader import Read
 from hdx.utilities.dateparse import parse_date
 from hdx.utilities.typehint import ListTuple
-from sqlalchemy.orm import Session
 
 from ..utilities.provider_admin_names import get_provider_name
 from . import admins
@@ -33,7 +33,7 @@ class AdminInfo:
 class FoodSecurity(BaseUploader):
     def __init__(
         self,
-        session: Session,
+        database: Database,
         metadata: Metadata,
         admins: admins.Admins,
         adminone: AdminLevel,
@@ -42,7 +42,7 @@ class FoodSecurity(BaseUploader):
         configuration: Configuration,
         error_handler: HDXErrorHandler,
     ):
-        super().__init__(session)
+        super().__init__(database)
         self._metadata = metadata
         self._admins = admins
         self._adminone = adminone

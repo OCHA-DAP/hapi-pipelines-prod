@@ -4,12 +4,12 @@ from typing import Dict, Optional
 
 from hdx.api.configuration import Configuration
 from hdx.api.utilities.hdx_error_handler import HDXErrorHandler
+from hdx.database import Database
 from hdx.location.adminlevel import AdminLevel
 from hdx.scraper.framework.runner import Runner
 from hdx.scraper.framework.utilities.reader import Read
 from hdx.scraper.framework.utilities.sources import Sources
 from hdx.utilities.typehint import ListTuple
-from sqlalchemy.orm import Session
 
 from hapi.pipelines.database.admins import Admins
 from hapi.pipelines.database.conflict_event import ConflictEvent
@@ -40,7 +40,7 @@ class Pipelines:
     def __init__(
         self,
         configuration: Configuration,
-        session: Session,
+        database: Database,
         today: datetime,
         themes_to_run: Optional[Dict] = None,
         scrapers_to_run: Optional[ListTuple[str]] = None,
@@ -49,11 +49,11 @@ class Pipelines:
         countries_to_run: Optional[ListTuple[str]] = None,
     ):
         self._configuration = configuration
-        self._session = session
+        self._database = database
         self._themes_to_run = themes_to_run
         self._locations = Locations(
             configuration=configuration,
-            session=session,
+            database=database,
             use_live=use_live,
             countries=countries_to_run,
         )
@@ -68,7 +68,7 @@ class Pipelines:
         ).cache()
         self._admins = Admins(
             configuration,
-            session,
+            database,
             self._locations,
             libhxl_dataset,
             error_handler,
@@ -94,12 +94,14 @@ class Pipelines:
         self._admintwo.output_admin_name_replacements()
 
         self._org_type = OrgType(
-            session=session,
+            database=database,
         )
         self._sector = Sector(
-            session=session,
+            database=database,
         )
-        self._currency = Currency(session=session, configuration=configuration)
+        self._currency = Currency(
+            database=database, configuration=configuration
+        )
 
         Sources.set_default_source_date_format("%Y-%m-%d")
         self._runner = Runner(
@@ -112,7 +114,7 @@ class Pipelines:
         self.create_configurable_scrapers()
 
         self._metadata = Metadata(
-            runner=self._runner, session=session, today=today
+            runner=self._runner, database=database, today=today
         )
 
     def setup_configurable_scrapers(
@@ -178,7 +180,7 @@ class Pipelines:
     def output_population(self):
         if not self._themes_to_run or "population" in self._themes_to_run:
             population = Population(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 admins=self._admins,
@@ -193,13 +195,13 @@ class Pipelines:
             or "operational_presence" in self._themes_to_run
         ):
             org = Org(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 configuration=self._configuration,
             )
             org.populate()
             operational_presence = OperationalPresence(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 admins=self._admins,
@@ -211,7 +213,7 @@ class Pipelines:
     def output_food_security(self):
         if not self._themes_to_run or "food_security" in self._themes_to_run:
             food_security = FoodSecurity(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 admins=self._admins,
                 adminone=self._adminone,
@@ -228,7 +230,7 @@ class Pipelines:
             or "humanitarian_needs" in self._themes_to_run
         ):
             humanitarian_needs = HumanitarianNeeds(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 admins=self._admins,
@@ -243,7 +245,7 @@ class Pipelines:
                 self._configurable_scrapers["national_risk"]
             )
             national_risk = NationalRisk(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 results=results,
@@ -253,7 +255,7 @@ class Pipelines:
     def output_refugees(self):
         if not self._themes_to_run or "refugees" in self._themes_to_run:
             refugees = Refugees(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 admins=self._admins,
@@ -265,7 +267,7 @@ class Pipelines:
     def output_returnees(self):
         if not self._themes_to_run or "returnees" in self._themes_to_run:
             returnees = Returnees(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 admins=self._admins,
@@ -277,7 +279,7 @@ class Pipelines:
     def output_idps(self):
         if not self._themes_to_run or "idps" in self._themes_to_run:
             idps = IDPs(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 admins=self._admins,
@@ -289,7 +291,7 @@ class Pipelines:
     def output_funding(self):
         if not self._themes_to_run or "funding" in self._themes_to_run:
             funding = Funding(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 admins=self._admins,
@@ -301,7 +303,7 @@ class Pipelines:
     def output_poverty_rate(self):
         if not self._themes_to_run or "poverty_rate" in self._themes_to_run:
             poverty_rate = PovertyRate(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 admins=self._admins,
@@ -313,7 +315,7 @@ class Pipelines:
     def output_conflict_event(self):
         if not self._themes_to_run or "conflict_event" in self._themes_to_run:
             conflict_event = ConflictEvent(
-                session=self._session,
+                database=self._database,
                 metadata=self._metadata,
                 locations=self._locations,
                 admins=self._admins,
@@ -325,12 +327,12 @@ class Pipelines:
     def output_food_prices(self):
         if not self._themes_to_run or "food_prices" in self._themes_to_run:
             wfp_commodity = WFPCommodity(
-                session=self._session,
+                database=self._database,
                 datasetinfo=self._configuration["wfp_commodity"],
             )
             wfp_commodity.populate()
             wfp_market = WFPMarket(
-                session=self._session,
+                database=self._database,
                 datasetinfo=self._configuration["wfp_market"],
                 countryiso3s=self._countries,
                 admins=self._admins,
@@ -341,7 +343,7 @@ class Pipelines:
             )
             wfp_market.populate()
             food_price = FoodPrice(
-                session=self._session,
+                database=self._database,
                 datasetinfo=self._configuration["wfp_countries"],
                 countryiso3s=self._countries,
                 metadata=self._metadata,
