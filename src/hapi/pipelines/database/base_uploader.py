@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
 
-from sqlalchemy.orm import Session
+from hdx.database import Database
 
 
 class BaseUploader(ABC):
-    def __init__(self, session: Session):
-        self._session = session
+    def __init__(self, database: Database):
+        self._database = database
+        self._session = database.get_session()
 
     @abstractmethod
     def populate(self) -> None:

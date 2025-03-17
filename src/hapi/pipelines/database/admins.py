@@ -11,10 +11,10 @@ from hapi_schema.db_admin2 import DBAdmin2
 from hapi_schema.db_location import DBLocation
 from hdx.api.configuration import Configuration
 from hdx.api.utilities.hdx_error_handler import HDXErrorHandler
+from hdx.database import Database
 from hdx.utilities.dateparse import parse_date
 from hxl.filters import AbstractStreamingFilter
 from sqlalchemy import select
-from sqlalchemy.orm import Session
 
 from .base_uploader import BaseUploader
 from .locations import Locations
@@ -31,12 +31,12 @@ class Admins(BaseUploader):
     def __init__(
         self,
         configuration: Configuration,
-        session: Session,
+        database: Database,
         locations: Locations,
         libhxl_dataset: hxl.Dataset,
         error_handler: HDXErrorHandler,
     ):
-        super().__init__(session)
+        super().__init__(database)
         self._limit = configuration["commit_limit"]
         self._orphan_admin2s = configuration["orphan_admin2s"]
         self._locations = locations

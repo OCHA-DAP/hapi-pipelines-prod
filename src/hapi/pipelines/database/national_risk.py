@@ -4,7 +4,7 @@ from logging import getLogger
 from typing import Dict
 
 from hapi_schema.db_national_risk import DBNationalRisk
-from sqlalchemy.orm import Session
+from hdx.database import Database
 
 from . import locations
 from .base_uploader import BaseUploader
@@ -16,12 +16,12 @@ logger = getLogger(__name__)
 class NationalRisk(BaseUploader):
     def __init__(
         self,
-        session: Session,
+        database: Database,
         metadata: Metadata,
         locations: locations,
         results: Dict,
     ):
-        super().__init__(session)
+        super().__init__(database)
         self._metadata = metadata
         self._locations = locations
         self._results = results
