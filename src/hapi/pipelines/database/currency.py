@@ -1,44 +1,20 @@
-"""Populate the currency table."""
+"""Functions specific to the WFP food prices theme for currencies."""
 
 from logging import getLogger
+from typing import Dict, Optional
 
 from hapi_schema.db_currency import DBCurrency
-from hdx.api.configuration import Configuration
-from hdx.database import Database
-from hdx.scraper.framework.utilities.reader import Read
 
-from .base_uploader import BaseUploader
+from hapi.pipelines.database.hapi_basic_uploader import HapiBasicUploader
 
 logger = getLogger(__name__)
 
 
-class Currency(BaseUploader):
-    def __init__(
-        self,
-        database: Database,
-        configuration: Configuration,
-    ):
-        super().__init__(database)
-        self._configuration = configuration
+class Currency(HapiBasicUploader):
+    def get_row(self, row: Dict) -> Optional[Dict]:
+        if not row["name"]:
+            row["name"] = ""
+        return row
 
     def populate(self) -> None:
-        logger.info("Populating currencies table")
-        reader = Read.get_reader("wfp_token")
-        bearer_json = reader.download_json(
-            self._configuration["wfp_token_url"],
-            post=True,
-            parameters={"grant_type": "client_credentials"},
-        )
-        bearer_token = bearer_json["access_token"]
-        reader = Read.get_reader("wfp_databridges")
-        reader.downloader.set_bearer_token(bearer_token)
-        json = reader.download_json(self._configuration["wfp_currencies_url"])
-        for currency in json["items"]:
-            code = currency["name"]
-            name = currency["extendedName"]
-            if not name:
-                logger.warning(f"Using {code} as name because name is empty!")
-                name = code
-            currency_row = DBCurrency(code=code, name=name)
-            self._session.add(currency_row)
-        self._session.commit()
+        self.hapi_populate(DBCurrency)
