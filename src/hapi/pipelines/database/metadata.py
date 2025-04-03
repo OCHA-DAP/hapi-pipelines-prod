@@ -6,9 +6,9 @@ from hapi_schema.db_dataset import DBDataset
 from hapi_schema.db_resource import DBResource
 from hdx.data.dataset import Dataset
 from hdx.data.resource import Resource
+from hdx.database import Database
 from hdx.scraper.framework.runner import Runner
 from hdx.scraper.framework.utilities.reader import Read
-from sqlalchemy.orm import Session
 
 from .base_uploader import BaseUploader
 
@@ -17,9 +17,9 @@ logger = logging.getLogger(__name__)
 
 class Metadata(BaseUploader):
     def __init__(
-        self, runner: Runner, session: Session, today: datetime
+        self, runner: Runner, database: Database, today: datetime
     ) -> None:
-        super().__init__(session)
+        super().__init__(database)
         self._runner = runner
         self._today = today
         self._dataset_id_to_name = {}

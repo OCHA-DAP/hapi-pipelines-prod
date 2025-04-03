@@ -3,8 +3,8 @@
 import logging
 
 from hapi_schema.db_sector import DBSector
+from hdx.database import Database
 from hdx.scraper.framework.utilities.sector import Sector as SectorData
-from sqlalchemy.orm import Session
 
 from .base_uploader import BaseUploader
 
@@ -14,9 +14,9 @@ logger = logging.getLogger(__name__)
 class Sector(BaseUploader, SectorData):
     def __init__(
         self,
-        session: Session,
+        database: Database,
     ):
-        BaseUploader.__init__(self, session)
+        BaseUploader.__init__(self, database)
         SectorData.__init__(self)
 
     def populate(self) -> None:

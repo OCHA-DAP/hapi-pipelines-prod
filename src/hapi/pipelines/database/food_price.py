@@ -1,111 +1,28 @@
-"""Populate the WFP market table."""
+"""Functions specific to the WFP food prices theme."""
 
 from logging import getLogger
-from typing import Dict, List
+from typing import Dict
 
-from dateutil.relativedelta import relativedelta
 from hapi_schema.db_food_price import DBFoodPrice
-from hdx.api.utilities.hdx_error_handler import HDXErrorHandler
-from hdx.scraper.framework.utilities.reader import Read
-from hdx.utilities.dateparse import parse_date
-from sqlalchemy.orm import Session
 
-from .base_uploader import BaseUploader
-from .currency import Currency
-from .metadata import Metadata
-from .wfp_commodity import WFPCommodity
-from .wfp_market import WFPMarket
+from .hapi_subcategory_uploader import HapiSubcategoryUploader
 
 logger = getLogger(__name__)
 
 
-class FoodPrice(BaseUploader):
-    def __init__(
-        self,
-        session: Session,
-        datasetinfo: Dict[str, str],
-        countryiso3s: List[str],
-        metadata: Metadata,
-        currency: Currency,
-        commodity: WFPCommodity,
-        market: WFPMarket,
-        error_handler: HDXErrorHandler,
-    ):
-        super().__init__(session)
-        self._datasetinfo = datasetinfo
-        self._countryiso3s = countryiso3s
-        self._metadata = metadata
-        self._currency = currency
-        self._commodity = commodity
-        self._market = market
-        self._error_handler = error_handler
+class FoodPrice(HapiSubcategoryUploader):
+    def populate_row(self, output_row: Dict, row: Dict) -> None:
+        output_row["market_code"] = row["market_code"]
+        output_row["commodity_code"] = row["commodity_code"]
+        output_row["currency_code"] = row["currency_code"]
+        output_row["unit"] = row["unit"]
+        output_row["price_flag"] = row["price_flag"]
+        output_row["price_type"] = row["price_type"]
+        output_row["price"] = row["price"]
 
     def populate(self) -> None:
-        logger.info("Populating WFP price table")
-        reader = Read.get_reader("hdx")
-        headers, country_iterator = reader.read(datasetinfo=self._datasetinfo)
-        datasetinfos = []
-        for country in country_iterator:
-            countryiso3 = country["countryiso3"]
-            if countryiso3 not in self._countryiso3s:
-                continue
-            dataset_name = country["url"].split("/")[-1]
-            datasetinfos.append(
-                {
-                    "dataset": dataset_name,
-                    "format": "csv",
-                    "admin_single": countryiso3,
-                }
-            )
-        for datasetinfo in datasetinfos:
-            headers, iterator = reader.read(datasetinfo)
-            hapi_dataset_metadata = datasetinfo["hapi_dataset_metadata"]
-            hapi_resource_metadata = datasetinfo["hapi_resource_metadata"]
-            self._metadata.add_hapi_metadata(
-                hapi_dataset_metadata, hapi_resource_metadata
-            )
-            countryiso3 = datasetinfo["admin_single"]
-            dataset_name = hapi_dataset_metadata["hdx_stub"]
-            resource_id = hapi_resource_metadata["hdx_id"]
-            next(iterator)  # ignore HXL hashtags
-            for row in iterator:
-                market = row["market"]
-                market_code = self._market.get_market_code(countryiso3, market)
-                if not market_code:
-                    self._error_handler.add_missing_value_message(
-                        "FoodPrice", dataset_name, "market code", market
-                    )
-                    continue
-                commodity_code = self._commodity.get_commodity_code(
-                    row["commodity"]
-                )
-                currency_code = row["currency"]
-                unit = row["unit"]
-                price_flag = row["priceflag"]
-                price_type = row["pricetype"]
-                price = row["price"]
-                reference_period_start = parse_date(
-                    row["date"], date_format="%Y-%m-%d"
-                )
-                reference_period_end = reference_period_start + relativedelta(
-                    months=1,
-                    days=-1,
-                    hours=23,
-                    minutes=59,
-                    seconds=59,
-                    microseconds=999999,
-                )  # food price reference period is one month
-                price_row = DBFoodPrice(
-                    resource_hdx_id=resource_id,
-                    market_code=market_code,
-                    commodity_code=commodity_code,
-                    currency_code=currency_code,
-                    unit=unit,
-                    price_flag=price_flag,
-                    price_type=price_type,
-                    price=price,
-                    reference_period_start=reference_period_start,
-                    reference_period_end=reference_period_end,
-                )
-                self._session.add(price_row)
-            self._session.commit()
+        self.hapi_populate(
+            "food-price",
+            DBFoodPrice,
+            max_admin_level=None,
+        )

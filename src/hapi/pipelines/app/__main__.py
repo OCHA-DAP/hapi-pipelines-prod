@@ -136,7 +136,6 @@ def main(
     with HDXErrorHandler(write_to_hdx=err_to_hdx) as error_handler:
         with temp_dir() as temp_folder:
             with Database(**params) as database:
-                session = database.get_session()
                 today = now_utc()
                 Read.create_readers(
                     temp_folder,
@@ -152,7 +151,7 @@ def main(
                     logger.info(f"Updating only scrapers: {scrapers_to_run}")
                 pipelines = Pipelines(
                     configuration,
-                    session,
+                    database,
                     today,
                     themes_to_run,
                     scrapers_to_run,
@@ -200,7 +199,6 @@ if __name__ == "__main__":
         ehx = getenv("ERR_TO_HDX")
     project_configs = [
         "core.yaml",
-        "food_security.yaml",
         "national_risk.yaml",
         "wfp.yaml",
     ]

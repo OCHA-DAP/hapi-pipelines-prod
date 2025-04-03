@@ -4,6 +4,54 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.54] = 2025-04-03
+
+### Changed
+
+- Bump schema to 0.9.15
+
+## [0.10.53] = 2025-04-03
+
+### Changed
+
+- Bump schema to 0.9.14
+
+## [0.10.52] = 2025-04-03
+
+### Changed
+
+- Food prices reads from HAPI dataset
+
+## [0.10.51] = 2025-04-02
+
+### Changed
+
+- Rainfall reads from global HAPI dataset
+
+## [0.10.50] = 2025-04-02
+
+### Changed
+
+- Update HAPI schema to fix funding issue
+
+## [0.10.49] = 2025-03-26
+
+### Changed
+
+- Food security reads from HAPI dataset
+
+## [0.10.48] = 2025-03-20
+
+### Added
+
+- Added rainfall data
+
+## [0.10.47] = 2025-03-17
+
+### Changed
+
+- Batch populate moved to HDX Python Database
+
 ## [0.10.46] = 2025-03-11
 
 ### Changed

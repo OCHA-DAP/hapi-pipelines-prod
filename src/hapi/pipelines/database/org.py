@@ -4,8 +4,8 @@ from logging import getLogger
 
 from hapi_schema.db_org import DBOrg
 from hdx.api.configuration import Configuration
+from hdx.database import Database
 from hdx.scraper.framework.utilities.reader import Read
-from sqlalchemy.orm import Session
 
 from .base_uploader import BaseUploader
 from .metadata import Metadata
@@ -16,11 +16,11 @@ logger = getLogger(__name__)
 class Org(BaseUploader):
     def __init__(
         self,
-        session: Session,
+        database: Database,
         metadata: Metadata,
         configuration: Configuration,
     ):
-        super().__init__(session)
+        super().__init__(database)
         self._metadata = metadata
         self._configuration = configuration
 
