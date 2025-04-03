@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.54] = 2025-04-03
+
+### Changed
+
+- Bump schema to 0.9.15
+
 ## [0.10.53] = 2025-04-03
 
 ### Changed
