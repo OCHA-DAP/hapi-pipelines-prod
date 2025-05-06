@@ -10,12 +10,7 @@ jobs:
     steps:
 
       - name: Checkout code
-        id: checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          submodules: true
-
+        uses: actions/checkout@v4
 
       - name: Free disk space on Ubuntu runner 🔧
         uses: kfir4444/free-disk-space@main
@@ -52,25 +47,7 @@ jobs:
           pip install --upgrade uv
           uv pip compile pyproject.toml --resolver=backtracking --upgrade -q -c requirements.txt -o prod-requirements.txt
 
-      - name: Build and tag image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: false
-          tags: public.ecr.aws/unocha/hdx-hapi-pipelines:main
-
-      - name: Free disk space on Ubuntu runner 🔧
-        uses: kfir4444/free-disk-space@main
-        with:
-          # frees about 6 GB, warning: may remove required tools
-          tool-cache: false
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          swap-storage: true
-
-      - name: Push image to Amazon ECR
+      - name: Build, tag, and push image to Amazon ECR
         uses: docker/build-push-action@v6
         with:
           context: .
