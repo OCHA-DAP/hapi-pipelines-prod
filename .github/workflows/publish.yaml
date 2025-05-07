@@ -10,12 +10,7 @@ jobs:
     steps:
 
       - name: Checkout code
-        id: checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          submodules: true
-
+        uses: actions/checkout@v4
 
       - name: Free disk space on Ubuntu runner 🔧
         uses: kfir4444/free-disk-space@main
