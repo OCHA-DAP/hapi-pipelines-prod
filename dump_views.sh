@@ -24,8 +24,8 @@ do
     >/dev/null
 done
 
-docker exec -t postgres-container pg_dump -U postgres -Fc -Z 0 hapi \
-    | unxz -z -9 > database/hapi_db.pg_restore.xz
+docker exec -t postgres-container pg_dump -U postgres -Fc --compress=zstd:13 hapi -f hapi_db.pg_restore
+docker cp postgres-container:/hapi_db.pg_restore database/hapi_db.pg_restore
 
 printf -v now '%(%Y-%m-%d %H:%M:%S)T\n' -1
 echo "Ended at $now"
