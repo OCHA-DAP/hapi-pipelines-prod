@@ -4,11 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [0.10.59] = 2025-09-10
+## [0.10.60] = 2025-09-10
 
 ## Changed
 
 - Exclude IDPs rows with assessment types not in enum
+
+## [0.10.59] = 2025-07-24
+
+## Added
+
+- Don't use xz
+- Upgrade to postgres 16
+- Use zstd:13 compression built into pg_dump
 
 ## [0.10.58] = 2025-07-23
 
