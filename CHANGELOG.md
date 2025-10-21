@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Changed
 
-- Update funding schema appeal_code to 64 chars (pending)
+- Update funding schema appeal_code to 64 chars
 - Expect no HXL hashtags in HAPI input datasets
 
 ## [0.10.63] = 2025-09-16
