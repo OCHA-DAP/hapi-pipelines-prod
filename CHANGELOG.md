@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.64] = 2025-10-20
+
+## Changed
+
+- Update funding schema appeal_code to 64 chars
+- Expect no HXL hashtags in HAPI input datasets
+
 ## [0.10.63] = 2025-09-16
 
 ## Changed
