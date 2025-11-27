@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.66] = 2025-11-27
+
+## Changed
+
+- Update admin mappings for global pcodes changes
+
 ## [0.10.65] = 2025-11-04
 
 ## Changed
