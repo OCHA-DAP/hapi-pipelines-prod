@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.10.69] = 2026-01-30
+
+## Changed
+
+- Removal of HXL from Country.get_country_info... in HDX Python Country dependency
+
+## [0.10.68] = 2026-01-13
+
+## Changed
+
+- Update requirements
+
+## [0.10.67] = 2026-01-13
+
+## Changed
+
+- Remove usage of hdx.utilities.typehint (which is deleted)
+
 ## [0.10.66] = 2025-11-27
 
 ## Changed

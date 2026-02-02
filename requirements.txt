@@ -8,10 +8,10 @@ attrs==25.4.0
     #   jsonlines
     #   jsonschema
     #   referencing
-cachetools==6.2.2
-    # via google-auth
-certifi==2025.11.12
+certifi==2026.1.4
     # via requests
+cffi==2.0.0
+    # via cryptography
 chardet==5.2.0
     # via frictionless
 charset-normalizer==3.4.4
@@ -20,6 +20,8 @@ ckanapi==4.9
     # via hdx-python-api
 click==8.3.1
     # via typer
+cryptography==46.0.4
+    # via google-auth
 defopt==7.0.0
     # via hdx-python-api
 dnspython==2.8.0
@@ -28,7 +30,7 @@ docopt==0.6.2
     # via
     #   ckanapi
     #   num2words
-docutils==0.22.3
+docutils==0.22.4
     # via defopt
 email-validator==2.3.0
     # via hdx-python-api
@@ -36,38 +38,38 @@ et-xmlfile==2.0.0
     # via openpyxl
 frictionless==5.18.1
     # via hdx-python-utilities
-google-auth==2.43.0
+google-auth==2.48.0
     # via
     #   google-auth-oauthlib
     #   gspread
-google-auth-oauthlib==1.2.2
+google-auth-oauthlib==1.2.4
     # via gspread
-greenlet==3.2.4
+greenlet==3.3.1
     # via sqlalchemy
 gspread==6.2.1
     # via hdx-python-scraper
 hapi-schema==0.9.17
     # via hapi-pipelines (pyproject.toml)
-hdx-python-api==6.5.4
+hdx-python-api==6.6.4
     # via
     #   hapi-pipelines (pyproject.toml)
     #   hdx-python-scraper
-hdx-python-country==3.9.8
+hdx-python-country==4.1.0
     # via
     #   hapi-pipelines (pyproject.toml)
     #   hdx-python-api
     #   hdx-python-scraper
 hdx-python-database==1.3.8
     # via hapi-pipelines (pyproject.toml)
-hdx-python-scraper==2.6.5
+hdx-python-scraper==2.7.1
     # via hapi-pipelines (pyproject.toml)
-hdx-python-utilities==3.9.5
+hdx-python-utilities==4.0.4
     # via
     #   hapi-pipelines (pyproject.toml)
     #   hdx-python-api
     #   hdx-python-country
     #   hdx-python-scraper
-humanize==4.14.0
+humanize==4.15.0
     # via frictionless
 idna==3.11
     # via
@@ -85,7 +87,7 @@ jsonlines==4.0.0
     # via hdx-python-utilities
 jsonpath-ng==1.7.0
     # via libhxl
-jsonschema==4.25.1
+jsonschema==4.26.0
     # via
     #   frictionless
     #   tableschema-to-template
@@ -94,7 +96,6 @@ jsonschema-specifications==2025.9.1
 libhxl==5.2.2
     # via
     #   hapi-pipelines (pyproject.toml)
-    #   hdx-python-api
     #   hdx-python-country
 loguru==0.7.3
     # via hdx-python-utilities
@@ -102,7 +103,7 @@ makefun==1.16.0
     # via hdx-python-api
 markdown-it-py==4.0.0
     # via rich
-marko==2.2.1
+marko==2.2.2
     # via frictionless
 markupsafe==3.0.3
     # via jinja2
@@ -116,6 +117,8 @@ oauthlib==3.3.1
     # via requests-oauthlib
 openpyxl==3.1.5
     # via hdx-python-utilities
+packaging==26.0
+    # via wheel
 petl==1.7.17
     # via frictionless
 ply==3.11
@@ -124,16 +127,18 @@ ply==3.11
     #   libhxl
 pockets==0.9.1
     # via sphinxcontrib-napoleon
-psycopg==3.2.13
+psycopg==3.3.2
     # via hdx-python-database
-psycopg-binary==3.2.13
+psycopg-binary==3.3.2
     # via psycopg
-pyasn1==0.6.1
+pyasn1==0.6.2
     # via
     #   pyasn1-modules
     #   rsa
 pyasn1-modules==0.4.2
     # via google-auth
+pycparser==3.0
+    # via cffi
 pydantic==2.12.5
     # via frictionless
 pydantic-core==2.41.5
@@ -165,7 +170,7 @@ referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
-regex==2025.11.3
+regex==2026.1.15
     # via hdx-python-scraper
 requests==2.32.5
     # via
@@ -181,19 +186,17 @@ requests-oauthlib==2.0.0
     # via google-auth-oauthlib
 rfc3986==2.0.0
     # via frictionless
-rich==14.2.0
+rich==14.3.1
     # via typer
-rpds-py==0.29.0
+rpds-py==0.30.0
     # via
     #   jsonschema
     #   referencing
 rsa==4.9.1
     # via google-auth
-ruamel-yaml==0.18.16
+ruamel-yaml==0.19.1
     # via hdx-python-utilities
-ruamel-yaml-clib==0.2.15
-    # via ruamel-yaml
-setuptools==80.9.0
+setuptools==80.10.2
     # via ckanapi
 shellingham==1.5.4
     # via typer
@@ -209,7 +212,7 @@ six==1.17.0
     #   sphinxcontrib-napoleon
 sphinxcontrib-napoleon==0.7
     # via defopt
-sqlalchemy==2.0.44
+sqlalchemy==2.0.46
     # via
     #   hapi-pipelines (pyproject.toml)
     #   hapi-schema
@@ -226,11 +229,12 @@ text-unidecode==1.3
     # via python-slugify
 typeguard==4.4.4
     # via inflect
-typer==0.20.0
+typer==0.21.1
     # via frictionless
 typing-extensions==4.15.0
     # via
     #   frictionless
+    #   hdx-python-utilities
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
@@ -243,13 +247,13 @@ unidecode==1.4.0
     # via
     #   libhxl
     #   pyphonetics
-urllib3==2.5.0
+urllib3==2.6.3
     # via
     #   libhxl
     #   requests
 validators==0.35.0
     # via frictionless
-wheel==0.45.1
+wheel==0.46.3
     # via libhxl
 xlrd==2.0.2
     # via hdx-python-utilities
