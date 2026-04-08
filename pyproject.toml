@@ -35,12 +35,11 @@ requires-python = ">=3.11"
 
 dependencies = [
     "hapi-schema>= 0.9.17",
-    "hdx-python-api>= 6.6.4",
+    "hdx-python-api>= 6.6.7",
     "hdx-python-country>= 4.1.1",
     "hdx-python-database[postgresql]>= 1.3.8",
     "hdx-python-scraper>= 2.7.2",
-    "hdx-python-utilities>= 4.0.4",
-    "libhxl",
+    "hdx-python-utilities>= 4.0.8",
     "sqlalchemy",
     "xlsx2csv==0.8.4"
 ]

@@ -93,7 +93,7 @@ admin2:
     "ET05|JIJIGA": "ET0502"
     "ET05|SHINILE": "ET0501"
     "ET05|WARDER": "ET0507"
-    "ET07|SIDAMA": "ET1600"  # TODO: this unit is not getting picked up because of the mismatched admin1
+#    "ET07|SIDAMA": "ET1600"  # TODO: this unit is not getting picked up because of the mismatched admin1
     "ET12|GODERE": "ET1203"
     "ET12|ZONE 1": "ET1204"
     "ET12|ZONE 2": "ET1202"

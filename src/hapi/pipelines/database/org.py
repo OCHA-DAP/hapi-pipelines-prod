@@ -35,9 +35,6 @@ class Org(BaseUploader):
         # Acronym, Name, Org Type Code
         for row in rows:
             acronym = row["acronym"] or ""
-            # Ignore HXL row
-            if acronym == "#org+acronym":
-                continue
             org_row = DBOrg(
                 acronym=acronym,
                 name=row["name"],
