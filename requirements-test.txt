@@ -73,7 +73,7 @@ frictionless==5.18.1
     # via
     #   -c requirements.txt
     #   hdx-python-utilities
-google-auth==2.49.1
+google-auth==2.49.2
     # via
     #   -c requirements.txt
     #   google-auth-oauthlib
@@ -82,7 +82,7 @@ google-auth-oauthlib==1.3.1
     # via
     #   -c requirements.txt
     #   gspread
-greenlet==3.3.2
+greenlet==3.4.0
     # via
     #   -c requirements.txt
     #   sqlalchemy
@@ -109,7 +109,7 @@ hdx-python-database==1.3.8
     # via
     #   -c requirements.txt
     #   hapi-pipelines (pyproject.toml)
-hdx-python-scraper==2.7.2
+hdx-python-scraper==2.7.3
     # via
     #   -c requirements.txt
     #   hapi-pipelines (pyproject.toml)
@@ -320,7 +320,7 @@ rfc3986==2.0.0
     # via
     #   -c requirements.txt
     #   frictionless
-rich==14.3.3
+rich==15.0.0
     # via
     #   -c requirements.txt
     #   typer
