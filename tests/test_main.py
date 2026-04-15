@@ -28,6 +28,7 @@ from hapi_schema.db_returnees import DBReturnees
 from hapi_schema.db_sector import DBSector
 from hapi_schema.db_wfp_commodity import DBWFPCommodity
 from hapi_schema.db_wfp_market import DBWFPMarket
+from hapi_schema.utils.enums import RiskClass
 from hapi_schema.views import prepare_hapi_views
 from hdx.api.configuration import Configuration
 from hdx.api.utilities.hdx_error_handler import HDXErrorHandler
@@ -248,6 +249,13 @@ class TestHAPIPipelines:
         check.equal(count, 1)
         count = session.scalar(select(func.count(DBNationalRisk.resource_hdx_id)))
         check.equal(count, 191)
+        stmt = select(DBNationalRisk).where(DBNationalRisk.location_ref == 1)  # AFG
+        row = session.scalars(stmt).first()
+        assert row.location_ref == 1
+        assert row.risk_class == RiskClass.VERY_HIGH
+        stmt = select(DBNationalRisk).where(DBNationalRisk.location_ref == 43)  # CAF
+        row = session.scalars(stmt).first()
+        assert row.meta_missing_indicators_pct == 0.058823529411764705
 
     @pytest.mark.parametrize("themes_to_run", [{"refugees": None}])
     def test_refugees(self, configuration, folder, pipelines):

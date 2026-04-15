@@ -97,6 +97,7 @@ class HapiSubcategoryUploader(BaseUploader, ABC):
                         )
                         resources_to_ignore.append(resource_id)
                         continue
+                    self._session.commit()
 
                 output_row = {
                     "resource_hdx_id": resource_id,

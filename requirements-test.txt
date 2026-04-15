@@ -237,11 +237,11 @@ pycparser==3.0
     # via
     #   -c requirements.txt
     #   cffi
-pydantic==2.13.0
+pydantic==2.13.1
     # via
     #   -c requirements.txt
     #   frictionless
-pydantic-core==2.46.0
+pydantic-core==2.46.1
     # via
     #   -c requirements.txt
     #   pydantic
