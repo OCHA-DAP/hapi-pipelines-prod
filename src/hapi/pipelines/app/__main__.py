@@ -2,7 +2,6 @@
 
 import argparse
 import logging
-from collections.abc import Sequence
 from os import getenv
 from os.path import expanduser, join
 from typing import Dict, Optional
@@ -25,7 +24,6 @@ from hdx.utilities.path import temp_dir
 from hapi.pipelines._version import __version__
 from hapi.pipelines.app import load_yamls
 from hapi.pipelines.app.pipelines import Pipelines
-from hapi.pipelines.utilities.process_config_defaults import add_defaults
 
 setup_logging(
     console_log_level="INFO",
@@ -56,7 +54,6 @@ def parse_args():
         "population:AFG|COD,poverty_rate:BFA,funding"
     )
     parser.add_argument("-th", "--themes", default=None, help=th_help)
-    parser.add_argument("-sc", "--scrapers", default=None, help="Scrapers to run")
     parser.add_argument(
         "-ba",
         "--basic_auths",
@@ -91,7 +88,6 @@ def main(
     db_uri: Optional[str] = None,
     db_params: Optional[str] = None,
     themes_to_run: Optional[Dict] = None,
-    scrapers_to_run: Optional[Sequence[str]] = None,
     basic_auths: Optional[Dict[str, str]] = None,
     save: bool = False,
     use_saved: bool = False,
@@ -107,7 +103,6 @@ def main(
         db_uri (Optional[str]): Database connection URI. Defaults to None.
         db_params (Optional[str]): Database connection parameters. Defaults to None.
         themes_to_run (Optional[Dict]): Themes to run. Defaults to None (all themes).
-        scrapers_to_run (Optional[Sequence[str]]): Scrapers to run. Defaults to None (all scrapers).
         basic_auths (Optional[Dict[str, str]]): Basic authorisations
         save (bool): Whether to save state for testing. Defaults to False.
         use_saved (bool): Whether to use saved state for testing. Defaults to False.
@@ -143,17 +138,13 @@ def main(
                     basic_auths=basic_auths,
                     today=today,
                 )
-                if scrapers_to_run:
-                    logger.info(f"Updating only scrapers: {scrapers_to_run}")
                 pipelines = Pipelines(
                     configuration,
                     database,
                     today,
                     themes_to_run,
-                    scrapers_to_run,
                     error_handler,
                 )
-                pipelines.run()
                 pipelines.output()
     logger.info("HAPI pipelines completed!")
 
@@ -177,10 +168,6 @@ if __name__ == "__main__":
                 themes_to_run[theme_strs[0]] = values if len(values) > 1 else values[0]
     else:
         themes_to_run = None
-    if args.scrapers:
-        scrapers_to_run = args.scrapers.split(",")
-    else:
-        scrapers_to_run = None
     ba = args.basic_auths
     if ba is None:
         ba = getenv("BASIC_AUTHS")
@@ -197,7 +184,6 @@ if __name__ == "__main__":
         "wfp.yaml",
     ]
     project_config_dict = load_yamls(project_configs)
-    project_config_dict = add_defaults(project_config_dict)
     facade(
         main,
         hdx_read_only=False,
@@ -207,7 +193,6 @@ if __name__ == "__main__":
         db_uri=db_uri,
         db_params=args.db_params,
         themes_to_run=themes_to_run,
-        scrapers_to_run=scrapers_to_run,
         basic_auths=basic_auths,
         save=args.save,
         use_saved=args.use_saved,
