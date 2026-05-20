@@ -6,7 +6,7 @@ from typing import Dict, Optional
 from hapi_schema.db_national_risk import DBNationalRisk
 from hdx.api.configuration import Configuration
 from hdx.database import Database
-from hdx.scraper.framework.utilities.reader import Read
+from hdx.pipelineutils.reader import Read
 
 from . import locations
 from .base_uploader import BaseUploader
@@ -51,11 +51,7 @@ class NationalRisk(BaseUploader):
         time_period = hapi_dataset_metadata["time_period"]
         hapi_resource_metadata = self._datasetinfo["hapi_resource_metadata"]
         resource_id = hapi_resource_metadata["hdx_id"]
-        resource_name = self._metadata.get_resource_name(resource_id)
-        if not resource_name:
-            self._metadata.add_hapi_metadata(
-                hapi_dataset_metadata, hapi_resource_metadata
-            )
+        self._metadata.add_hapi_metadata(hapi_dataset_metadata, hapi_resource_metadata)
         next(iterator)  # ignore filter row
         output_rows = []
         for row in iterator:
